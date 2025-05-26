@@ -1,0 +1,175 @@
+---
+const { title } = Astro.props;
+---
+
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{title}</title>
+  </head>
+
+  <body>
+    <main class="hangman">
+      <h1 class="hangman__title">{title}</h1>
+      <p class="hangman__hint" id="hint">pista: cargando...</p>
+      <div class="hangman__word" id="word"></div>
+
+      <form class="hangman__form" id="form">
+        <input
+          class="hangman__input"
+          id="letter-input"
+          type="text"
+          maxlength="1"
+          required
+          placeholder="Letra"
+          autocomplete="off"
+        />
+        <button class="hangman__button" type="submit">Adivinar</button>
+      </form>
+
+      <p class="hangman__used-letters">
+        Letras usadas: <span id="used-letters"></span>
+      </p>
+      <p class="hangman__message" id="message"></p>
+
+      <canvas class="hangman__canvas" id="canvas" width="200" height="250"
+      ></canvas>
+      <button class="hangman__reset" id="reset">🔄 Reiniciar</button>
+    </main>
+
+    <script type="module" src="/scripts/hangman.js"></script>
+  </body>
+</html>
+
+<style>
+  :root {
+    --lapis: oklch(0.4887 0.0805 242.84) ;
+    --carolina: oklch(0.7654 0.0693 232.79);
+    --moss: oklch(0.6118 0.0927 126.67) ;
+    --yellow: oklch(0.7999 0.1559 76.25);
+    --orange: oklch(0.6741 0.191 42.86);
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--lapis);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 1rem;
+  }
+
+  .hangman {
+    background: var(--carolina);
+    padding: 2rem;
+    border-radius: 1rem;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    text-align: center;
+  }
+
+  .hangman__title {
+    font-size: 2rem;
+    color: var(--lapis);
+    margin-bottom: 1rem;
+  }
+
+  .hangman__hint {
+    font-style: italic;
+    color: var(--moss);
+    margin: 1rem 0;
+  }
+
+  .hangman__word {
+    font-size: 2rem;
+    letter-spacing: 10px;
+    color: #fff;
+    margin: 1.5rem 0;
+    word-wrap: break-word;
+  }
+
+  .hangman__form {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+
+  .hangman__input {
+    width: 60px;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+  }
+
+  .hangman__button,
+  .hangman__reset {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    border: none;
+    background: var(--yellow);
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .hangman__button:hover,
+  .hangman__reset:hover {
+    background: var(--orange);
+  }
+
+  .hangman__used-letters {
+    margin-top: 1rem;
+    color: #333;
+    font-size: 0.9rem;
+  }
+
+  .hangman__message {
+    margin-top: 1rem;
+    font-weight: bold;
+    color: #ff2e2e;
+  }
+
+  .hangman__canvas {
+    margin-top: 1.5rem;
+    background: #fff;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+  }
+
+  @media (max-width: 480px) {
+    .hangman__title {
+      font-size: 1.5rem;
+    }
+    .hangman__word {
+      font-size: 1.5rem;
+      letter-spacing: 6px;
+    }
+    .hangman__input {
+      width: 50px;
+      font-size: 1rem;
+    }
+    .hangman__button,
+    .hangman__reset {
+      font-size: 0.9rem;
+      padding: 0.4rem 0.8rem;
+    }
+  }
+</style>
