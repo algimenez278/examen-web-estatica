@@ -134,7 +134,11 @@
         },
         {
             "word": "ASYNC",
-            "hint": "Operación que no bloquea el flujo principal"
+            "hint": "Operación de espera que no bloquea el flujo principal"
+        },
+        {
+            "word": "AWAIT",
+            "hint": "Operación de espera que bloquea el flujo principal"
         },
         {
             "word": "PROMESA",
@@ -173,8 +177,8 @@
             "hint": "Cadena que representa la autenticación"
         },
         {
-            "word": "SESSION",
-            "hint": "Información temporal del usuario"
+            "word": "LOCALSTORAGE",
+            "hint": "Almacena datos en el navegador"
         },
         {
             "word": "COOKIE",
@@ -237,24 +241,12 @@
             "hint": "Código de autenticación"
         },
         {
-            "word": "AUTH",
-            "hint": "Proceso de autenticación"
-        },
-        {
             "word": "LOGIN",
             "hint": "Ingreso de usuario"
         },
         {
-            "word": "REGISTRO",
+            "word": "REGISTER",
             "hint": "Proceso de crear una cuenta"
-        },
-        {
-            "word": "HOOK",
-            "hint": "Función especial en React"
-        },
-        {
-            "word": "STATE",
-            "hint": "Variable que controla la UI"
         },
         {
             "word": "PROPS",
@@ -341,20 +333,12 @@
             "hint": "Almacén estructurado de datos"
         },
         {
-            "word": "INDEX",
-            "hint": "Mejora la búsqueda en bases de datos"
-        },
-        {
             "word": "QUERY",
             "hint": "Consulta a una base de datos"
         },
         {
             "word": "CRUD",
             "hint": "Crear, leer, actualizar y borrar"
-        },
-        {
-            "word": "FIREBASE",
-            "hint": "Plataforma backend de Google"
         },
         {
             "word": "MONGODB",
@@ -375,10 +359,6 @@
         {
             "word": "BUILD",
             "hint": "Compilación del código para producción"
-        },
-        {
-            "word": "LINTER",
-            "hint": "Herramienta que revisa el estilo del código"
         },
         {
             "word": "UNITTEST",
