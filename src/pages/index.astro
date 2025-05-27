@@ -1,16 +1,328 @@
 ---
+import MainLayout from "./layout/MainLayout.astro";
+import Padlock from "./layout/Padlock.astro";
+import CardModal from "./layout/CardModal.astro";
+import Modal from "./layout/Modal.astro";
+import CandadoDigit from "./CandadoDigit.astro";
 
+const pistas = [1, 2, 3, 4];
+
+const modales = [
+  {
+    num: 1,
+    title: "¿Qué retorna pista1(AÑONACIMENTOADALOVELACE)?",
+    code: `function pista1(numero) {
+  const strNum = numero.toString();
+  if (strNum.length === 0) return 0;
+  const suma = parseInt(strNum[0], 10) + pista1(strNum.slice(1));
+  if (suma > 9) {
+    return pista1(suma);
+  }
+  return suma;
+}`,
+  },
+  {
+    num: 2,
+    title: `¿Qué retorna si gatos = [
+  { nombre: 'Michi', color: 'gris', edad: 3 },
+  { nombre: 'Luna', color: 'negro', edad: 2 },
+  { nombre: 'Simba', color: 'naranja', edad: 4 }, ] ?`,
+    code: `function pista2(gatos) {
+  const suma = gatos.reduce((total, gato) => {
+    return total + (gato.edad * gato.nombre.length);
+  }, 0);
+  return suma % 10;
+}`,
+  },
+  {
+    num: 3,
+    title: "¿Qué retornará pista3(10110101)?",
+    code: `function pista3(numero) {
+  const binario = numero.toString(2);
+  const cantidadUnos = [...binario].filter(bit => bit === '1').length;
+  return cantidadUnos;
+}`,
+  },
+  {
+    num: 4,
+    title: "¿Qué retorará pista4(gatos[1].edad)?",
+    code: `function pista4(numero) {
+  if (numero <= 0) return 0;
+  if (numero === 1) return 15;
+  if (numero === 2) return 24;
+
+  return (24 + (numero - 2) * 3) % 10;
+}`,
+  },
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<style>
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #b0d8f7 0%, #eaf6ff 100%);
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .container {
+    background: white;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    text-align: center;
+    max-width: 350px;
+    width: 100%;
+  }
+  /* Cards container block */
+  .cards {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+  }
+
+  .heading {
+    margin-bottom: 20px;
+    color: oklch(0.4887 0.0805 242.84);
+    font-weight: 700;
+  }
+
+  #candado {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+
+  button {
+    padding: 12px 24px;
+    background-color: oklch(0.6118 0.0927 126.67);
+    color: white;
+    font-weight: 700;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    user-select: none;
+    font-size: 16px;
+  }
+
+  button:hover {
+    background-color: oklch(0.6741 0.191 42.86);
+  }
+
+  .message {
+    margin-top: 20px;
+    font-weight: 700;
+    min-height: 24px;
+    font-size: 18px;
+  }
+
+  @media (max-width: 400px) {
+    .cards {
+      justify-content: space-around;
+      gap: 8px;
+    }
+    .cards__card {
+      width: 60px;
+      height: 38px;
+      margin: 0 2px;
+      font-size: 14px;
+    }
+    .digit {
+      width: 50px;
+      height: 70px;
+      line-height: 70px;
+    }
+    .wheel {
+      font-size: 40px;
+      line-height: 70px;
+    }
+  }
+</style>
+
+<MainLayout>
+  <main class="container" role="main">
+    <!-- Cards block -->
+    <section class="cards" aria-label="Tarjetas con modales">
+      {pistas.map((num) => <CardModal num={num} />)}
+    </section>
+
+    <header>
+      <h1 class="heading">Candado de 4 dígitos</h1>
+    </header>
+
+    <section id="candado" aria-label="Candado de 4 dígitos">
+      {[0, 1, 2, 3].map((i) => <CandadoDigit index={i} />)}
+    </section>
+
+    <button id="btn-verificar" aria-describedby="mensaje">Verificar</button>
+
+    <p class="message" id="mensaje" role="alert" aria-live="polite"></p>
+  </main>
+
+  <!-- Modal blocks -->
+  {
+    modales.map(({ num, title, code }) => (
+      <Modal num={num} title={title} code={code} />
+    ))
+  }
+
+  <!-- script functions -->
+  <script>
+    const claveCorrecta = "6396";
+    const wheelCount = 10;
+    const digits: number[] = [0, 0, 0, 0];
+    const wheels: HTMLElement[] = [];
+    const digitHeight = 80;
+
+    function createWheelNumbers(): number[] {
+      const nums = [];
+      for (let i = 0; i < wheelCount; i++) nums.push(i);
+      return nums.concat(nums);
+    }
+
+    function setupWheels() {
+      const digitElements =
+        document.querySelectorAll<HTMLElement>(".digit .wheel");
+
+      digitElements.forEach((wheel, idx) => {
+        wheels[idx] = wheel; // Ya es HTMLElement, no hay problema
+
+        const nums = createWheelNumbers(); // Asumo que esta función retorna number[]
+        wheel.innerHTML = ""; // innerHTML existe en HTMLElement
+
+        nums.forEach((n) => {
+          const div = document.createElement("div");
+          div.textContent = n.toString(); // Aseguramos string
+          wheel.appendChild(div);
+        });
+
+        wheel.style.transform = `translateY(${-digits[idx] * digitHeight}px)`;
+        wheel.style.transition = "none";
+      });
+    }
+
+    const animating = [false, false, false, false];
+
+    function incrementarDigito(idx: number) {
+      const mensaje = document.getElementById("mensaje") as HTMLElement | null;
+      if (mensaje) {
+        mensaje.textContent = "";
+      }
+
+      if (animating[idx]) return;
+      animating[idx] = true;
+
+      const wheel = wheels[idx] as HTMLElement;
+      digits[idx] = (digits[idx] + 1) % wheelCount;
+
+      const newTranslate = -digits[idx] * digitHeight;
+
+      wheel.style.transition = "transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)";
+      wheel.style.transform = `translateY(${newTranslate}px)`;
+
+      const parent = wheel.parentElement as HTMLElement | null;
+      if (parent) {
+        parent.setAttribute("aria-valuenow", digits[idx].toString());
+      }
+
+      // Escuchamos una sola vez la transición
+      const handler = () => {
+        if (digits[idx] === 0) {
+          wheel.style.transition = "none";
+          wheel.style.transform = "translateY(0px)";
+        }
+        animating[idx] = false;
+        wheel.removeEventListener("transitionend", handler);
+      };
+
+      wheel.addEventListener("transitionend", handler);
+    }
+    const digitElements = document.querySelectorAll<HTMLElement>(".digit");
+
+    digitElements.forEach((digitEl, idx) => {
+      digitEl.addEventListener("click", () => {
+        incrementarDigito(idx);
+      });
+    });
+
+    function verificarClave() {
+      const entrada = digits.join("");
+      const mensaje = document.getElementById("mensaje") as HTMLElement | null;
+      const botonesCandado = document.querySelectorAll<HTMLElement>(".digit");
+      const botonVerificar = document.querySelector(
+        "button"
+      ) as HTMLButtonElement | null;
+
+      if (!mensaje || !botonVerificar) return; // Evita errores si no existen en el DOM
+
+      if (entrada === claveCorrecta) {
+        mensaje.textContent = "Clave correcta!";
+        mensaje.style.color = "#2a7f62";
+
+        botonesCandado.forEach((boton) => {
+          boton.style.pointerEvents = "none";
+          boton.style.opacity = "0.6";
+          boton.setAttribute("aria-disabled", "true");
+          boton.tabIndex = -1;
+        });
+
+        botonVerificar.disabled = true;
+        botonVerificar.style.cursor = "default";
+      } else {
+        mensaje.textContent = "Clave incorrecta.";
+        mensaje.style.color = "#aa2a2a";
+      }
+    }
+    document
+      .getElementById("btn-verificar")
+      ?.addEventListener("click", verificarClave);
+
+    // Modal functionality
+    document.querySelectorAll<HTMLElement>(".cards__card").forEach((card) => {
+      card.addEventListener("click", () => {
+        const modalId = card.getAttribute("data-modal");
+        if (modalId) {
+          const modal = document.getElementById(modalId);
+          if (modal) {
+            modal.style.display = "flex";
+            modal.focus();
+          }
+        }
+      });
+
+      card.addEventListener("keydown", (e: KeyboardEvent) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          card.click(); // Ya no hace falta castear
+        }
+      });
+    });
+
+    document.querySelectorAll(".modal__close").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const modalId = btn.getAttribute("data-close");
+        if (modalId) {
+          const modal = document.getElementById(modalId);
+          if (modal) {
+            modal.style.display = "none";
+          }
+        }
+      });
+    });
+
+    // Close modal when clicking outside modal content
+    document.querySelectorAll(".modal").forEach((modal) => {
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+          (modal as HTMLElement).style.display = "none";
+        }
+      });
+    });
+
+    setupWheels();
+  </script>
+</MainLayout>

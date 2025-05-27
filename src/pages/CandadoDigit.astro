@@ -1,0 +1,54 @@
+---
+// CandadoDigit.astro
+const { index } = Astro.props;
+---
+
+<style>
+  .digit {
+    width: 60px;
+    height: 80px;
+    border: 3px solid oklch(0.6118 0.0927 126.67);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: inset 0 -6px 10px rgba(0, 0, 0, 0.12);
+    background: oklch(0.7654 0.0693 232.79);
+    user-select: none;
+    position: relative;
+  }
+
+  .wheel {
+    display: flex;
+    flex-direction: column;
+    font-size: 48px;
+    font-weight: 900;
+    color: oklch(0.4887 0.0805 242.84);
+    line-height: 80px;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+
+  @media (max-width: 400px) {
+    .digit {
+      width: 50px;
+      height: 70px;
+      line-height: 70px;
+    }
+    .wheel {
+      font-size: 40px;
+      line-height: 70px;
+    }
+  }
+</style>
+
+<div
+  class="digit"
+  role="spinbutton"
+  aria-valuemin="0"
+  aria-valuemax="9"
+  aria-valuenow="0"
+  tabindex="0"
+  aria-label={`Dígito ${index + 1}`}
+>
+  <div class="wheel"></div>
+</div>
