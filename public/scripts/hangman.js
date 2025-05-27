@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateWordDisplay() {
     const display = word
       .split("")
-      .map(letter => (usedLetters.includes(letter) ? letter : "_"))
+      .map((letter) => (usedLetters.includes(letter) ? letter : "_"))
       .join(" ");
     wordEl.textContent = display;
 
@@ -60,39 +60,47 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function drawHangman() {
+    ctx.beginPath(); // Siempre empezá un nuevo trazo limpio
+
     switch (errors) {
-      case 1:
-        ctx.moveTo(10, 240);
-        ctx.lineTo(190, 240);
+      case 1: // base
+        ctx.moveTo(10, 180);
+        ctx.lineTo(150, 180);
         break;
-      case 2:
-        ctx.moveTo(50, 240);
-        ctx.lineTo(50, 20);
-        ctx.lineTo(140, 20);
-        ctx.lineTo(140, 40);
+
+      case 2: // poste y soporte
+        ctx.moveTo(40, 180);
+        ctx.lineTo(40, 20);
+        ctx.lineTo(120, 20);
+        ctx.lineTo(120, 40);
         break;
-      case 3:
-        ctx.arc(140, 60, 20, 0, Math.PI * 2);
+
+      case 3: // cabeza
+        ctx.arc(120, 60, 15, 0, Math.PI * 2); // centro (120,60), radio 15
         break;
-      case 4:
-        ctx.moveTo(140, 80);
-        ctx.lineTo(140, 150);
-        break;
-      case 5:
-        ctx.moveTo(140, 100);
+
+      case 4: // cuerpo
+        ctx.moveTo(120, 75);
         ctx.lineTo(120, 130);
-        ctx.moveTo(140, 100);
-        ctx.lineTo(160, 130);
         break;
-      case 6:
-        ctx.moveTo(140, 150);
-        ctx.lineTo(120, 190);
-        ctx.moveTo(140, 150);
-        ctx.lineTo(160, 190);
+
+      case 5: // brazos
+        ctx.moveTo(120, 90);
+        ctx.lineTo(100, 110);
+        ctx.moveTo(120, 90);
+        ctx.lineTo(140, 110);
+        break;
+
+      case 6: // piernas
+        ctx.moveTo(120, 130);
+        ctx.lineTo(100, 160);
+        ctx.moveTo(120, 130);
+        ctx.lineTo(140, 160);
         messageEl.textContent = `💀 Perdiste. La palabra era: ${word}`;
         input.disabled = true;
         break;
     }
+
     ctx.stroke();
   }
 
