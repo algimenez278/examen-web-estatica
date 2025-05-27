@@ -1,6 +1,7 @@
-// Wait for the DOM to be ready
+console.log("¿SweetAlert2 está disponible?", typeof Swal !== "undefined");
+
 document.addEventListener("DOMContentLoaded", () => {
-  // DOM elements
+  // 🎮 Elementos del DOM
   const wordEl = document.getElementById("word");
   const hintEl = document.getElementById("hint");
   const usedLettersEl = document.getElementById("used-letters");
@@ -11,17 +12,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const ctx = canvas.getContext("2d");
   const resetBtn = document.getElementById("reset");
 
-  // Game state
+  // 🧠 Estado del juego
   let word = "";
   let hint = "";
   let usedLetters = [];
   let errors = 0;
   const maxErrors = 6;
 
-  // Get word from external JSON file
+  // 🔄 Cargar una palabra aleatoria del archivo JSON
   async function pickRandomWord() {
     try {
-      const response = await fetch("/data/word.json"); // Must be located in /public/data/word.json
+      const response = await fetch("/data/word.json");
       const data = await response.json();
       const words = data.record;
       const random = words[Math.floor(Math.random() * words.length)];
@@ -42,68 +43,104 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // ✍️ Mostrar la palabra con letras adivinadas
   function updateWordDisplay() {
     const display = word
       .split("")
       .map((letter) => (usedLetters.includes(letter) ? letter : "_"))
       .join(" ");
+
     wordEl.textContent = display;
 
-    if (!display.includes("_")) {
-      messageEl.textContent = "🎉 ¡Ganaste!";
+    if (word && !display.includes("_")) {
       input.disabled = true;
+
+      setTimeout(() => {
+        Swal.fire({
+          title: "🎉 ¡Ganaste!",
+          text: "Sos una mente brillante, dev crack 😎",
+          icon: "success",
+          showDenyButton: true,
+          confirmButtonText: "Volver a jugar",
+          denyButtonText: "Siguiente room",
+          confirmButtonColor: "#f6ae2d",
+          denyButtonColor: "#758e4f",
+          background: "#2c2c3e",
+          color: "#fff",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            resetBtn.click();
+          } else if (result.isDenied) {
+            // Acá se va a cambiar la ruta cuando se nsepa que room sigue
+            console.log("Pasando a la siguiente room...");
+            // window.location.href = "/siguiente-room"; // cuando esté lista
+          }
+        });
+      }, 500); // 0.5 segundos
     }
   }
 
+  // 🔤 Actualizar las letras que se usaron
   function updateUsedLetters() {
     usedLettersEl.textContent = usedLetters.join(", ");
   }
 
+  // 💀 Dibujar el ahorcado en cada error
   function drawHangman() {
-    ctx.beginPath(); // Siempre empezá un nuevo trazo limpio
+    ctx.beginPath();
 
     switch (errors) {
-      case 1: // base
+      case 1:
         ctx.moveTo(10, 180);
         ctx.lineTo(150, 180);
         break;
-
-      case 2: // poste y soporte
+      case 2:
         ctx.moveTo(40, 180);
         ctx.lineTo(40, 20);
         ctx.lineTo(120, 20);
         ctx.lineTo(120, 40);
         break;
-
-      case 3: // cabeza
-        ctx.arc(120, 60, 15, 0, Math.PI * 2); // centro (120,60), radio 15
+      case 3:
+        ctx.arc(120, 60, 15, 0, Math.PI * 2);
         break;
-
-      case 4: // cuerpo
+      case 4:
         ctx.moveTo(120, 75);
         ctx.lineTo(120, 130);
         break;
-
-      case 5: // brazos
+      case 5:
         ctx.moveTo(120, 90);
         ctx.lineTo(100, 110);
         ctx.moveTo(120, 90);
         ctx.lineTo(140, 110);
         break;
-
-      case 6: // piernas
+      case 6:
         ctx.moveTo(120, 130);
         ctx.lineTo(100, 160);
         ctx.moveTo(120, 130);
         ctx.lineTo(140, 160);
-        messageEl.textContent = `💀 Perdiste. La palabra era: ${word}`;
         input.disabled = true;
+
+        setTimeout(() => {
+          Swal.fire({
+            title: "💀 ¡Perdiste!",
+            text: `La palabra era: ${word}`,
+            icon: "error",
+            confirmButtonText: "Intentar de nuevo",
+            confirmButtonColor: "#f26419",
+            background: "#2c2c3e",
+            color: "#fff",
+          }).then(() => {
+            resetBtn.click();
+          });
+        }, 1000); // 1000 milisegundos = 1 segundo
+
         break;
     }
 
     ctx.stroke();
   }
 
+  // ✅ Manejador del formulario
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const letter = input.value.toUpperCase();
@@ -132,12 +169,13 @@ document.addEventListener("DOMContentLoaded", () => {
     input.focus();
   });
 
+  // 🔁 Reiniciar juego
   resetBtn.addEventListener("click", () => {
     input.disabled = false;
     pickRandomWord();
     input.focus();
   });
 
-  // Start game on load
+  // 🚀 Empezar el juego al cargar
   pickRandomWord();
 });

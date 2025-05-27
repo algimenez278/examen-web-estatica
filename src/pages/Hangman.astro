@@ -8,6 +8,8 @@ const { title = "💻 Ahorcado Dev 💀" } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>{title}</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
   </head>
 
   <body>
@@ -43,150 +45,149 @@ const { title = "💻 Ahorcado Dev 💀" } = Astro.props;
         ></canvas>
       </div>
     </main>
-
-    <script type="module" src="/scripts/hangman.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+    <script src="/scripts/hangman.js" defer></script>
   </body>
 </html>
 
 <style>
- :root {
-  --lapis: oklch(0.4887 0.0805 242.84);
-  --carolina: oklch(0.7654 0.0693 232.79);
-  --moss: oklch(0.6118 0.0927 126.67);
-  --yellow: oklch(0.7999 0.1559 76.25);
-  --orange: oklch(0.6741 0.191 42.86);
-}
+  :root {
+    --lapis: oklch(0.4887 0.0805 242.84);
+    --carolina: oklch(0.7654 0.0693 232.79);
+    --moss: oklch(0.6118 0.0927 126.67);
+    --yellow: oklch(0.7999 0.1559 76.25);
+    --orange: oklch(0.6741 0.191 42.86);
+  }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-html,
-body {
-  height: 100%;
-}
+  html,
+  body {
+    height: 100%;
+  }
 
-body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-image: linear-gradient(to bottom, var(--moss), var(--lapis));
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  padding: 1rem;
-  overflow: hidden;
-}
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-image: linear-gradient(to bottom, var(--moss), var(--lapis));
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 1rem;
+    overflow: hidden;
+  }
 
-.hangman {
-  width: 90vw;
-  max-width: 700px;
-  height: 400px;
-  background: var(--carolina);
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
-  border-radius: 15px;
-  padding: 1.5rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  align-items: center;
-  box-sizing: border-box;
-}
-
-.hangman__left,
-.hangman__right {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.hangman__title {
-  font-size: clamp(1.5rem, 2.5vw, 2rem);
-  color: var(--lapis);
-}
-
-.hangman__hint {
-  font-style: italic;
-  color: var(--moss);
-  font-size: 0.9rem;
-}
-
-.hangman__word {
-  font-size: clamp(1.2rem, 5vw, 1.8rem);
-  letter-spacing: 0.3em;
-  word-wrap: break-word;
-}
-
-.hangman__form {
-  display: flex;
-  gap: 0.5rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.hangman__input {
-  width: 50px;
-  padding: 0.3rem;
-  font-size: 1.2rem;
-  text-align: center;
-  border-radius: 5px;
-  border: none;
-}
-
-.hangman__button,
-.hangman__reset {
-  padding: 0.4rem 0.8rem;
-  border-radius: 5px;
-  border: none;
-  background: var(--yellow);
-  color: #000;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  font-size: 0.9rem;
-}
-
-.hangman__button:hover,
-.hangman__reset:hover {
-  background: var(--orange);
-}
-
-.hangman__used-letters {
-  font-size: 0.8rem;
-  color: #333;
-  word-break: break-word;
-}
-
-.hangman__message {
-  font-size: 1rem;
-  font-weight: bold;
-  color: #ff2e2e;
-}
-
-.hangman__canvas {
-  background: #fff;
-  border-radius: 5px;
-  width: 100%;
-  max-width: 220px;
-  height: auto;
-  margin: 0 auto;
-}
-
-/* Responsive */
-@media (max-width: 600px) {
   .hangman {
-    grid-template-columns: 1fr;
-    height: auto;
+    width: 90vw;
+    max-width: 700px;
+    height: 400px;
+    background: var(--carolina);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    border-radius: 15px;
+    padding: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  .hangman__left,
+  .hangman__right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .hangman__title {
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    color: var(--lapis);
+  }
+
+  .hangman__hint {
+    font-style: italic;
+    color: var(--moss);
+    font-size: 0.9rem;
+  }
+
+  .hangman__word {
+    font-size: clamp(1.2rem, 5vw, 1.8rem);
+    letter-spacing: 0.3em;
+    word-wrap: break-word;
+  }
+
+  .hangman__form {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .hangman__input {
+    width: 50px;
+    padding: 0.3rem;
+    font-size: 1.2rem;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+  }
+
+  .hangman__button,
+  .hangman__reset {
+    padding: 0.4rem 0.8rem;
+    border-radius: 5px;
+    border: none;
+    background: var(--yellow);
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-size: 0.9rem;
+  }
+
+  .hangman__button:hover,
+  .hangman__reset:hover {
+    background: var(--orange);
+  }
+
+  .hangman__used-letters {
+    font-size: 0.8rem;
+    color: #333;
+    word-break: break-word;
+  }
+
+  .hangman__message {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ff2e2e;
   }
 
   .hangman__canvas {
-    max-width: 100%;
-    margin-top: 1rem;
+    background: #fff;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 220px;
+    height: auto;
+    margin: 0 auto;
   }
-}
 
+  /* Responsive */
+  @media (max-width: 600px) {
+    .hangman {
+      grid-template-columns: 1fr;
+      height: auto;
+    }
+
+    .hangman__canvas {
+      max-width: 100%;
+      margin-top: 1rem;
+    }
+  }
 </style>
