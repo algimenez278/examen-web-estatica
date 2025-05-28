@@ -1,7 +1,7 @@
 console.log("¿SweetAlert2 está disponible?", typeof Swal !== "undefined");
 
 document.addEventListener("DOMContentLoaded", () => {
-  // 🎮 Elementos del DOM
+  // Elementos del DOM
   const wordEl = document.getElementById("word");
   const hintEl = document.getElementById("hint");
   const usedLettersEl = document.getElementById("used-letters");
@@ -12,14 +12,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const ctx = canvas.getContext("2d");
   const resetBtn = document.getElementById("reset");
 
-  // 🧠 Estado del juego
+  // Estado del juego
   let word = "";
   let hint = "";
   let usedLetters = [];
   let errors = 0;
   const maxErrors = 6;
 
-  // 🔄 Cargar una palabra aleatoria del archivo JSON
+  // Cargar una palabra aleatoria del archivo JSON (se utiliza fetch y async/await)
   async function pickRandomWord() {
     try {
       const response = await fetch("/data/word.json");
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // ✍️ Mostrar la palabra con letras adivinadas
+  // Mostrar la palabra con letras adivinadas
   function updateWordDisplay() {
     const display = word
       .split("")
@@ -54,6 +54,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (word && !display.includes("_")) {
       input.disabled = true;
+      input.blur();
+
 
       setTimeout(() => {
         Swal.fire({
@@ -76,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // window.location.href = "/siguiente-room"; // cuando esté lista
           }
         });
-      }, 500); // 0.5 segundos
+      }, 500); // 0.5 seg
     }
   }
 
@@ -85,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
     usedLettersEl.textContent = usedLetters.join(", ");
   }
 
-  // 💀 Dibujar el ahorcado en cada error
+  // Dibujar el ahorcado en cada error
   function drawHangman() {
     ctx.beginPath();
 
@@ -132,15 +134,14 @@ document.addEventListener("DOMContentLoaded", () => {
           }).then(() => {
             resetBtn.click();
           });
-        }, 1000); // 1000 milisegundos = 1 segundo
-
+        }, 2000); // 2 seg de delay
         break;
     }
 
     ctx.stroke();
   }
 
-  // ✅ Manejador del formulario
+  // Manejador del input de la letra
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const letter = input.value.toUpperCase();
@@ -169,13 +170,13 @@ document.addEventListener("DOMContentLoaded", () => {
     input.focus();
   });
 
-  // 🔁 Reiniciar juego
+  // Reiniciar juego
   resetBtn.addEventListener("click", () => {
     input.disabled = false;
     pickRandomWord();
     input.focus();
   });
 
-  // 🚀 Empezar el juego al cargar
+  // Empezar el juego al cargar
   pickRandomWord();
 });
