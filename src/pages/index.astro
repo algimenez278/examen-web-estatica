@@ -60,16 +60,21 @@ const modales = [
 <style>
   body {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #b0d8f7 0%, #eaf6ff 100%);
-    height: 100vh;
+    background: linear-gradient(
+      to right,
+      oklch(0.6741 0.191 42.86),
+      oklch(0.6118 0.0927 126.67)
+    );
+    min-height: 100vh;
     margin: 0;
+    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
   }
   .container {
     background: white;
-    padding: 30px 40px;
     border-radius: 12px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
     text-align: center;
@@ -120,7 +125,7 @@ const modales = [
     font-size: 18px;
   }
 
-  @media (max-width: 400px) {
+  @media (max-width: 480px) {
     .cards {
       justify-content: space-around;
       gap: 8px;
