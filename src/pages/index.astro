@@ -58,6 +58,13 @@ const modales = [
 ---
 
 <style>
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
   body {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(
@@ -74,17 +81,16 @@ const modales = [
     flex-wrap: wrap;
   }
   .container {
-    background: white;
+    background: rgba(255, 255, 255, 0.459);
     border-radius: 12px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
     text-align: center;
     max-width: 350px;
-    width: 100%;
+    width: 90%;
   }
   /* Cards container block */
   .cards {
     display: flex;
-    justify-content: space-between;
     margin-bottom: 25px;
   }
 
@@ -119,7 +125,7 @@ const modales = [
   }
 
   .message {
-    margin-top: 20px;
+    margin: 20px;
     font-weight: 700;
     min-height: 24px;
     font-size: 18px;
@@ -128,12 +134,11 @@ const modales = [
   @media (max-width: 480px) {
     .cards {
       justify-content: space-around;
-      gap: 8px;
+      gap: 2px;
     }
     .cards__card {
-      width: 60px;
+      width: 90%;
       height: 38px;
-      margin: 0 2px;
       font-size: 14px;
     }
     .digit {
@@ -156,7 +161,7 @@ const modales = [
     </section>
 
     <header>
-      <h1 class="heading">Candado de 4 dígitos</h1>
+      <h1 class="heading">Código Oculto</h1>
     </header>
 
     <section id="candado" aria-label="Candado de 4 dígitos">
