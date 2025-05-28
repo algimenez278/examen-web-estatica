@@ -1,0 +1,49 @@
+---
+const {
+  href = "#",
+  title = "Ir a la siguiente habitación",
+  direction = "right", // "left" o "right"
+} = Astro.props;
+---
+
+<style>
+  .arrow-btn {
+    background-color: oklch(0.6118 0.0927 126.67);
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(255, 111, 145, 0.5);
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+    margin: 10px;
+  }
+
+  .arrow-btn:hover {
+    background-color: oklch(0.6741 0.191 42.86);
+  }
+
+  .arrow-icon {
+    width: 24px;
+    height: 24px;
+    fill: white;
+    transition: transform 0.3s ease;
+  }
+
+  .left .arrow-icon {
+    transform: rotate(180deg);
+  }
+</style>
+
+<button
+  class={`arrow-btn ${direction === "left" ? "left" : ""}`}
+  onclick={`navegarConAnimacion('${href}')`}
+  title={title}
+  aria-label={title}
+>
+  <svg viewBox="0 0 24 24" class="arrow-icon">
+    <path d="M8 5v14l11-7z"></path>
+  </svg>
+</button>

@@ -4,6 +4,7 @@ import Padlock from "./layout/Padlock.astro";
 import CardModal from "./layout/CardModal.astro";
 import Modal from "./layout/Modal.astro";
 import CandadoDigit from "./layout/CandadoDigit.astro";
+import Button from "./layout/Button.astro";
 
 const pistas = [1, 2, 3, 4];
 
@@ -168,7 +169,13 @@ const modales = [
       {[0, 1, 2, 3].map((i) => <CandadoDigit index={i} />)}
     </section>
 
+    <Button
+      href="habitacion1.html"
+      title="Volver a habitación anterior"
+      direction="left"
+    />
     <button id="btn-verificar" aria-describedby="mensaje">Verificar</button>
+    <Button href="habitacion3.html" title="Ir a habitación siguiente" />
 
     <p class="message" id="mensaje" role="alert" aria-live="polite"></p>
   </main>
