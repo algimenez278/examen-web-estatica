@@ -1,0 +1,275 @@
+:root {
+  --w: min(90px, 12vw);
+  --h: var(--w);
+
+  --blue: oklch(0.4887 0.0805 242.84);
+  --light-blue: oklch(0.7654 0.0693 232.79);
+  --green: oklch(0.6118 0.0927 126.67);
+  --yellow: oklch(0.7999 0.1559 76.25);
+  --orange: oklch(0.6741 0.191 42.86);
+  --lapis: oklch(0.4887 0.0805 242.84);
+  --moss: oklch(0.6118 0.0927 126.67);
+
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-blur: blur(12px);
+
+  --button-bg: var(--orange);
+  --button-hover: oklch(0.68 0.19 42.86);
+  --button-text: #fff;
+
+  --text-color: #111;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-image: linear-gradient(to bottom, var(--green), var(--blue));
+  color: var(--text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+  padding: 0;
+}
+
+
+/* BEM structure */
+
+.memorama {
+  width: 95%;
+  max-width: 1200px;
+  max-height: 100%;
+  overflow: hidden;
+  backdrop-filter: var(--glass-blur);
+  background: var(--glass-bg);
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;     /* 👈 centrado vertical */
+  align-items: center;         /* 👈 centrado horizontal */
+}
+
+.memorama__glass-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  width: 100%;
+  min-height: 250px;
+  padding: 40px 20px;
+  text-align: center;
+  animation: fadeIn 1s ease;
+}
+
+.memorama__title {
+  font-size: 2.6rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  color: var(--text-color);
+  flex-direction: column;
+}
+.memorama__paragraph {
+  font-size: 1.0rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  color: var(--text-color);
+  flex-direction: column;
+}
+
+.memorama__layout {
+  display: flex;
+  flex-direction: column;  
+
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+.memorama__side-panel {
+  width: 100%;
+  flex: 1 1 100%;             /* ✅ Se adapta al ancho disponible */
+  display: flex;
+  flex-direction: column;
+  align-items: center;        /* ✅ Centrado */
+  gap: 25px;
+  min-width: 0;  
+}
+
+.memorama__controls {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.memorama__button {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  padding: 14px 26px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: all 0.3s;
+  width: 100%;
+  text-align: center;
+  width: 100%;
+  max-width: 250px;           /* ✅ Tope de tamaño */
+  margin: 0 auto;
+}
+
+.memorama__button:hover {
+  background-color: var(--button-hover);
+  transform: scale(1.05);
+}
+
+.memorama__stats {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 1.05rem;
+}
+.memorama__controls,
+.memorama__stats {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.memorama__board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+  max-width: calc(var(--w) * 6 + 80px);
+}
+
+.memorama__card-area,
+.memorama__card,
+.memorama__face {
+  width: var(--w);
+  height: var(--h);
+  border-radius: 14px;
+}
+
+.memorama__card {
+  position: relative;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+  animation: init 5s;
+}
+
+.memorama__face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.memorama__face--back {
+  background-color: var(--light-blue);
+  transform: rotateY(180deg);
+}
+
+.memorama__face--front {
+  background-color: var(--yellow);
+}
+
+.memorama__card--matched .memorama__face--back {
+  background-color: var(--green);
+}
+
+.memorama__face--back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+#board:empty {
+  display: none;
+}
+
+
+
+/* Tablets (≥768px) */
+@media screen and (min-width: 768px) {
+  .memorama__board {
+    grid-template-columns: repeat(4, 1fr); /* Más columnas en tablet */
+  }
+
+  .memorama__title {
+    font-size: 3rem;
+  }
+
+  .memorama__side-panel {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .memorama__controls, .memorama__stats {
+    flex: 1;
+  }
+}
+
+/* Desktops (≥992px) */
+@media screen and (min-width: 992px) {
+  .memorama__layout {
+    flex-wrap: nowrap;
+    flex-direction: row;
+  }
+
+  .memorama__board {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .memorama__side-panel {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+/* Pantallas grandes (≥1200px) */
+@media screen and (min-width: 1200px) {
+  .memorama__title {
+    font-size: 3.4rem;
+  }
+
+  .memorama__button {
+    font-size: 1.2rem;
+    padding: 16px 30px;
+  }
+
+  .memorama__stats {
+    font-size: 1.2rem;
+  }
+
+  .memorama__board {
+    gap: 20px;
+  }
+}

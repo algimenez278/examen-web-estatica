@@ -1,0 +1,36 @@
+---
+import GameBoard from '../../components/memory-game/GameBoard.astro'
+import Controls from '../../components/memory-game/Controls.astro'
+import StatsPanel from '../../components/memory-game/StatsPanel.astro'
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🧠 Memorama</title>
+    <link rel="stylesheet" href="/memory-game/styles/styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+  </head>
+  <body>
+    <div class="memorama">
+      <div class="memorama__glass-card">
+        <header class="memorama__header">
+          <h1 class="memorama__title">🧠 Memorama</h1>
+          <p  class="memorama__paragraph">Encuentra las parejas de imagenes</p>
+        </header>
+        <div class="memorama__layout">
+          <GameBoard />
+          <aside class="memorama__side-panel">
+            <Controls />
+            <StatsPanel />
+          </aside>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+    <script type="module" src="/memory-game/main.js"></script>
+  </body>
+</html>

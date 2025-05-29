@@ -2,15 +2,209 @@
 
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Scape Room by Suicide Squad</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+    }
+
+    .background-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      height: 100%;
+      width: 100%;
+      z-index: -1;
+    }
+
+    .background {
+      background-size: cover;
+      background-position: center;
+      transition: background-image 1s ease-in-out;
+      width: 100%;
+      height: 100%;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      text-align: center;
+      padding: 30px 40px;
+      background-color: rgba(0, 0, 0, 0.85);
+      border-radius: 16px;
+      color: white;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+      max-width: 600px;
+      margin: 20vh auto 0 auto;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 5px black;
+    }
+
+    p {
+      font-size: 1.3rem;
+      margin-bottom: 25px;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    a.button {
+      padding: 12px 30px;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    a.button:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.05);
+    }
+     /* 🔁 Responsive */
+     /* Tablets (≥768px) */
+    @media screen and (min-width: 768px) {
+      .background-container {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+      }
+
+      .content {
+        margin-top: 15vh;
+        padding: 24px;
+      }
+
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      p {
+        font-size: 1.2rem;
+      }
+
+      a.button {
+        font-size: 1.1rem;
+      }
+    }
+
+    /* Desktops (≥992px) */
+    @media screen and (min-width: 992px) {
+      .background-container {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+      }
+
+      .content {
+        padding: 30px 40px;
+        max-width: 600px;
+        margin-top: 20vh;
+      }
+
+      h1 {
+        font-size: 3rem;
+      }
+
+      p {
+        font-size: 1.3rem;
+      }
+    }
+
+    /* Pantallas grandes (≥1200px) */
+    @media screen and (min-width: 1200px) {
+      h1 {
+        font-size: 3.4rem;
+      }
+
+      a.button {
+        font-size: 1.2rem;
+        padding: 16px 30px;
+      }
+
+      .content {
+        max-width: 700px;
+        padding: 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="background-container">
+    <div class="background" id="background0"></div>
+    <div class="background" id="background1"></div>
+    <div class="background" id="background2"></div>
+    <div class="background" id="background3"></div>
+    <div class="background" id="background4"></div>
+    <div class="background" id="background5"></div>
+  </div>
+
+  <div class="content">
+    <h1>Bienvenido al Scape Room</h1>
+    <p>By Suicide Cats</p>
+    <div class="button-group">
+      <a class="button" href="/memory-game/">Ingresar</a>
+      <a class="button" href="/contact/">Contacto</a>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const backgrounds = [
+        document.getElementById("background0"),
+        document.getElementById("background1"),
+        document.getElementById("background2"),
+        document.getElementById("background3"),
+        document.getElementById("background4"),
+        document.getElementById("background5")
+      ];
+
+      const codes = [
+        100, 200, 201, 202, 204,
+        300, 301, 302, 304, 307,
+        400, 401, 403, 404, 405, 
+        406, 408, 409, 410, 411, 
+        412, 413, 414, 415, 417, 
+        418, 421, 426, 429, 500, 
+        501, 502, 503, 504
+      ];
+
+      let index = 0;
+
+      function updateBackground() {
+        backgrounds.forEach((bg, i) => {
+          const code = codes[(index + i) % codes.length];
+          bg.style.backgroundImage = `url('https://http.cat/${code}')`;
+        });
+        index++;
+      }
+
+      updateBackground();
+      setInterval(updateBackground, 6000);
+    });
+  </script>
+</body>
 </html>
+

@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Cargar una palabra aleatoria del archivo JSON (se utiliza fetch y async/await)
   async function pickRandomWord() {
     try {
-      const response = await fetch("/data/word.json");
+      const response = await fetch("/hagnman/data/word.json");
       const data = await response.json();
       const words = data.record;
       const random = words[Math.floor(Math.random() * words.length)];
