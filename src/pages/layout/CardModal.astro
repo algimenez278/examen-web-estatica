@@ -4,13 +4,22 @@ const modalId = `modal${num}`;
 ---
 
 <style>
+  :root {
+    --base: #1e1e2e;
+    --over: #181825;
+    --mauve: #ca9ee6;
+    --red: #e78284;
+    --green: #a6d189;
+    --sky: #99d1db;
+    --blue: #8caaee;
+    --letter: #cdd6f4;
+  }
   /* Card element */
   .cards__card {
-    background: oklch(0.6118 0.0927 126.67);
-    border: 1px solid oklch(0.6118 0.0927 126.67);
+    background: var(--red);
     border-radius: 8px;
     padding: 15px;
-    width: 70px;
+    width: 60px;
     height: 40px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin: 10px 3px;
@@ -18,10 +27,9 @@ const modalId = `modal${num}`;
     justify-content: center;
     align-items: center;
     font-weight: 700;
-    color: oklch(0.4887 0.0805 242.84);
+    color: var(--letter);
     user-select: none;
     cursor: pointer;
-    position: relative;
   }
   @media (max-width: 400px) {
     .cards {

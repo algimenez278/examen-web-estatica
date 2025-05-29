@@ -2,19 +2,30 @@
 const {
   href = "#",
   title = "Ir a la siguiente habitación",
-  direction = "right", // "left" o "right"
+  direction = "right",
 } = Astro.props;
 ---
 
 <style>
+  :root {
+    --base: #1e1e2e;
+    --over: #181825;
+    --mauve: #ca9ee6;
+    --red: #e78284;
+    --green: #a6d189;
+    --sky: #99d1db;
+    --blue: #8caaee;
+    --letter: #cdd6f4;
+  }
+
   .arrow-btn {
-    background-color: oklch(0.6118 0.0927 126.67);
+    background-color: var(--sky);
     border: none;
     border-radius: 50%;
     width: 60px;
     height: 60px;
     cursor: pointer;
-    box-shadow: 0 4px 10px rgba(255, 111, 145, 0.5);
+    box-shadow: 0 4px 10px #8caaee;
     justify-content: center;
     align-items: center;
     transition: background-color 0.3s ease;
@@ -22,7 +33,7 @@ const {
   }
 
   .arrow-btn:hover {
-    background-color: oklch(0.6741 0.191 42.86);
+    background-color: var(--blue);
   }
 
   .arrow-icon {

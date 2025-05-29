@@ -12,7 +12,8 @@ const modales = [
   {
     num: 1,
     title: "¿Qué retorna pista1(AÑONACIMENTOADALOVELACE)?",
-    code: `function pista1(numero) {
+    code: `
+function pista1(numero) {
   const strNum = numero.toString();
   if (strNum.length === 0) return 0;
   const suma = parseInt(strNum[0], 10) + pista1(strNum.slice(1));
@@ -28,7 +29,8 @@ const modales = [
   { nombre: 'Michi', color: 'gris', edad: 3 },
   { nombre: 'Luna', color: 'negro', edad: 2 },
   { nombre: 'Simba', color: 'naranja', edad: 4 }, ] ?`,
-    code: `function pista2(gatos) {
+    code: `
+function pista2(gatos) {
   const suma = gatos.reduce((total, gato) => {
     return total + (gato.edad * gato.nombre.length);
   }, 0);
@@ -38,7 +40,8 @@ const modales = [
   {
     num: 3,
     title: "¿Qué retornará pista3(10110101)?",
-    code: `function pista3(numero) {
+    code: `
+function pista3(numero) {
   const binario = numero.toString(2);
   const cantidadUnos = [...binario].filter(bit => bit === '1').length;
   return cantidadUnos;
@@ -47,7 +50,8 @@ const modales = [
   {
     num: 4,
     title: "¿Qué retorará pista4(gatos[1].edad)?",
-    code: `function pista4(numero) {
+    code: `
+function pista4(numero) {
   if (numero <= 0) return 0;
   if (numero === 1) return 15;
   if (numero === 2) return 24;
@@ -66,13 +70,21 @@ const modales = [
     margin: 0;
     padding: 0;
   }
+
+  :root {
+    --base: #1e1e2e;
+    --over: #181825;
+    --mauve: #ca9ee6;
+    --red: #e78284;
+    --green: #a6d189;
+    --sky: #99d1db;
+    --blue: #8caaee;
+    --letter: #cdd6f4;
+  }
+
   body {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(
-      to right,
-      oklch(0.6741 0.191 42.86),
-      oklch(0.6118 0.0927 126.67)
-    );
+    background: var(--base);
     min-height: 100vh;
     margin: 0;
     padding: 0;
@@ -84,7 +96,7 @@ const modales = [
   .container {
     background: rgba(255, 255, 255, 0.459);
     border-radius: 12px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 8px 25px var(--red);
     text-align: center;
     max-width: 350px;
     width: 90%;
@@ -92,25 +104,26 @@ const modales = [
   /* Cards container block */
   .cards {
     display: flex;
+    padding: 10px;
     margin-bottom: 25px;
   }
 
   .heading {
     margin-bottom: 20px;
-    color: oklch(0.4887 0.0805 242.84);
+    color: var(--over);
     font-weight: 700;
   }
 
   #candado {
     display: flex;
     justify-content: center;
-    gap: 15px;
+    gap: 2px;
     margin-bottom: 30px;
   }
 
   button {
     padding: 12px 24px;
-    background-color: oklch(0.6118 0.0927 126.67);
+    background-color: var(--sky);
     color: white;
     font-weight: 700;
     border: none;
@@ -122,7 +135,7 @@ const modales = [
   }
 
   button:hover {
-    background-color: oklch(0.6741 0.191 42.86);
+    background-color: var(--blue);
   }
 
   .message {
@@ -175,7 +188,7 @@ const modales = [
       direction="left"
     />
     <button id="btn-verificar" aria-describedby="mensaje">Verificar</button>
-    <Button href="habitacion3.html" title="Ir a habitación siguiente" />
+    <Button href="src/pages/index.astro" title="Ir a habitación siguiente" />
 
     <p class="message" id="mensaje" role="alert" aria-live="polite"></p>
   </main>

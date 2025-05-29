@@ -4,15 +4,25 @@ const { index } = Astro.props;
 ---
 
 <style>
+  :root {
+    --base: #1e1e2e;
+    --over: #181825;
+    --mauve: #ca9ee6;
+    --red: #e78284;
+    --green: #a6d189;
+    --sky: #99d1db;
+    --blue: #8caaee;
+    --letter: #cdd6f4;
+  }
   .digit {
     width: 60px;
-    height: 80px;
-    border: 3px solid oklch(0.6118 0.0927 126.67);
+    height: 90px;
+    border: 1px solid var(--blue);
     border-radius: 12px;
     overflow: hidden;
     cursor: pointer;
     box-shadow: inset 0 -6px 10px rgba(0, 0, 0, 0.12);
-    background: oklch(0.7654 0.0693 232.79);
+    background: var(--sky);
     user-select: none;
     position: relative;
   }
@@ -22,7 +32,7 @@ const { index } = Astro.props;
     flex-direction: column;
     font-size: 48px;
     font-weight: 900;
-    color: oklch(0.4887 0.0805 242.84);
+    color: var(--base);
     line-height: 80px;
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: transform;
