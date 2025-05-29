@@ -1,16 +1,29 @@
 ---
-
+const { initialTime = 30 } = Astro.props;
 ---
-
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content="Astro" />
+    <title>Quiz</title>
+    <link rel="stylesheet" href="/public/quiz-game/style/quiz.css">
+</head>
+<body>
+    <div class="quiz" data-initial-time={initialTime}>
+        <h1>Quiz 🤓❔</h1>
+        <div class="quizSpan">
+            <span id="currents">1</span>
+            <span id="total">/ 5</span>
+            <div class="timer">
+                <span id="remaining-time">{initialTime}</span> seconds
+            </div>
+        </div>
+        <h4 id="question"></h4>
+        <ul id="options"></ul>
+        <button class="follow" id="following">siguiente</button>
+    </div>
+    <script src="/quiz-game/scripts/quiz.js" defer></script>
+</body>
 </html>
