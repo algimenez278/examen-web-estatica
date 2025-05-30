@@ -27,7 +27,7 @@ Cada integrante del equipo desarrolló una sala distinta del escape room. Todas 
 | Sala              | Juego                           | 
 |-------------------|---------------------------------|
 | 🧠 Memorama Dev   | Match de tecnologías y memes    |  
-| 💀 Ahorcado Dev   |  Adiviná palabras tech          |                              
+| 💀 Ahorcado Dev   | Adiviná palabras tech           |                              
 | 🤓 Quiz Dev       | Preguntas de programación       |                              
 | 🔤 Rosco Dev      | Definiciones dev                |                               
 | 🔐 Candado Dev    | Combinación de digitos secretos |
@@ -40,23 +40,23 @@ Cada integrante del equipo desarrolló una sala distinta del escape room. Todas 
 ```bash
 git clone http://github.com/algimenez278/examen-web-estatica/
 cd examen-web-estatica
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
 ---
 
 ## 👩‍💻 Integrantes
 
-Antonella Simonetti – Memorama Dev 🧠
+**Antonella Simonetti** – *Memorama Dev 🧠*
 
-Katherine Gomez – Ahorcado Dev 💀
+**Katherine Gomez** – *Ahorcado Dev 💀*
 
-Valeria Medina – Quiz Dev 🤓
+**Valeria Medina** – *Quiz Dev 🤓*
 
-Miriam Chalañuk - Rosco Dev  🔤
+**Miriam Chalañuk** - *Rosco Dev  🔤*
 
-Abril Gimenez – Candado 🔐
+**Abril Gimenez** – *Candado 🔐*
 
 ---
 
