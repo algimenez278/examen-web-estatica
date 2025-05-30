@@ -16,7 +16,7 @@ Este proyecto fue desarrollado como parte del **Examen de Web Estática 2025** u
 - JavaScript (orientado al DOM)
 - Fetch API (JSON local)
 - SweetAlert2 (modales personalizados)
-- [Deploy en Vercel / Netlify / etc.]
+- Deploy en Netlify
 
 ---
 
@@ -38,7 +38,7 @@ Cada integrante del equipo desarrolló una sala distinta del escape room. Todas 
 ## 🚀 Cómo correr el proyecto
 
 ```bash
-git clone http://github.com/algimenez278/examen-web-estatica/tree/develop
+git clone http://github.com/algimenez278/examen-web-estatica/
 cd repo-dev-escape-room
 npm install
 npm run dev
