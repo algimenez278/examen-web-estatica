@@ -26,8 +26,8 @@ Cada integrante del equipo desarrolló una sala distinta del escape room. Todas 
 
 | Sala              | Juego                           | 
 |-------------------|---------------------------------|
-| 💀 Ahorcado Dev   | Adiviná palabras tech           |  
-| 🧠 Memorama Dev   | Match de tecnologías            |                              
+| 🧠 Memorama Dev   | Match de tecnologías y memes    |  
+| 💀 Ahorcado Dev   |  Adiviná palabras tech          |                              
 | 🤓 Quiz Dev       | Preguntas de programación       |                              
 | 🔤 Rosco Dev      | Definiciones dev                |                               
 | 🔐 Candado Dev    | Combinación de digitos secretos |
@@ -39,7 +39,7 @@ Cada integrante del equipo desarrolló una sala distinta del escape room. Todas 
 
 ```bash
 git clone http://github.com/algimenez278/examen-web-estatica/
-cd repo-dev-escape-room
+cd examen-web-estatica
 npm install
 npm run dev
 ```
