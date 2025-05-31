@@ -1,0 +1,348 @@
+---
+import Timer from './Timer.astro';
+---
+
+<main class="rosco-container">
+  <header>
+    <h1>Rosco de Pasapalabra - Programación</h1>
+    <Timer initialTime="80"/>
+    <button id="terminar-juego-btn" class="btn-terminar">Terminar Juego</button>
+  </header>
+
+  <section id="rosco-letras" class="rosco" aria-label="Rosco de letras">
+    <!-- Letras se insertan con JS -->
+  </section>
+
+  <section class="juego-area" aria-label="Zona de juego">
+    <article id="definicion-container">
+      <h2 id="letra-actual"></h2>
+      <p id="definicion-actual"></p>
+      <p class="categoria" id="categoria-actual"></p>
+    </article>
+
+    <input 
+      type="text" 
+      id="respuesta-input" 
+      autocomplete="off" 
+      placeholder="Escribe tu respuesta..."
+      class="input-response"
+    />
+
+    <div class="botones">
+      <button id="responder-btn" class="btn-responder">Responder</button>
+      <button id="pasar-btn" class="btn-pasar">Pasapalabra</button>
+    </div>
+  </section>
+
+  <section id="resultados" class="hidden resultados">
+    <h2>Juego Terminado!</h2>
+    <p id="puntuacion-final"></p>
+  </section>
+</main>
+<style>
+:root {
+    --lapis: oklch(0.4887 0.0805 242.84);
+    --carolina: oklch(0.7654 0.0693 232.79);
+    --moss: oklch(0.6118 0.0927 126.67);
+    --yellow: oklch(0.7999 0.1559 76.25);
+    --orange: oklch(0.6741 0.191 42.86);
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    background-image: linear-gradient(to bottom, var(--lapis), var(--carolina));
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .rosco-container {
+    background: rgba(255, 255, 255, 0.459);
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    text-align: center;
+    max-width: 800px;
+    width: 90%;
+    height: 60%;
+  }
+  
+  .rosco {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    aspect-ratio: 1 / 1.3;
+    margin: 3rem auto;
+  }
+  
+  :global(.letra) {
+    position: absolute;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 2rem;
+    user-select: none;
+    background-color: #222;
+    color: white;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+    transform: translate(-50%, -50%);
+  }
+  
+  :global(.letra.activa) {
+    background-color: #f39c12;
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(243, 156, 18, 0.7);
+    z-index: 10;
+  }
+  
+  :global(.letra.acertada) {
+    background-color: #2ecc71;
+    color: black;
+  }
+  
+  :global(.letra.fallada) {
+    background-color: #e74c3c;
+    color: white;
+  }
+  
+  :global(.letra.pasada) {
+    background-color: #f39c12;
+    color: black;
+  }
+  
+ .juego-area {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin: 2rem;
+    color: black;
+  }
+
+  .input-response {
+    width: 80%;
+    height: 3em;
+    padding: 0.5em;
+    font-size: 1.2rem;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    margin: 2rem auto;
+  }
+  
+  .botones {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+  }
+  
+  button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .btn-responder {
+    background-color: #2ecc71;
+    color: white;
+  }
+  
+  .btn-pasar {
+    background-color: #f39c12;
+    color: black;
+  }
+  
+  .btn-terminar {
+    background-color: #e74c3c;
+    color: white;
+    margin-top: 1rem;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  </style>
+
+<script type="module">
+  document.addEventListener('DOMContentLoaded', async () => {
+    let data;
+    try {
+      const res = await fetch('/rosco-game/data/rosco.json');
+      if (!res.ok) throw new Error('No se pudo cargar rosco.json');
+      data = await res.json();
+    } catch (error) {
+      console.error('Error cargando rosco.json:', error);
+      alert('Error al cargar los datos del rosco. Ver consola.');
+      return;
+    }
+  
+    const preguntas = data.rondas;
+  
+    const roscoEl = document.getElementById('rosco-letras');
+    const letraActualEl = document.getElementById('letra-actual');
+    const definicionEl = document.getElementById('definicion-actual');
+    const categoriaEl = document.getElementById('categoria-actual');
+    const respuestaInput = document.getElementById('respuesta-input');
+    const responderBtn = document.getElementById('responder-btn');
+    const pasarBtn = document.getElementById('pasar-btn');
+    const terminarBtn = document.getElementById('terminar-juego-btn');
+    const resultadosEl = document.getElementById('resultados');
+    const puntuacionEl = document.getElementById('puntuacion-final');
+  
+    const estado = {
+      letraActual: 0,
+      letrasAcertadas: {},
+      juegoTerminado: false,
+    };
+  
+    const roscoSize = 600;
+    const center = roscoSize / 2;
+    const radius = 300;
+  
+    preguntas.forEach((pregunta, index) => {
+      pregunta.estado = 'pendiente';
+      const div = document.createElement('div');
+      div.className = 'letra';
+      div.dataset.letra = pregunta.letra;
+      div.dataset.index = index;
+      div.textContent = pregunta.letra;
+  
+      const total = preguntas.length;
+      const ang = ((2 * Math.PI * index) / total) - Math.PI / 2;
+      const x = center + radius * Math.cos(ang);
+      const y = center + radius * Math.sin(ang);
+  
+      div.style.position = 'absolute';
+      div.style.left = `${x}px`;
+      div.style.top = `${y}px`;
+  
+      roscoEl.appendChild(div);
+    });
+  
+    function actualizarPregunta() {
+      const pregunta = preguntas[estado.letraActual];
+      letraActualEl.textContent = pregunta.letra;
+      definicionEl.textContent = pregunta.definicion;
+      categoriaEl.textContent = `Categoría: ${pregunta.categoria}`;
+      respuestaInput.value = '';
+  
+      document.querySelectorAll('.letra').forEach((el, i) => {
+        el.classList.remove('activa');
+        if (i === estado.letraActual && !el.classList.contains('acertada') && !el.classList.contains('fallada')) {
+          el.classList.add('activa');
+        }
+      });
+    }
+
+    function manejarRespuesta() {
+  if (estado.juegoTerminado) return;
+
+  const pregunta = preguntas[estado.letraActual];
+  const respuesta = respuestaInput.value.trim().toLowerCase();
+  const esCorrecta = respuesta === pregunta.respuesta.toLowerCase();
+
+  const letraEl = document.querySelector(`.letra[data-index="${estado.letraActual}"]`);
+  
+  console.log('Elemento letra encontrado:', letraEl); // Para depuración
+  
+  if (!letraEl) {
+    console.error('No se encontró el elemento de la letra');
+    return;
+  }
+
+  letraEl.classList.remove('activa', 'acertada', 'fallada', 'pasada');
+  
+  letraEl.classList.add(esCorrecta ? 'acertada' : 'fallada');
+
+  pregunta.estado = esCorrecta ? 'acertada' : 'fallada';
+  
+  estado.letrasAcertadas[pregunta.letra] = esCorrecta;
+
+  setTimeout(avanzar, 300);
+}
+  
+    function pasarPalabra() {
+      const pregunta = preguntas[estado.letraActual];
+      const letraEl = document.querySelector(`.letra[data-letra="${pregunta.letra}"]`);
+      letraEl.classList.remove('activa');
+      letraEl.classList.add('pasada');
+      pregunta.estado = 'pasada';
+      pregunta.estado = 'pasada';
+
+      avanzar();
+    }
+  
+    function avanzar() {
+  let siguienteIndice = estado.letraActual;
+
+  for (let i = 1; i <= preguntas.length; i++) {
+    const index = (siguienteIndice + i) % preguntas.length;
+    const estadoPregunta = preguntas[index].estado;
+
+    if (estadoPregunta === 'pendiente' || estadoPregunta === 'pasada') {
+      estado.letraActual = index;
+      actualizarPregunta();
+      return;
+    }
+  }
+
+  // Si no encontró ninguna letra pendiente o pasada, termina el juego
+  terminarJuego();
+}
+  
+    function terminarJuego() {
+      if(estado.juegoTerminado) return;
+      estado.juegoTerminado = true;
+
+      document.querySelector('.juego-area').classList.add('hidden');
+      document.getElementById('rosco-letras').classList.add('hidden');
+      resultadosEl.classList.remove('hidden'); 
+
+      const aciertos = Object.values(estado.letrasAcertadas).filter(Boolean).length;
+      const porcentaje = Math.round((aciertos / preguntas.length) * 100);
+      puntuacionEl.textContent = `Acertaste ${aciertos} de ${preguntas.length} letras (${porcentaje}%)`;
+
+      respuestaInput.disabled = true;
+      responderBtn.disabled = true;
+      pasarBtn.disabled = true;
+      terminarBtn.disabled = true;
+    }
+
+    document.addEventListener('timer-finished', () => {
+      terminarJuego();
+    });
+  
+    responderBtn.addEventListener('click', manejarRespuesta);
+    pasarBtn.addEventListener('click', pasarPalabra);
+    terminarBtn.addEventListener('click', terminarJuego);
+    respuestaInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        manejarRespuesta();
+      }
+    });
+
+    actualizarPregunta();
+  });
+  </script>
