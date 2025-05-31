@@ -1,0 +1,388 @@
+{
+    "record": [
+        {
+            "word": "ALGORITMO",
+            "hint": "Conjunto de pasos lógicos"
+        },
+        {
+            "word": "VARIABLE",
+            "hint": "Espacio para guardar datos"
+        },
+        {
+            "word": "FUNCION",
+            "hint": "Bloque de código reutilizable"
+        },
+        {
+            "word": "BUCLE",
+            "hint": "Repite instrucciones"
+        },
+        {
+            "word": "OBJETO",
+            "hint": "Entidad con propiedades y métodos"
+        },
+        {
+            "word": "COMPILADOR",
+            "hint": "Traduce código a lenguaje máquina"
+        },
+        {
+            "word": "DEBUG",
+            "hint": "Proceso de depuración"
+        },
+        {
+            "word": "IDE",
+            "hint": "Entorno de desarrollo integrado"
+        },
+        {
+            "word": "GIT",
+            "hint": "Control de versiones"
+        },
+        {
+            "word": "API",
+            "hint": "Interfaz de programación de aplicaciones"
+        },
+        {
+            "word": "JSON",
+            "hint": "Formato de datos"
+        },
+        {
+            "word": "CSS",
+            "hint": "Hoja de estilo en cascada"
+        },
+        {
+            "word": "HTML",
+            "hint": "Lenguaje de marcado de hipertexto"
+        },
+        {
+            "word": "JAVASCRIPT",
+            "hint": "Lenguaje de programación de alto nivel, que se utiliza popularmente en el desarrollo web"
+        },
+        {
+            "word": "SQL",
+            "hint": "Lenguaje de base de datos relacional"
+        },
+        {
+            "word": "GITHUB",
+            "hint": "Plataforma de control de versiones en la nube"
+        },
+        {
+            "word": "REACT",
+            "hint": "Librería de JavaScript para construir interfaces de usuario reactivas"
+        },
+        {
+            "word": "NODEJS",
+            "hint": "Entorno de ejecución de JavaScript en el lado del servidor"
+        },
+        {
+            "word": "PYTHON",
+            "hint": "Lenguaje de programación interpretado y de alto nivel"
+        },
+        {
+            "word": "JAVA",
+            "hint": "Lenguaje de programación orientado a objetos"
+        },
+        {
+            "word": "ANDROID",
+            "hint": "Sistema operativo para dispositivos móviles basado en Linux"
+        },
+        {
+            "word": "IOS",
+            "hint": "Sistema operativo para dispositivos móviles basado en macOS"
+        },
+        {
+            "word": "HARDWARE",
+            "hint": "Parte física de un dispositivo informático"
+        },
+        {
+            "word": "SOFTWARE",
+            "hint": "Parte lógica de un dispositivo informático"
+        },
+        {
+            "word": "HARDCODE",
+            "hint": "Código fijo o estático"
+        },
+        {
+            "word": "BUG",
+            "hint": "Error en el código"
+        },
+        {
+            "word": "BACKEND",
+            "hint": "Lógica del lado del servidor"
+        },
+        {
+            "word": "FRONTEND",
+            "hint": "Interfaz con la que interactúa el usuario"
+        },
+        {
+            "word": "FULLSTACK",
+            "hint": "Desarrollador que maneja frontend y backend"
+        },
+        {
+            "word": "FRAMEWORK",
+            "hint": "Estructura base para desarrollar software"
+        },
+        {
+            "word": "LIBRERIA",
+            "hint": "Conjunto de funciones reutilizables"
+        },
+        {
+            "word": "COMPONENTE",
+            "hint": "Elemento independiente reutilizable"
+        },
+        {
+            "word": "EVENTO",
+            "hint": "Acción que ocurre en la interfaz"
+        },
+        {
+            "word": "ASYNC",
+            "hint": "Operación de espera que no bloquea el flujo principal"
+        },
+        {
+            "word": "AWAIT",
+            "hint": "Operación de espera que bloquea el flujo principal"
+        },
+        {
+            "word": "PROMESA",
+            "hint": "Manejo asincrónico en JavaScript"
+        },
+        {
+            "word": "CALLBACK",
+            "hint": "Función pasada como argumento"
+        },
+        {
+            "word": "RUTEO",
+            "hint": "Gestión de URLs en una SPA"
+        },
+        {
+            "word": "VSCODE",
+            "hint": "Editor de código muy popular"
+        },
+        {
+            "word": "EXTENSION",
+            "hint": "Herramienta extra que se añade a un IDE"
+        },
+        {
+            "word": "TIPADO",
+            "hint": "Clasificación de datos por tipo"
+        },
+        {
+            "word": "LOGICA",
+            "hint": "Parte del código que resuelve el problema"
+        },
+        {
+            "word": "FUNCIONAL",
+            "hint": "Paradigma basado en funciones puras"
+        },
+        {
+            "word": "TOKEN",
+            "hint": "Cadena que representa la autenticación"
+        },
+        {
+            "word": "LOCALSTORAGE",
+            "hint": "Almacena datos en el navegador"
+        },
+        {
+            "word": "COOKIE",
+            "hint": "Dato guardado en el navegador"
+        },
+        {
+            "word": "FETCH",
+            "hint": "Método para obtener datos en JS"
+        },
+        {
+            "word": "ERROR",
+            "hint": "Algo no salió como se esperaba"
+        },
+        {
+            "word": "CONSOLE",
+            "hint": "Herramienta para ver errores o logs"
+        },
+        {
+            "word": "DEPLOY",
+            "hint": "Publicar una app en internet"
+        },
+        {
+            "word": "BIT",
+            "hint": "Unidad mínima de información digital"
+        },
+        {
+            "word": "BASH",
+            "hint": "Lenguaje de consola en sistemas Unix"
+        },
+        {
+            "word": "TERMINAL",
+            "hint": "Interfaz de línea de comandos"
+        },
+        {
+            "word": "SHELL",
+            "hint": "Interprete de comandos"
+        },
+        {
+            "word": "ALGORITMO",
+            "hint": "Secuencia de instrucciones"
+        },
+        {
+            "word": "PUERTO",
+            "hint": "Punto de comunicación en red"
+        },
+        {
+            "word": "DOMINIO",
+            "hint": "Nombre de una página web"
+        },
+        {
+            "word": "SERVIDOR",
+            "hint": "Computadora que brinda servicios"
+        },
+        {
+            "word": "CLIENTE",
+            "hint": "Solicita recursos o servicios"
+        },
+        {
+            "word": "TOKEN",
+            "hint": "Código de autenticación"
+        },
+        {
+            "word": "LOGIN",
+            "hint": "Ingreso de usuario"
+        },
+        {
+            "word": "REGISTER",
+            "hint": "Proceso de crear una cuenta"
+        },
+        {
+            "word": "PROPS",
+            "hint": "Datos que se pasan a componentes"
+        },
+        {
+            "word": "ARRAY",
+            "hint": "Colección de datos ordenados"
+        },
+        {
+            "word": "OBJETO",
+            "hint": "Estructura con propiedades y métodos"
+        },
+        {
+            "word": "BOOLEAN",
+            "hint": "Tipo de dato verdadero o falso"
+        },
+        {
+            "word": "NULO",
+            "hint": "Valor que representa ausencia"
+        },
+        {
+            "word": "UNDEFINED",
+            "hint": "Valor no asignado"
+        },
+        {
+            "word": "TIPO",
+            "hint": "Define la naturaleza de un dato"
+        },
+        {
+            "word": "INTERFAZ",
+            "hint": "Punto de interacción con el usuario"
+        },
+        {
+            "word": "RECURSION",
+            "hint": "Función que se llama a sí misma"
+        },
+        {
+            "word": "COMMIT",
+            "hint": "Guardar cambios en Git"
+        },
+        {
+            "word": "BRANCH",
+            "hint": "Rama en un repositorio"
+        },
+        {
+            "word": "MERGE",
+            "hint": "Unir ramas en Git"
+        },
+        {
+            "word": "PULL",
+            "hint": "Obtener cambios de un repositorio"
+        },
+        {
+            "word": "PUSH",
+            "hint": "Enviar cambios a un repositorio"
+        },
+        {
+            "word": "ISSUE",
+            "hint": "Reporte de problema o tarea"
+        },
+        {
+            "word": "TICKET",
+            "hint": "Tarea en un sistema de seguimiento"
+        },
+        {
+            "word": "KANBAN",
+            "hint": "Método visual de gestión de tareas"
+        },
+        {
+            "word": "SCRUM",
+            "hint": "Marco ágil de trabajo"
+        },
+        {
+            "word": "SPRINT",
+            "hint": "Periodo de desarrollo en Scrum"
+        },
+        {
+            "word": "STORY",
+            "hint": "Funcionalidad escrita desde el punto de vista del usuario"
+        },
+        {
+            "word": "DATABASE",
+            "hint": "Almacén estructurado de datos"
+        },
+        {
+            "word": "QUERY",
+            "hint": "Consulta a una base de datos"
+        },
+        {
+            "word": "CRUD",
+            "hint": "Crear, leer, actualizar y borrar"
+        },
+        {
+            "word": "MONGODB",
+            "hint": "Base de datos NoSQL"
+        },
+        {
+            "word": "MYSQL",
+            "hint": "Sistema de gestión de base de datos relacional"
+        },
+        {
+            "word": "POSTGRES",
+            "hint": "Sistema de base de datos avanzado"
+        },
+        {
+            "word": "DEPLOY",
+            "hint": "Publicación de una app"
+        },
+        {
+            "word": "BUILD",
+            "hint": "Compilación del código para producción"
+        },
+        {
+            "word": "UNITTEST",
+            "hint": "Prueba individual de componente"
+        },
+        {
+            "word": "AWS",
+            "hint": "Plataforma de desarrollo en la nube"
+        },
+        {
+            "word": "DOCKER",
+            "hint": "Contenedor de software"
+        },
+        {
+            "word": "KUBERNETES",
+            "hint": "Orquestación de contenedores"
+        },
+        {
+            "word": "API",
+            "hint": "Interfaz de programación de aplicaciones"
+        },
+        {
+            "word": "REST",
+            "hint": "Estilo de desarrollo de APIs"
+        }
+    ]
+}
