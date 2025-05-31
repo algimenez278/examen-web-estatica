@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
           }).then(() => {
             resetBtn.click();
           });
-        }, 2000); // 2 seg de delay
+        }, 1000); // 1 seg de delay
         break;
     }
 

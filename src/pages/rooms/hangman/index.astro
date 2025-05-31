@@ -90,7 +90,7 @@ const { title = "💻 Ahorcado Dev 💀" } = Astro.props;
 
   .hangman__hint {
     font-style: italic;
-    color: var(--over);
+    color: var(--base);
     font-size: 0.9rem;
   }
 
@@ -98,6 +98,8 @@ const { title = "💻 Ahorcado Dev 💀" } = Astro.props;
     font-size: clamp(1.2rem, 5vw, 1.8rem);
     letter-spacing: 0.3em;
     word-wrap: break-word;
+    color: var(--over);
+    text-align: center;
   }
 
   .hangman__form {
@@ -122,7 +124,7 @@ const { title = "💻 Ahorcado Dev 💀" } = Astro.props;
     border-radius: 5px;
     border: none;
     background: var(--blue);
-    color: #000;
+    color: var(--over);
     font-weight: bold;
     cursor: pointer;
     transition: background 0.3s ease;
@@ -136,18 +138,18 @@ const { title = "💻 Ahorcado Dev 💀" } = Astro.props;
 
   .hangman__used-letters {
     font-size: 0.8rem;
-    color: #333;
+    color: var(--over);
     word-break: break-word;
   }
 
   .hangman__message {
     font-size: 1rem;
     font-weight: bold;
-    color: #ff2e2e;
+    color: var(--red);
   }
 
   .hangman__canvas {
-    background: #fff;
+    background: var(--letter);
     border-radius: 5px;
     width: 100%;
     max-width: 220px;
