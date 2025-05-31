@@ -48,13 +48,10 @@ const {
   }
 </style>
 
-<button
-  class={`arrow-btn ${direction === "left" ? "left" : ""}`}
-  onclick={`navegarConAnimacion('${href}')`}
-  title={title}
-  aria-label={title}
->
-  <svg viewBox="0 0 24 24" class="arrow-icon">
-    <path d="M8 5v14l11-7z"></path>
-  </svg>
-</button>
+<a href={href} title={title} aria-label={title}>
+  <button class={`arrow-btn ${direction === "left" ? "left" : ""}`}>
+    <svg viewBox="0 0 24 24" class="arrow-icon">
+      <path d="M8 5v14l11-7z"></path>
+    </svg>
+  </button>
+</a>
