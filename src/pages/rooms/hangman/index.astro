@@ -1,5 +1,6 @@
 ---
 import MainLayout from "../../../layouts/MainLayout.astro";
+import Buttons from "../../../components/Buttons.astro";
 const { title = "💻 Ahorcado Dev 💀" } = Astro.props;
 ---
 
@@ -7,40 +8,49 @@ const { title = "💻 Ahorcado Dev 💀" } = Astro.props;
   <!-- <h1>ahorcado</h1> -->
   <!-- Acá va todo tu contenido específico -->
   <!-- recorda quela ruta va ser http://localhost:4321/rooms/hangman -->
-    <main class="hangman">
-      <div class="hangman__left">
-        <h1 class="hangman__title">{title}</h1>
-        <p class="hangman__hint" id="hint">pista: cargando...</p>
-        <div class="hangman__word" id="word"></div>
+  <main class="hangman">
+    <div class="hangman__left">
+      <h1 class="hangman__title">{title}</h1>
+      <p class="hangman__hint" id="hint">pista: cargando...</p>
+      <div class="hangman__word" id="word"></div>
 
-        <form class="hangman__form" id="form">
-          <input
-            class="hangman__input"
-            id="letter-input"
-            type="text"
-            maxlength="1"
-            required
-            placeholder="Letra"
-            autocomplete="off"
-          />
-          <button class="hangman__button" type="submit">Adivinar</button>
-        </form>
+      <form class="hangman__form" id="form">
+        <input
+          class="hangman__input"
+          id="letter-input"
+          type="text"
+          maxlength="1"
+          required
+          placeholder="Letra"
+          autocomplete="off"
+        />
+        <button class="hangman__button" type="submit">Adivinar</button>
+      </form>
 
-        <p class="hangman__used-letters">
-          Letras usadas: <span id="used-letters"></span>
-        </p>
-        <p class="hangman__message" id="message"></p>
+      <p class="hangman__used-letters">
+        Letras usadas: <span id="used-letters"></span>
+      </p>
+      <p class="hangman__message" id="message"></p>
 
-        <button class="hangman__reset" id="reset">🔄 Reiniciar</button>
+      <button class="hangman__reset" id="reset">🔄 Reiniciar</button>
+      
+      <div id="next-room-wrapper" class="locked">
+        <Buttons href="/rooms/quiz" />
       </div>
+      
+      
+    </div>
+    
+    
+    <div class="hangman__right">
+      <canvas class="hangman__canvas" id="canvas" width="160" height="200"
+      ></canvas>
+    </div>
 
-      <div class="hangman__right">
-        <canvas class="hangman__canvas" id="canvas" width="160" height="200"
-        ></canvas>
-      </div>
-    </main>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
-    <script src="/src/pages/rooms/hangman/hangman.js" defer></script>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+  <script type="module" src="/src/pages/rooms/hangman/hangman.js"></script>
 </MainLayout>
 
 <style>
@@ -133,7 +143,7 @@ const { title = "💻 Ahorcado Dev 💀" } = Astro.props;
 
   .hangman__button:hover,
   .hangman__reset:hover {
-    background: var(--orange);
+    background: var(--mauve);
   }
 
   .hangman__used-letters {
@@ -169,4 +179,16 @@ const { title = "💻 Ahorcado Dev 💀" } = Astro.props;
       margin-top: 1rem;
     }
   }
+  #next-room-wrapper.locked {
+  pointer-events: none;
+  opacity: 0.5;
+  filter: grayscale(1);
+}
+
+#next-room-wrapper.unlocked {
+  pointer-events: auto;
+  opacity: 1;
+  filter: none;
+}
+
 </style>

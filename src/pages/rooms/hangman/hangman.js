@@ -1,4 +1,4 @@
-console.log("¿SweetAlert2 está disponible?", typeof Swal !== "undefined");
+import { showWinAlert, showLoseAlert } from "../../../utils/alerts.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   // Elementos del DOM
@@ -56,38 +56,31 @@ document.addEventListener("DOMContentLoaded", () => {
       input.disabled = true;
       input.blur();
 
-
       setTimeout(() => {
-        Swal.fire({
-          title: "🎉 ¡Ganaste!",
-          text: "Sos una mente brillante, dev crack 😎",
-          icon: "success",
-          showDenyButton: true,
-          confirmButtonText: "Volver a jugar",
-          denyButtonText: "Siguiente room",
-          confirmButtonColor: "#f6ae2d",
-          denyButtonColor: "#758e4f",
-          background: "#2c2c3e",
-          color: "#fff",
-        }).then((result) => {
-          if (result.isConfirmed) {
-            resetBtn.click();
-          } else if (result.isDenied) {
-            // Acá se va a cambiar la ruta cuando se nsepa que room sigue
+        showWinAlert({
+          onConfirm: () => {
             console.log("Pasando a la siguiente room...");
-            // window.location.href = "/siguiente-room"; // cuando esté lista
-          }
+            /* document.getElementById("next-room-btn").style.display =
+              "inline-flex"; */
+            /* window.location.href = "/rooms/quiz"; */
+            document
+              .getElementById("next-room-wrapper")
+              .classList.remove("locked");
+            document
+              .getElementById("next-room-wrapper")
+              .classList.add("unlocked");
+          },
         });
-      }, 500); // 0.5 seg
+      }, 500);
     }
   }
 
-  // 🔤 Actualizar las letras que se usaron
+  // actualiza las letras que se usaron
   function updateUsedLetters() {
     usedLettersEl.textContent = usedLetters.join(", ");
   }
 
-  // Dibujar el ahorcado en cada error
+  // dibuja el ahorcado en cada error
   function drawHangman() {
     ctx.beginPath();
 
@@ -123,25 +116,16 @@ document.addEventListener("DOMContentLoaded", () => {
         input.disabled = true;
 
         setTimeout(() => {
-          Swal.fire({
-            title: "💀 ¡Perdiste!",
-            text: `La palabra era: ${word}`,
-            icon: "error",
-            confirmButtonText: "Intentar de nuevo",
-            confirmButtonColor: "#f26419",
-            background: "#2c2c3e",
-            color: "#fff",
-          }).then(() => {
-            resetBtn.click();
-          });
-        }, 1000); // 1 seg de delay
+          showLoseAlert(word, () => resetBtn.click());
+        }, 1000);
+        // 1 seg de delay
         break;
     }
 
     ctx.stroke();
   }
 
-  // Manejador del input de la letra
+  // input de la letra
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const letter = input.value.toUpperCase();
@@ -170,13 +154,13 @@ document.addEventListener("DOMContentLoaded", () => {
     input.focus();
   });
 
-  // Reiniciar juego
+  // reiniciar juego
   resetBtn.addEventListener("click", () => {
     input.disabled = false;
     pickRandomWord();
     input.focus();
   });
 
-  // Empezar el juego al cargar
+  // empezar juego al cargar
   pickRandomWord();
 });
