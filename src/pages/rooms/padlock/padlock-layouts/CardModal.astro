@@ -1,0 +1,46 @@
+---
+const { num } = Astro.props;
+const modalId = `modal${num}`;
+---
+
+<style>
+  /* Card element */
+  .cards__card {
+    background: var(--red);
+    border-radius: 8px;
+    padding: 15px;
+    width: 60px;
+    height: 40px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 10px 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    color: var(--letter);
+    user-select: none;
+    cursor: pointer;
+  }
+  @media (max-width: 400px) {
+    .cards {
+      justify-content: space-around;
+      gap: 8px;
+    }
+    .cards__card {
+      width: 90%;
+      height: 38px;
+      font-size: 14px;
+    }
+  }
+</style>
+
+<article
+  class="cards__card"
+  tabindex="0"
+  role="button"
+  aria-haspopup="dialog"
+  aria-controls={modalId}
+  data-modal={modalId}
+>
+  Pista {num}
+</article>
