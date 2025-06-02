@@ -34,13 +34,8 @@ import Button from './Button.astro';
   </section>
 
   <div class="nav-buttons-container">
-    <div id="button-next-room-left" class="locked-btn button-nav-left">
-      <Button href="/rooms/quiz" />
-    </div> 
-
-    <div id="button-next-room-right" class="locked-btn button-nav-right">
-      <Button href="/rooms/padlock" />
-    </div>  
+      <Button href="/rooms/quiz" title="Volver a la habitación anterior" direction="left" />
+      <Button href="/rooms/padlock" title="Ir a habitación siguiente"/>
   </div>
 
   <section id="resultados" class="hidden resultados">
@@ -84,9 +79,8 @@ import Button from './Button.astro';
   
   .rosco {
     position: relative;
-    /* Ajuste inicial para móviles, usando vw para escalar */
-    width: 75vw; /* Empieza con un tamaño considerable en móviles */
-    max-width: 300px; /* Pero que no se haga demasiado grande en tabletas antes del desktop */
+    width: 75vw; 
+    max-width: 300px;
     height: auto;
     aspect-ratio: 1 / 1.1;
     margin: 1.3rem auto;
@@ -146,8 +140,8 @@ import Button from './Button.astro';
   }
 
   .input-response {
-    width: 60%; /* Aumentamos el ancho del input para mejor usabilidad en móviles */
-    max-width: 300px; /* Para que no sea excesivamente ancho en tabletas */
+    width: 60%; 
+    max-width: 300px; 
     height: 1em;
     padding: 0.5em;
     font-size: 1rem;
@@ -159,7 +153,7 @@ import Button from './Button.astro';
     display: flex;
     gap: 1rem;
     justify-content: center;
-    flex-wrap: wrap; /* Permite que los botones se envuelvan en pantallas muy pequeñas */
+    flex-wrap: wrap; 
   }
   
   button {
@@ -196,45 +190,27 @@ import Button from './Button.astro';
     width: 100%;
     padding: 0 1rem;
   }
-  
-  .button-nav-left, .button-nav-right {
-    flex-basis: 48%;
-    max-width: 100px;
-    cursor: not-allowed;
-  }
-
-
-  #button-next-room-left.unlocked-btn,
-  #button-next-room-right.unlocked-btn {
-    opacity: 1;
-    cursor: pointer:
-  }
 
   .hidden {
     display: none;
   }
-  
-  /* Media queries específicas para los puntos problemáticos y desktop */
 
-  /* Media Query para teléfonos pequeños / hasta 425px */
-  /* Si el 75vw y max-width: 300px no funcionan bien para ti, puedes ajustar aquí */
   @media (max-width: 425px) {
     .rosco {
-      width: 58vw; /* Un poco más grande para pantallas muy pequeñas */
-      max-width: 280px; /* Un límite para que no se desborde */
+      width: 58vw; 
+      max-width: 280px; 
     }
     :global(.letra) {
-      width: 1.6rem; /* Aumentamos el tamaño de la letra un poco */
+      width: 1.6rem; 
       height: 1.6rem;
       font-size: 1.2rem;
     }
   }
 
-  /* Media Query para un punto intermedio, por ejemplo, tablets pequeñas o landscape */
   @media (min-width: 426px) and (max-width: 540px) {
     .rosco {
-      width: 46vw; /* Ajuste para este rango específico */
-      max-width: 320px; /* Aseguramos que no crezca demasiado */
+      width: 46vw; 
+      max-width: 320px; 
     }
     :global(.letra) {
       width: 1.8rem;
@@ -243,10 +219,9 @@ import Button from './Button.astro';
     }
   }
 
-  /* Media Query para otro punto intermedio, como 540px */
   @media (min-width: 541px) and (max-width: 767px) {
     .rosco {
-      width: 48vw; /* Otro ajuste para este rango */
+      width: 48vw; 
       max-width: 350px;
     }
     :global(.letra) {
@@ -256,7 +231,6 @@ import Button from './Button.astro';
     }
   }
 
-  /* Media Query para pantallas más grandes (desktop) */
   @media (min-width: 768px) {
     .rosco-container {
       display: grid;
@@ -279,20 +253,20 @@ import Button from './Button.astro';
     }
     .rosco {
       grid-area: rosco;
-      width: 100%; /* Ocupa el 100% de su área en el grid */
-      max-width: 400px;/* Un tamaño máximo razonable para el rosco en desktop */
+      width: 100%; 
+      max-width: 400px;
       margin: 0;
     }
 
     :global(.letra) {
-      width: 2rem; /* Usamos rem para un tamaño fijo y consistente en desktop */
+      width: 2rem; 
       height: 2rem;
       font-size: 1.2rem;
     }
 
     .juego-area {
       grid-area: juego;
-      max-width: 350px; /* Ajusta el max-width para el juego-area en desktop */
+      max-width: 350px; 
     }
 
     .nav-buttons-container {
@@ -314,6 +288,7 @@ import Button from './Button.astro';
   }
 
 </style>
+
 <script type="module">
   document.addEventListener('DOMContentLoaded', async () => {
     let data;
@@ -338,6 +313,9 @@ import Button from './Button.astro';
     const terminarBtn = document.getElementById('terminar-juego-btn');
     const resultadosEl = document.getElementById('resultados');
     const puntuacionEl = document.getElementById('puntuacion-final');
+
+    // Referencias a los nuevos botones de navegación
+    const nextRoomButtons = document.querySelectorAll('.arrow-btn'); 
   
     const estado = {
       letraActual: 0,
@@ -367,6 +345,12 @@ import Button from './Button.astro';
       div.style.top = `${y}px`;
   
       roscoEl.appendChild(div);
+      
+      nextRoomButtons.forEach((btn) => {
+        btn.disabled = true;
+        btn.style.cursor = "not-allowed";
+        btn.style.opacity = "0.5";
+      });
     });
   
     function actualizarPregunta() {
@@ -438,7 +422,7 @@ import Button from './Button.astro';
   // Si no encontró ninguna letra pendiente o pasada, termina el juego
   terminarJuego();
 }
-  
+
     function terminarJuego() {
       if(estado.juegoTerminado) return;
       estado.juegoTerminado = true;
@@ -456,28 +440,13 @@ import Button from './Button.astro';
       responderBtn.disabled = true;
       pasarBtn.disabled = true;
       terminarBtn.disabled = true;
-
-      const navButtonsContainer = document.querySelector('.nav-buttons-container');
-      if (navButtonsContainer) {
-        navButtonsContainer.classList.remove('hidden'); // Mostrar el contenedor de botones
-
-        // ** CAMBIOS AQUÍ: Desbloquear el botón izquierdo **
-        const buttonNextRoomLeft = document.getElementById("button-next-room-left");
-        const buttonNextRoomRight = document.getElementById("button-next-room-right"); // Este ya lo tenías para el derecho
-
-        if (buttonNextRoomLeft) {
-          buttonNextRoomLeft.classList.remove("locked-btn");
-          buttonNextRoomLeft.classList.add("unlocked-btn");
-          console.log("Botón izquierdo desbloqueado.");
-        }
-        // El botón derecho ya tenías la lógica para desbloquearlo, la mantenemos
-        if (buttonNextRoomRight) {
-          buttonNextRoomRight.classList.remove("locked-btn");
-          buttonNextRoomRight.classList.add("unlocked-btn");
-          console.log("Botón derecho desbloqueado.");
-        }
-    }
-    }
+      
+      nextRoomButtons.forEach((btn) => {
+        btn.disabled = false;
+        btn.style.cursor = "pointer";
+        btn.style.opacity = "1";
+      });
+     }
 
     document.addEventListener('timer-finished', () => {
       terminarJuego();

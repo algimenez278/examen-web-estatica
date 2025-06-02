@@ -12,8 +12,8 @@
     },
     {
       "letra": "C",
-      "definicion": "Empieza con 'C'. Lenguaje de programación creado por Dennis Ritchie",
-      "respuesta": "c"
+      "definicion": "Empieza con 'C'. Componente visual de secuencia que a Santiago le disgusta",
+      "respuesta": "carrusel"
     },
     {
       "letra": "D",
@@ -27,27 +27,27 @@
     },
     {
       "letra": "F",
-      "definicion": "Contiene 'F'. Palabra clave en Python para definir funciones",
+      "definicion": "Contiene 'F'. Palabra clave reservada en Python para definir funciones",
       "respuesta": "def"
     },
     {
       "letra": "G",
-      "definicion": "Contiene 'G'. Conjunto de pasos para resolver un problema",
+      "definicion": "Contiene 'G'. Conjunto de operaciones que permite hallar una solución",
       "respuesta": "algoritmo"
     },
     {
       "letra": "H",
-      "definicion": "Empieza con 'H'. Protocolo para transferencia de datos en la web",
+      "definicion": "Empieza con 'H'. Protocolo de Transferencia de Hipertexto en la web",
       "respuesta": "http"
     },
     {
       "letra": "I",
-      "definicion": "Empieza con 'I'. Bucle en programación",
+      "definicion": "Empieza con 'I'. Repetición de un bloque de código o secuencia en un programa",
       "respuesta": "iteracion"
     },
     {
       "letra": "J",
-      "definicion": "Empieza con 'J'. Formato ligero de intercambio de datos en texto",
+      "definicion": "Empieza con 'J'. Formato de texto ligero de intercambio y almacenamiento de datos",
       "respuesta": "json"
     },
     {
@@ -57,22 +57,22 @@
     },
     {
       "letra": "L",
-      "definicion": "Empieza con 'L'. Lenguaje de programación multiparadigma, imperativo, estructurado y bastante ligero",
+      "definicion": "Empieza con 'L'. Lenguaje de programación multiparadigma, imperativo y bastante ligero",
       "respuesta": "lua"
     },
     {
       "letra": "M",
-      "definicion": "Empieza con 'M'. Patrón de diseño para conectar datos y vista",
+      "definicion": "Empieza con 'M'. Patrón de diseño que organiza la lógica en capas diferenciadas",
       "respuesta": "mvc"
     },
     {
       "letra": "N",
-      "definicion": "Empieza con 'N'. Entorno de ejecución para JavaScript",
+      "definicion": "Empieza con 'N'. Entorno de ejecución multiplataforma usado por Javascript",
       "respuesta": "node"
     },
     {
       "letra": "O",
-      "definicion": "Contiene 'O'. Programa que traduce código fuente",
+      "definicion": "Contiene 'O'. Programa que traduce código fuente de un lenguaje a otro",
       "respuesta": "compilador"
     },
     {
@@ -82,52 +82,52 @@
     },
     {
       "letra": "Q",
-      "definicion": "Contiene 'Q'. Lenguaje de consulta estructurado",
+      "definicion": "Contiene 'Q'. Lenguaje de consulta estructurado que almacena y procesa información",
       "respuesta": "sql"
     },
     {
       "letra": "R",
-      "definicion": "Contiene 'R'. Atributo en HTML para definir enlaces",
+      "definicion": "Contiene 'R'. Atributo en HTML para definir dirección URL o el destino de hipervinculo",
       "respuesta": "href"
     },
     {
       "letra": "S",
-      "definicion": "Empieza con 'S'. Preprocesador de CSS",
+      "definicion": "Empieza con 'S'. Preprocesador de CSS que extiende sus capacidades y facilita el trabajo",
       "respuesta": "sass"
     },
     {
       "letra": "T",
-      "definicion": "Contiene 'T'. Framework CSS con componentes responsivos",
+      "definicion": "Contiene 'T'. Framework de desarrollo frontend con componentes responsivos",
       "respuesta": "bootstrap"
     },
     {
       "letra": "U",
-      "definicion": "Empieza con 'U'. Lenguaje de programación funcional puro",
+      "definicion": "Empieza con 'U'. Lenguaje de programación funcional puro y estático",
       "respuesta": "unison"
     },
     {
       "letra": "V",
-      "definicion": "Empieza con 'V'. Framework JavaScript progresivo",
+      "definicion": "Empieza con 'V'. Framework JavaScript progresivo y de código abierto",
       "respuesta": "vue"
     },
     {
       "letra": "W",
-      "definicion": "Empieza con 'W'. Sistema operativo de Microsoft",
+      "definicion": "Empieza con 'W'. Sistema operativo desarrollado por Microsoft en 1985",
       "respuesta": "windows"
     },
     {
       "letra": "X",
-      "definicion": "Comienza con 'X'. Lenguaje de marcado extensible",
+      "definicion": "Comienza con 'X'. Lenguaje de marcado que define estructura y contenido",
       "respuesta": "xml"
     },
     {
       "letra": "Y",
-      "definicion": "Contiene 'Y'. Lenguaje de programación de alto nivel, interpretado, multiparadigma y de tipado dinámico",
+      "definicion": "Contiene 'Y'. Lenguaje de programación de alto nivel, interpretado y de tipado dinámico",
       "respuesta": "python"
     },
     {
       "letra": "Z",
-      "definicion": "Contiene 'Z'. Framework CSS",
+      "definicion": "Contiene 'Z'. Marco frontend responsivo que cuenta con gran variedad de componentes",
       "respuesta": "zurb"
     }
   ]
