@@ -39,8 +39,8 @@ const { title = "💻 Ahorcado Dev 💀" } = Astro.props;
       <canvas class="hangman__canvas" id="canvas" width="160" height="200"
       ></canvas>
       <div class="component__button">
-        <Button href="/rooms/memory" direction="left" />
-        <Button href="/rooms/quiz" direction="right" />
+        <Button href="/rooms/memory" direction="left" client:load />
+        <Button href="/rooms/quiz" direction="right" client:load />
       </div>
     </div>
 
@@ -50,10 +50,11 @@ const { title = "💻 Ahorcado Dev 💀" } = Astro.props;
       message="Sos una mente brillante, dev crack 😎"
       confirmText="¡Genial!"
       showNext={false}
+      client:load
     />
   </main>
-
-  <script type="module" src="/src/pages/rooms/hangman/hangman.js"></script>
+  <!--   <script src="/src/pages/rooms/hangman/hangman.js" ></script> -->
+  <script src="/src/pages/rooms/hangman/hangman.js" is:inline></script>
 </MainLayout>
 
 <style>

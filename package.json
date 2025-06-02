@@ -9,7 +9,6 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.7.13",
-    "sweetalert2": "^11.22.0"
+    "astro": "^5.7.13"
   }
 }
