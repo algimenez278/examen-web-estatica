@@ -42,8 +42,8 @@ function pista2(gatos) {
     code: `
 function pista3(numero) {
   const binario = numero.toString(2);
-  const cantidadUnos = [...binario].filter(bit => bit === '1').length;
-  return cantidadUnos;
+  const otro = [...binario].filter(bit => bit === '1').length;
+  return otro;
 }`,
   },
   {
@@ -132,7 +132,7 @@ function pista4(numero) {
     font-size: 18px;
   }
 
-  @media (max-width: 320px) {
+  /* @media (max-width: 320px) {
     .cards {
       justify-content: space-around;
       gap: 2px;
@@ -151,7 +151,7 @@ function pista4(numero) {
       font-size: 40px;
       line-height: 70px;
     }
-  }
+  } */
 </style>
 
 <!-- Acá va todo tu contenido específico -->
@@ -176,9 +176,14 @@ function pista4(numero) {
       href="/rooms/rosco"
       title="Volver a habitación anterior"
       direction="left"
+      id="btn-prev"
     />
     <button id="btn-verificar" aria-describedby="message">Verificar</button>
-    <Button href="/rooms/memory" title="Ir a habitación siguiente" />
+    <Button
+      href="/rooms/memory"
+      title="Ir a habitación siguiente"
+      id="btn-next"
+    />
 
     <p class="message" id="message" role="alert" aria-live="polite"></p>
   </main>
@@ -268,6 +273,14 @@ function pista4(numero) {
       });
     });
 
+    function enableButton(button: HTMLButtonElement | null) {
+      if (button) {
+        button.removeAttribute("disabled");
+        button.style.opacity = "1";
+        button.style.cursor = "pointer";
+      }
+    }
+
     function verifyKey() {
       const input = digits.join("");
       const message = document.getElementById("message") as HTMLElement | null;
@@ -275,22 +288,28 @@ function pista4(numero) {
       const botonVerificar = document.querySelector(
         "button"
       ) as HTMLButtonElement | null;
+      const btnPrev = document.getElementById("btn-prev") as HTMLButtonElement;
+      const btnNext = document.getElementById("btn-next") as HTMLButtonElement;
+      const btnVerif = document.getElementById(
+        "btn-verificar"
+      ) as HTMLButtonElement;
 
       if (!message || !botonVerificar) return;
 
       if (input === correctKey) {
         message.textContent = "Clave correcta!";
         message.style.color = "#2a7f62";
-
+        btnVerif.style.opacity = "0.5";
+        btnVerif.setAttribute("disabled", "true");
+        btnVerif.style.pointerEvents = "none";
+        enableButton(btnPrev);
+        enableButton(btnNext);
         botonesPadlock.forEach((boton) => {
           boton.style.pointerEvents = "none";
           boton.style.opacity = "0.6";
           boton.setAttribute("aria-disabled", "true");
           boton.tabIndex = -1;
         });
-
-        botonVerificar.disabled = true;
-        botonVerificar.style.cursor = "default";
       } else {
         message.textContent = "Clave incorrecta.";
         message.style.color = "#aa2a2a";
