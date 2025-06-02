@@ -213,8 +213,8 @@ function pista4(numero) {
       const digitElements =
         document.querySelectorAll<HTMLElement>(".digit .wheel");
 
-      digitElements.forEach((wheel, idx) => {
-        wheels[idx] = wheel;
+      digitElements.forEach((wheel, i) => {
+        wheels[i] = wheel;
 
         const nums = createWheelNumbers();
         wheel.innerHTML = "";
@@ -225,7 +225,7 @@ function pista4(numero) {
           wheel.appendChild(div);
         });
 
-        wheel.style.transform = `translateY(${-digits[idx] * digitHeight}px)`;
+        wheel.style.transform = `translateY(${-digits[i] * digitHeight}px)`;
         wheel.style.transition = "none";
       });
     }
@@ -281,20 +281,18 @@ function pista4(numero) {
       }
     }
 
+    //Verify functionality
     function verifyKey() {
       const input = digits.join("");
       const message = document.getElementById("message") as HTMLElement | null;
-      const botonesPadlock = document.querySelectorAll<HTMLElement>(".digit");
-      const botonVerificar = document.querySelector(
-        "button"
-      ) as HTMLButtonElement | null;
+      const btnsPadlock = document.querySelectorAll<HTMLElement>(".digit");
       const btnPrev = document.getElementById("btn-prev") as HTMLButtonElement;
       const btnNext = document.getElementById("btn-next") as HTMLButtonElement;
       const btnVerif = document.getElementById(
         "btn-verificar"
       ) as HTMLButtonElement;
 
-      if (!message || !botonVerificar) return;
+      if (!message || !btnVerif) return;
 
       if (input === correctKey) {
         message.textContent = "Clave correcta!";
@@ -304,11 +302,11 @@ function pista4(numero) {
         btnVerif.style.pointerEvents = "none";
         enableButton(btnPrev);
         enableButton(btnNext);
-        botonesPadlock.forEach((boton) => {
-          boton.style.pointerEvents = "none";
-          boton.style.opacity = "0.6";
-          boton.setAttribute("aria-disabled", "true");
-          boton.tabIndex = -1;
+        btnsPadlock.forEach((btn) => {
+          btn.style.pointerEvents = "none";
+          btn.style.opacity = "0.6";
+          btn.setAttribute("aria-disabled", "true");
+          btn.tabIndex = -1;
         });
       } else {
         message.textContent = "Clave incorrecta.";
