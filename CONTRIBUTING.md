@@ -30,11 +30,11 @@ Este flujo de trabajo evitó errores, permitió un desarrollo en paralelo y mant
 
 | 💬 Nombre                 | 🌱 Rama personal        | 🎮 Juego desarrollado |
 |---------------------------|-------------------------|-----------------------|
-| Abril Luna Gimenez        | dev-abi                 | Candado               |
-| Katherine Gomez           | kathy                   | Ahorcado              |
-| Simonetti Antonella       | dev-anto                | Memorama              |
-| Valeria Paola Medina      | dev-vale                | Quiz                  |
-| Mirian Chalañuk           | dev-Mirian              | Rosco                 |
+| Abril Luna Gimenez        | abi-padlock             | Candado               |
+| Katherine Gomez           | kathy-hangman           | Ahorcado Dev          |
+| Simonetti Antonella       | anto-memory             | Memorama              |
+| Valeria Paola Medina      | vale-quiz               | Quiz                  |
+| Mirian Chalañuk           | mirian-rosco            | Rosco Dev             |
 
 ---
 
