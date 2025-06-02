@@ -33,20 +33,15 @@ const { title = "💻 Ahorcado Dev 💀" } = Astro.props;
       <p class="hangman__message" id="message"></p>
 
       <button class="hangman__reset" id="reset">🔄 Reiniciar</button>
-      
-      <div id="next-room-wrapper" class="locked">
-        <Buttons href="/rooms/quiz" />
-      </div>
-      
-      
     </div>
-    
-    
+
     <div class="hangman__right">
       <canvas class="hangman__canvas" id="canvas" width="160" height="200"
       ></canvas>
+      <div id="next-room-wrapper" class="locked">
+        <Buttons href="/rooms/quiz" />
+      </div>
     </div>
-
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
@@ -60,7 +55,7 @@ const { title = "💻 Ahorcado Dev 💀" } = Astro.props;
   }
 
   body {
-    background-image: linear-gradient(to bottom, var(--mauve), var(--sky));
+    background: var(--over);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -73,8 +68,8 @@ const { title = "💻 Ahorcado Dev 💀" } = Astro.props;
     width: 90vw;
     max-width: 700px;
     height: 400px;
-    /* background-image: linear-gradient(to bottom, var(--sky), var(--mauve)); */
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    background-image: linear-gradient(to bottom, var(--mauve), var(--sky));
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
     border-radius: 15px;
     padding: 1.5rem;
     display: grid;
@@ -95,7 +90,7 @@ const { title = "💻 Ahorcado Dev 💀" } = Astro.props;
 
   .hangman__title {
     font-size: clamp(1.5rem, 2.5vw, 2rem);
-    /* color: var(--over); */
+    color: var(--over);
   }
 
   .hangman__hint {
@@ -180,15 +175,14 @@ const { title = "💻 Ahorcado Dev 💀" } = Astro.props;
     }
   }
   #next-room-wrapper.locked {
-  pointer-events: none;
-  opacity: 0.5;
-  filter: grayscale(1);
-}
+    pointer-events: none;
+    opacity: 0.5;
+    filter: grayscale(1);
+  }
 
-#next-room-wrapper.unlocked {
-  pointer-events: auto;
-  opacity: 1;
-  filter: none;
-}
-
+  #next-room-wrapper.unlocked {
+    pointer-events: auto;
+    opacity: 1;
+    filter: none;
+  }
 </style>
