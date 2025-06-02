@@ -3,6 +3,7 @@ const {
   href = "#",
   title = "Ir a la siguiente habitación",
   direction = "right",
+  id,
 } = Astro.props;
 ---
 
@@ -18,12 +19,13 @@ const {
     border-radius: 50%;
     width: 60px;
     height: 60px;
-    cursor: pointer;
+    cursor: not-allowed;
     box-shadow: 0 4px 10px var(--blue);
     justify-content: center;
     align-items: center;
     transition: background-color 0.3s ease;
     margin: 10px;
+    opacity: 0.5;
   }
 
   .arrow-btn:hover {
@@ -43,7 +45,11 @@ const {
 </style>
 
 <a href={href} title={title} aria-label={title}>
-  <button class={`arrow-btn ${direction === "left" ? "left" : ""}`}>
+  <button
+    {id}
+    disabled
+    class={`arrow-btn ${direction === "left" ? "left" : ""}`}
+  >
     <svg viewBox="0 0 24 24" class="arrow-icon">
       <path d="M8 5v14l11-7z"></path>
     </svg>
