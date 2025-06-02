@@ -1,7 +1,4 @@
-import { showWinAlert, showLoseAlert } from "../../../utils/alerts.js";
-
 document.addEventListener("DOMContentLoaded", () => {
-  // Elementos del DOM
   const wordEl = document.getElementById("word");
   const hintEl = document.getElementById("hint");
   const usedLettersEl = document.getElementById("used-letters");
@@ -12,14 +9,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const ctx = canvas.getContext("2d");
   const resetBtn = document.getElementById("reset");
 
-  // Estado del juego
+  const modal = document.getElementById("game-modal");
+  const modalTitle = document.getElementById("modal-title");
+  const modalMessage = document.getElementById("modal-message");
+  const modalReplay = document.getElementById("modal-replay");
+  const modalNext = document.getElementById("modal-next");
+  const nextRoomButtons = document.querySelectorAll(".arrow-btn");
+
   let word = "";
   let hint = "";
   let usedLetters = [];
   let errors = 0;
   const maxErrors = 6;
 
-  // Cargar una palabra aleatoria del archivo JSON (se utiliza fetch y async/await)
   async function pickRandomWord() {
     try {
       const response = await fetch("/rooms/hangman/word.json");
@@ -37,13 +39,19 @@ document.addEventListener("DOMContentLoaded", () => {
       messageEl.textContent = "";
       updateWordDisplay();
       updateUsedLetters();
+      input.disabled = false;
+
+      // Bloquear botones flecha al iniciar o reiniciar
+      nextRoomButtons.forEach((btn) => {
+        btn.disabled = true;
+        btn.style.cursor = "not-allowed";
+        btn.style.opacity = "0.5";
+      });
     } catch (error) {
       messageEl.textContent = "No se pudo cargar la palabra 😢";
-      console.error("Error fetching word.json:", error);
     }
   }
 
-  // Mostrar la palabra con letras adivinadas
   function updateWordDisplay() {
     const display = word
       .split("")
@@ -52,38 +60,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     wordEl.textContent = display;
 
-    if (word && !display.includes("_")) {
+    if (!display.includes("_")) {
       input.disabled = true;
       input.blur();
-
       setTimeout(() => {
-        showWinAlert({
-          onConfirm: () => {
-            console.log("Pasando a la siguiente room...");
-            /* document.getElementById("next-room-btn").style.display =
-              "inline-flex"; */
-            /* window.location.href = "/rooms/quiz"; */
-            document
-              .getElementById("next-room-wrapper")
-              .classList.remove("locked");
-            document
-              .getElementById("next-room-wrapper")
-              .classList.add("unlocked");
-          },
-        });
+        showModal("🎉 ¡Ganaste!", "¡Buen trabajo dev 😎!", false); // <== solo un botón
       }, 500);
     }
   }
 
-  // actualiza las letras que se usaron
   function updateUsedLetters() {
     usedLettersEl.textContent = usedLetters.join(", ");
   }
 
-  // dibuja el ahorcado en cada error
   function drawHangman() {
     ctx.beginPath();
-
     switch (errors) {
       case 1:
         ctx.moveTo(10, 180);
@@ -114,18 +105,14 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx.moveTo(120, 130);
         ctx.lineTo(140, 160);
         input.disabled = true;
-
         setTimeout(() => {
-          showLoseAlert(word, () => resetBtn.click());
-        }, 1000);
-        // 1 seg de delay
+          showModal("💀 ¡Perdiste!", `La palabra era: ${word}`, false);
+        }, 500);
         break;
     }
-
     ctx.stroke();
   }
 
-  // input de la letra
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const letter = input.value.toUpperCase();
@@ -154,13 +141,42 @@ document.addEventListener("DOMContentLoaded", () => {
     input.focus();
   });
 
-  // reiniciar juego
+  function showModal(title, message, showNextBtn) {
+    modalTitle.textContent = title;
+    modalMessage.textContent = message;
+    modal.classList.add("show");
+
+    if (modalNext) {
+      modalNext.style.display = showNextBtn ? "inline-block" : "none";
+    }
+  }
+
+  modalReplay.addEventListener("click", () => {
+    modal.classList.remove("show");
+
+    if (modalTitle.textContent.includes("¡Ganaste")) {
+      enableNextButtons(); // desbloquea flechitas solo después de ganar
+    } else {
+      resetBtn.click(); // reinicia si perdiste
+    }
+  });
+
+  modalNext?.addEventListener("click", () => {
+    window.location.href = "/rooms/quiz";
+  });
+
+  function enableNextButtons() {
+    nextRoomButtons.forEach((btn) => {
+      btn.disabled = false;
+      btn.style.cursor = "pointer";
+      btn.style.opacity = "1";
+    });
+  }
+
   resetBtn.addEventListener("click", () => {
-    input.disabled = false;
     pickRandomWord();
     input.focus();
   });
 
-  // empezar juego al cargar
   pickRandomWord();
 });

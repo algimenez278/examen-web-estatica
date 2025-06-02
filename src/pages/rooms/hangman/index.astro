@@ -1,12 +1,12 @@
 ---
 import MainLayout from "../../../layouts/MainLayout.astro";
-import Buttons from "../../../components/Buttons.astro";
+import Button from "../../../components/Button.astro";
+import Modal from "../../../components/GameModal.astro";
 const { title = "💻 Ahorcado Dev 💀" } = Astro.props;
 ---
 
 <MainLayout title="Ahorcado Dev">
   <!-- <h1>ahorcado</h1> -->
-  <!-- Acá va todo tu contenido específico -->
   <!-- recorda quela ruta va ser http://localhost:4321/rooms/hangman -->
   <main class="hangman">
     <div class="hangman__left">
@@ -38,13 +38,21 @@ const { title = "💻 Ahorcado Dev 💀" } = Astro.props;
     <div class="hangman__right">
       <canvas class="hangman__canvas" id="canvas" width="160" height="200"
       ></canvas>
-      <div id="next-room-wrapper" class="locked">
-        <Buttons href="/rooms/quiz" />
+      <div class="component__button">
+        <Button href="/rooms/memory" direction="left" />
+        <Button href="/rooms/quiz" direction="right" />
       </div>
     </div>
+
+    <Modal
+      id="game-modal"
+      title="🎉 ¡Ganaste!"
+      message="Sos una mente brillante, dev crack 😎"
+      confirmText="¡Genial!"
+      showNext={false}
+    />
   </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
   <script type="module" src="/src/pages/rooms/hangman/hangman.js"></script>
 </MainLayout>
 
@@ -100,7 +108,7 @@ const { title = "💻 Ahorcado Dev 💀" } = Astro.props;
   }
 
   .hangman__word {
-    font-size: clamp(1.2rem, 5vw, 1.8rem);
+    font-size: clamp(1.1rem, 3vw, 1.7rem);
     letter-spacing: 0.3em;
     word-wrap: break-word;
     color: var(--over);
@@ -173,16 +181,5 @@ const { title = "💻 Ahorcado Dev 💀" } = Astro.props;
       max-width: 100%;
       margin-top: 1rem;
     }
-  }
-  #next-room-wrapper.locked {
-    pointer-events: none;
-    opacity: 0.5;
-    filter: grayscale(1);
-  }
-
-  #next-room-wrapper.unlocked {
-    pointer-events: auto;
-    opacity: 1;
-    filter: none;
   }
 </style>
