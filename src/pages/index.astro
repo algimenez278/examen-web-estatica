@@ -1,9 +1,85 @@
 ---
-import MainLayout from "../layouts/MainLayout.astro";
+import MainLayout from '../layouts/MainLayout.astro';
+import Particles from '../components/Particles.astro';
 ---
 
-<MainLayout title="Dev Escape Room">
-	
-  <!-- Todo el contenido HTML del index va a ir acá -->
+<MainLayout title="Escape Room">
+  <Particles cantidad={100} direccion="down" />
 
+  <main>
+    <section class="intro">
+      <h1>Escape Room</h1>
+      <p>Una experiencia moderna, desafiante y llena de tecnología.</p>
+      <button onclick="ingresar()">Ingresar a la sala</button>
+    </section>
+  </main>
+
+  <style>
+    body {
+      background-color: var(--base);
+      color: var(--letter);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    main {
+      z-index: 2;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .intro {
+      text-align: center;
+      max-width: 600px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: var(--sky);
+      margin-bottom: 1rem;
+      text-shadow: 0 0 10px var(--blue);
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: var(--mauve);
+      margin-bottom: 2rem;
+      animation: fadeIn 2.5s ease-in-out;
+    }
+
+    button {
+      background: linear-gradient(45deg, var(--green), var(--sky));
+      border: none;
+      color: var(--over);
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 0 10px var(--green);
+    }
+
+    button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px var(--sky);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+
+  <script is:inline>
+    function ingresar() {
+      window.location.href = "./rooms/memory";
+    }
+  </script>
 </MainLayout>

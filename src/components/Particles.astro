@@ -1,0 +1,56 @@
+---
+const { amount = 80, direction = "down" } = Astro.props;
+
+const particles = Array.from({ length: amount });
+const animationClass = direction === "up" ? "move-up" : "move-down";
+---
+
+<div class="particles">
+  {particles.map(() => (
+    <div
+      class={`particle ${animationClass}`}; 
+      style={`left: ${Math.random() * 100}vw; top: ${Math.random() * 100}vh; animation-duration: ${5 + Math.random() * 5}s;`}
+    ></div>
+  ))}
+
+  <style is:global>
+    .particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(var(--over), var(--base));
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .particle {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: var(--blue);
+      border-radius: 50%;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes move-down {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
+
+    @keyframes move-up {
+      0% { transform: translateY(100vh); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    .move-down {
+      animation-name: move-down;
+    }
+
+    .move-up {
+      animation-name: move-up;
+    }
+  </style>
+</div>
