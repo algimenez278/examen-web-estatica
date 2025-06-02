@@ -1,11 +1,12 @@
 ---
 import Timer from './Timer.astro';
+import Buttons from './Button.astro';
 ---
 
 <main class="rosco-container">
   <header>
-    <h1>Rosco de Pasapalabra - Programación</h1>
-    <Timer initialTime="80"/>
+    <h1>Rosco Dev</h1>
+    <Timer initialTime="300"/>
     <button id="terminar-juego-btn" class="btn-terminar">Terminar Juego</button>
   </header>
 
@@ -17,7 +18,6 @@ import Timer from './Timer.astro';
     <article id="definicion-container">
       <h2 id="letra-actual"></h2>
       <p id="definicion-actual"></p>
-      <p class="categoria" id="categoria-actual"></p>
     </article>
 
     <input 
@@ -34,82 +34,73 @@ import Timer from './Timer.astro';
     </div>
   </section>
 
+  <div id="button-next-room" class="locked-btn">
+    <Buttons href="/rooms/padlock" />
+  </div>  
+
   <section id="resultados" class="hidden resultados">
     <h2>Juego Terminado!</h2>
     <p id="puntuacion-final"></p>
   </section>
 </main>
+
 <style>
-:root {
-    --lapis: oklch(0.4887 0.0805 242.84);
-    --carolina: oklch(0.7654 0.0693 232.79);
-    --moss: oklch(0.6118 0.0927 126.67);
-    --yellow: oklch(0.7999 0.1559 76.25);
-    --orange: oklch(0.6741 0.191 42.86);
-  }
+ html, 
+ body {
+   height: 100%;
+ }
 
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  html,
-  body {
-    height: 100%;
-  }
-
-  body {
-    background-image: linear-gradient(to bottom, var(--lapis), var(--carolina));
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    min-height: 100vh;
+ body {
+    background-color: var(--base);
+    height: 100vh;
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
+    
   }
 
   .rosco-container {
-    background: rgba(255, 255, 255, 0.459);
+    background: var(--over);
     border-radius: 12px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
     text-align: center;
-    max-width: 800px;
-    width: 90%;
-    height: 60%;
+    max-width: 600px;
+    max-height: 95vh;
+    width: 80%;
+    margin: auto;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
   }
   
   .rosco {
     position: relative;
     width: 100%;
-    max-width: 600px;
+    max-width: 320px;
     height: auto;
-    aspect-ratio: 1 / 1.3;
-    margin: 3rem auto;
+    aspect-ratio: 1 / 1.1;
+    margin: 1.3rem auto;
   }
   
   :global(.letra) {
     position: absolute;
-    width: 4rem;
-    height: 4rem;
+    width: 1.8rem;
+    height: 1.8rem;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: bold;
-    font-size: 2rem;
+    font-size: 1.4rem;
     user-select: none;
-    background-color: #222;
-    color: white;
+    background-color: var(--sky);
+    color: var(--base);
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
     transition: all 0.3s ease;
     transform: translate(-50%, -50%);
   }
   
   :global(.letra.activa) {
-    background-color: #f39c12;
+    background-color: var(--letter);
     color: white;
     transform: scale(1.1);
     box-shadow: 0 0 10px rgba(243, 156, 18, 0.7);
@@ -117,18 +108,18 @@ import Timer from './Timer.astro';
   }
   
   :global(.letra.acertada) {
-    background-color: #2ecc71;
-    color: black;
+    background-color: var(--green);
+    color: var(--over);
   }
   
   :global(.letra.fallada) {
-    background-color: #e74c3c;
-    color: white;
+    background-color: var(--red);
+    color: var(--over);
   }
   
   :global(.letra.pasada) {
-    background-color: #f39c12;
-    color: black;
+    background-color: var(--blue);
+    color: var(--over);
   }
   
  .juego-area {
@@ -136,18 +127,27 @@ import Timer from './Timer.astro';
     padding: 1rem;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    margin: 2rem;
+    margin: 1rem auto;
+    
+    color: white;
+
+    all: unset;
+    max-height: 180px;
+    display: block;
+    background-image: linear-gradient(45deg, var(--mauve), var(--sky));
+    padding: 1rem;
+    border-radius: 8px;
     color: black;
   }
 
+
   .input-response {
-    width: 80%;
-    height: 3em;
+    width: 60%;
+    height: 1em;
     padding: 0.5em;
-    font-size: 1.2rem;
-    border: 2px solid #ddd;
+    font-size: 1rem;
     border-radius: 4px;
-    margin: 2rem auto;
+    margin: 1rem auto;
   }
   
   .botones {
@@ -157,39 +157,91 @@ import Timer from './Timer.astro';
   }
   
   button {
-    padding: 12px 24px;
+    padding: 8px 8px;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     font-size: 1rem;
     cursor: pointer;
   }
   
+   button:hover {
+    box-shadow: 0px 0px 5px var(--sky);
+ }
+
   .btn-responder {
-    background-color: #2ecc71;
-    color: white;
+    background-color: var(--mauve);
+    color: var(--base);
   }
   
   .btn-pasar {
-    background-color: #f39c12;
-    color: black;
+    background-color: var(--sky);
+    color: var(--base);
   }
   
   .btn-terminar {
-    background-color: #e74c3c;
+    background-color: var(--red);
     color: white;
     margin-top: 1rem;
   }
   
+   #button-next-room.locked-btn {
+   opacity: 0.5;
+   cursor: not-allowed;
+    
+  }
+
+  #button-next-room.unlocked-btn {
+    opacity: 1;
+    cursor: pointer;
+ }
   .hidden {
     display: none;
   }
+  
+ 
+  @media (min-width: 768px) {
+    .rosco-container {
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+     grid-template-rows: auto 1fr;
+     grid-template-areas:
+       "header header"
+       "rosco juego";
+     align-items: start;
+     justify-items: center;
+     gap: 2rem;
+     padding: 2rem;
+   }
+
+     header {
+      grid-area: header;
+      text-align: center;
+   }
+     .rosco {
+      grid-area: rosco;
+      width: 92%;
+   }
+
+     .juego-area {
+       grid-area: juego;
+       max-width: 300px;
+   }
+   }
+   @media (max-width: 425px) {
+    .rosco {
+     width: 74%;
+   }
+ } 
+  
+
+ }
   </style>
 
 <script type="module">
   document.addEventListener('DOMContentLoaded', async () => {
     let data;
     try {
-      const res = await fetch('/rosco-game/data/rosco.json');
+      const res = await fetch('/data-rosco/rosco.json');
       if (!res.ok) throw new Error('No se pudo cargar rosco.json');
       data = await res.json();
     } catch (error) {
@@ -203,7 +255,6 @@ import Timer from './Timer.astro';
     const roscoEl = document.getElementById('rosco-letras');
     const letraActualEl = document.getElementById('letra-actual');
     const definicionEl = document.getElementById('definicion-actual');
-    const categoriaEl = document.getElementById('categoria-actual');
     const respuestaInput = document.getElementById('respuesta-input');
     const responderBtn = document.getElementById('responder-btn');
     const pasarBtn = document.getElementById('pasar-btn');
@@ -217,9 +268,9 @@ import Timer from './Timer.astro';
       juegoTerminado: false,
     };
   
-    const roscoSize = 600;
+    const roscoSize = 250;
     const center = roscoSize / 2;
-    const radius = 300;
+    const radius = 125;
   
     preguntas.forEach((pregunta, index) => {
       pregunta.estado = 'pendiente';
@@ -245,7 +296,6 @@ import Timer from './Timer.astro';
       const pregunta = preguntas[estado.letraActual];
       letraActualEl.textContent = pregunta.letra;
       definicionEl.textContent = pregunta.definicion;
-      categoriaEl.textContent = `Categoría: ${pregunta.categoria}`;
       respuestaInput.value = '';
   
       document.querySelectorAll('.letra').forEach((el, i) => {
@@ -318,6 +368,7 @@ import Timer from './Timer.astro';
 
       document.querySelector('.juego-area').classList.add('hidden');
       document.getElementById('rosco-letras').classList.add('hidden');
+      document.getElementById('terminar-juego-btn').classList.add('hidden');
       resultadosEl.classList.remove('hidden'); 
 
       const aciertos = Object.values(estado.letrasAcertadas).filter(Boolean).length;
@@ -328,6 +379,13 @@ import Timer from './Timer.astro';
       responderBtn.disabled = true;
       pasarBtn.disabled = true;
       terminarBtn.disabled = true;
+
+      const nextBtn = document.getELementById("button-next-btn");
+      if(nextBtn) {
+        nextBtn.disabled = false;
+        nextBtn.classList.remove("locked");
+        nextBtn.classList.add("unlocked");
+    }
     }
 
     document.addEventListener('timer-finished', () => {

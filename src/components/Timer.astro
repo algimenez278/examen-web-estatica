@@ -3,20 +3,19 @@ const { initialTime = 50, timeOut, extraClass = "" } = Astro.props;
 ---
 
 <div class="timer">
-  <span id="remaining-time">{initialTime}</span> seconds
+ Tiempo: <span id="remaining-time">{initialTime}</span> 
 </div>
 
 <style>
   .timer {
     font-size: 1rem;
     font-weight: bold;
-    color: #e74c3c;
-    margin: 1rem 0;
-    padding: 0.5rem 1.5rem;
-    background-color: var(--moss);
-    border-radius: 0.2rem;
+    color: var(--mauve);
+    margin: 1rem auto;
+    padding: 0.5rem;
+    border-radius: 8px;
     display: inline-block;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px var(--sky);
   }
 </style>
 

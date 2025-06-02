@@ -1,0 +1,134 @@
+{
+  "rondas": [
+    {
+      "letra": "A",
+      "definicion": "Contiene 'A'. Lenguaje de programación multiplataforma orientado a objetos",
+      "respuesta": "java"
+    },
+    {
+      "letra": "B",
+      "definicion": "Empieza con 'B'. Espacio de memoria reservado para guardar datos temporalmente",
+      "respuesta": "buffer"
+    },
+    {
+      "letra": "C",
+      "definicion": "Empieza con 'C'. Lenguaje de programación creado por Dennis Ritchie",
+      "respuesta": "c"
+    },
+    {
+      "letra": "D",
+      "definicion": "Empieza con 'D'. Estructura de datos que almacenan datos como clave-valor",
+      "respuesta": "diccionario"
+    },
+    {
+      "letra": "E",
+      "definicion": "Contiene 'E'. Biblioteca de JavaScript para construir interfaces de usuario",
+      "respuesta": "react"
+    },
+    {
+      "letra": "F",
+      "definicion": "Contiene 'F'. Palabra clave en Python para definir funciones",
+      "respuesta": "def"
+    },
+    {
+      "letra": "G",
+      "definicion": "Contiene 'G'. Conjunto de pasos para resolver un problema",
+      "respuesta": "algoritmo"
+    },
+    {
+      "letra": "H",
+      "definicion": "Empieza con 'H'. Protocolo para transferencia de datos en la web",
+      "respuesta": "http"
+    },
+    {
+      "letra": "I",
+      "definicion": "Empieza con 'I'. Bucle en programación",
+      "respuesta": "iteracion"
+    },
+    {
+      "letra": "J",
+      "definicion": "Empieza con 'J'. Formato ligero de intercambio de datos en texto",
+      "respuesta": "json"
+    },
+    {
+      "letra": "K",
+      "definicion": "Contiene 'K'. Parte del desarrollo que se encarga de la lógica del servidor",
+      "respuesta": "backend"
+    },
+    {
+      "letra": "L",
+      "definicion": "Empieza con 'L'. Lenguaje de programación multiparadigma, imperativo, estructurado y bastante ligero",
+      "respuesta": "lua"
+    },
+    {
+      "letra": "M",
+      "definicion": "Empieza con 'M'. Patrón de diseño para conectar datos y vista",
+      "respuesta": "mvc"
+    },
+    {
+      "letra": "N",
+      "definicion": "Empieza con 'N'. Entorno de ejecución para JavaScript",
+      "respuesta": "node"
+    },
+    {
+      "letra": "O",
+      "definicion": "Contiene 'O'. Programa que traduce código fuente",
+      "respuesta": "compilador"
+    },
+    {
+      "letra": "P",
+      "definicion": "Contiene 'P'. Lenguaje de programación de tipado estático que se basa en Javascript",
+      "respuesta": "typescript"
+    },
+    {
+      "letra": "Q",
+      "definicion": "Contiene 'Q'. Lenguaje de consulta estructurado",
+      "respuesta": "sql"
+    },
+    {
+      "letra": "R",
+      "definicion": "Contiene 'R'. Atributo en HTML para definir enlaces",
+      "respuesta": "href"
+    },
+    {
+      "letra": "S",
+      "definicion": "Empieza con 'S'. Preprocesador de CSS",
+      "respuesta": "sass"
+    },
+    {
+      "letra": "T",
+      "definicion": "Contiene 'T'. Framework CSS con componentes responsivos",
+      "respuesta": "bootstrap"
+    },
+    {
+      "letra": "U",
+      "definicion": "Empieza con 'U'. Lenguaje de programación funcional puro",
+      "respuesta": "unison"
+    },
+    {
+      "letra": "V",
+      "definicion": "Empieza con 'V'. Framework JavaScript progresivo",
+      "respuesta": "vue"
+    },
+    {
+      "letra": "W",
+      "definicion": "Empieza con 'W'. Sistema operativo de Microsoft",
+      "respuesta": "windows"
+    },
+    {
+      "letra": "X",
+      "definicion": "Comienza con 'X'. Lenguaje de marcado extensible",
+      "respuesta": "xml"
+    },
+    {
+      "letra": "Y",
+      "definicion": "Contiene 'Y'. Lenguaje de programación de alto nivel, interpretado, multiparadigma y de tipado dinámico",
+      "respuesta": "python"
+    },
+    {
+      "letra": "Z",
+      "definicion": "Contiene 'Z'. Framework CSS",
+      "respuesta": "zurb"
+    }
+  ]
+}
