@@ -1,249 +1,310 @@
 ---
 import MainLayout from "../../../layouts/MainLayout.astro";
-import button from "../../../components/Button.astro";
-const initialTime = 60;
+import Button from "../../../components/Button.astro";
+import Modal from "../../../components/Modal.astro";
+const initialTime = 45;
 ---
 
 <MainLayout title="Quiz Dev">
-  <!-- Acá va todo tu contenido específico -->
-   <div class="quiz" data-initial-time={initialTime} >
+  <main class="quiz" data-initial-time={initialTime}>
+    <div class="header">
+      <div class="navigation-button">
+        <Button
+          href="/rooms/rosco"
+          title="Volver a habitación anterior"
+          direction="left"
+          id="btn-prev"
+        />
+      </div>
+      
+      <div class="quiz-title">
         <h1>Quiz 🤓❔</h1>
-        <div class="quizSpan">
-            <span id="currents">1</span>
-            <span id="total">/ 5</span>
-            <div class="timer">
-                <span id="remaining-time">{initialTime}</span> seconds
-            </div>
-        </div>
-        <h4 id="question"></h4>
-        <ul id="options"></ul>
-        <div>
-             <button class="follow" id="following">siguiente</button>
-             
-        </div>
-       
+      </div>
+      
+      <div class="navigation-button">
+        <Button 
+          href="/rooms/memory"
+          title="Ir a habitación siguiente"
+          id="btn-next"
+          disabled={true}
+        />  
+      </div>
     </div>
-    <script src="/src/pages/rooms/quiz/quiz.js" defer></script>
-</MainLayout>
-    <style>
-    /* 
-            --back: oklch(0.225 0.0213 242.99);
-            --letters: oklch(1 0 242.99);
-            --hover-bg: oklch(0.3 0.03 242.99);
-            --button-bg: oklch(0.4 0.05 242.99);
-            --button-hover: oklch(0.5 0.07 242.99);
-            --lapis: oklch(0.4887 0.0805 242.84);
-            --moss: oklch(0.6118 0.0927 126.67);
+
+    <div class="quiz-progress">
+      <div class="quiz-progress--counter">
+        <span id="current-question">1</span>
+        <span id="total-questions">/ 5</span>
+      </div>
+      
+      <div class="timer">
+        <span id="remaining-time">{initialTime}</span> seconds
+      </div>
+    </div>
+
+    <h4 id="question-text"></h4>
+    
+    <div id="options-container">
         
+    </div>
+    
+    <div class="action-controls">
+      <button class="action-button action-button--next" id="next-question" disabled>
+        Siguiente
+      </button>
+    </div>
 
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        } */
-        :root {
-          --Mauve:#c6a0f6;
-        }
-        html,
-        body{
-            height: 100%;
-        }
-        body {
-            background-image: linear-gradient(to bottom, var(--mauve), var(--sky));
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            padding: 1rem;
-            overflow: hidden;
-        }
-        /* toda la estructura del quiz */
-        .quiz {
-            width: 90vw;
-            max-width: 700px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
-            border-radius: 15px;
-            padding: 1.5rem;
-            display: grid;
-            gap: 1rem;
-            align-items: center;
-            box-sizing: border-box;
-	    }
-	
-        .quiz h1 {
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
-            color: oklch(1 0 242.99);
-            text-align: center;
-            background-color: oklch(0.15 0.015 242.99);
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-            
-        }
-        .quizSpan {
-            margin-top: 1.5rem 0;
-            padding: 0.8rem 1rem;
-            color: var(--letters);
-            background: oklch(0.18 0.018 242.99);
-            text-align: center;
-            font-weight: 600;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-            border-radius: 8px;
-            
-        }
-        /* time */
-        .timer {
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
-            text-align: center;
-            background-color: oklch(0.15 0.015 242.99);
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.233);
-            font-size: 2rem;
+    <Modal
+      id="game-modal"
+      title="🎉 ¡Ganaste!"
+      message="Sos una mente brillante, dev crack 😎"
+      confirmText="¡Genial!"
+      showNext={false}
+      client:load
+    />
+  </main>
 
-        }
-        #remaining-time {
-            font-weight: bold;
-        }
+  <script type="module" src="/src/pages/rooms/quiz/quiz.js" is:inline></script>
+</MainLayout>
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.98); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        .quiz h4 {
-            margin-top: 2rem;
-            padding: 1rem;
-            color: var(--letters);
-            text-align: center;
-            background: oklch(0.2 0.02 242.99);
-            border-radius: 8px;
-            font-size: 1.4rem;
-            line-height: 1.4;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            white-space: pre-line;
-        }
+<style>
+  :root {
+    --mauve: #c6a0f6;
+    --sky: #91d7ff;
+    --letters: oklch(1 0 242.99);
+    --button-color: oklch(0.7 0.15 270);
+    --button-hover: oklch(0.6 0.2 270);
+    --green: #4caf50;
+    --red: #f44336;
+  }
 
-        #options {
-            list-style: none;
-            padding: 0;
-            margin: 1.5rem 0;
-        }
+  html, body {
+    height: 100%;
+  }
 
-        .option{
-            background: oklch(0.9 0.005 242.99);
-            color: oklch(0.2 0.02 242.99);
-            padding: 1rem 1.2rem;
-            margin: 0.8rem 0;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            user-select: none;
-            position: relative;
-            border: 2px solid transparent;
-            font-size: 1rem;
-            font-weight: 500;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+  body {
+    background-image: linear-gradient(to bottom, var(--mauve), var(--sky));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 1rem;
+    overflow: hidden;
+    color: var(--letters);
+  }
 
-        .option:hover{
-            background: oklch(0.85 0.01 242.99);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            border-color: oklch(0.7 0.02 242.99);
-        }
+  .quiz {
+    width: 90vw;
+    max-width: 800px;
+    background-image: linear-gradient(to bottom, var(--mauve), var(--sky));
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    border-radius: 15px;
+    padding: 1.5rem;
+    display: grid;
+    align-items: center;
+  }
 
-        .correcta {
-            background: linear-gradient(135deg, #c8e6c9, #a5d6a7);
-            color: var(--green);
-            border-color: #4caf50;
-            animation: correctaPulse 0.6s ease;
-        }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
 
-        .incorrecta {
-            background: linear-gradient(135deg, #ffcdd2, #ef9a9a);
-            color: var(--red);
-            border-color: #f44336;
-            animation: incorrectaShake 0.6s ease;
-        }
+  .quiz-title {
+    text-align: center;
+  }
 
-        .optionspan {
-            font-size: 1.2rem;
-            margin-left: 0.5rem;
-        }
-        /* siguiente */
-        .follow {
-            padding: 1rem 2rem;
-            width: 100%;
-            background: var(--button-bg);
-            color: var(--letters);
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 2rem;
-            font-family: inherit;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        }
+  .quiz-title h1 {
+    margin: 0;
+    font-size: 2rem;
+  }
 
-        .follow:hover:not(:disabled) {
-            background: var(--button-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
-        }
+  .quiz-progress {
+    margin: 1rem 0;
+    padding: 0.8rem 1rem;
+    color: var(--letters);
+    background: oklch(0.18 0.018 242.99);
+    text-align: center;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
 
-        .follow:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
+  .quiz-progress--counter {
+    font-size: 2rem;
+    text-align: center;
+  }
 
-        .quiz-end {
-            text-align: center;
-            animation: fadeIn 0.8s ease;
-        }
-        @media (max-width: 320px), (max-height: 480px) {
-            body {
-                padding: 0;
-                margin: 0;
-            }
+  .timer {
+    text-align: center;
+    background-color: oklch(0.15 0.015 242.99);
+    border-radius: 12px;
+    font-size: 2rem;
+    padding: 0.5rem 1rem;
+  }
 
-            .quiz {
-                margin: 0.5rem;
-                padding: 1rem;
-                max-width: 100%;
-                max-height: 100%;
-                box-sizing: border-box;
-            }
+  #question-text {
+    margin-top: 2rem;
+    padding: 1rem;
+    color: var(--letters);
+    text-align: center;
+    background: oklch(0.2 0.02 242.99);
+    border-radius: 8px;
+    font-size: 1.4rem;
+    line-height: 1.4;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    white-space: pre-line;
+  }
 
-            .quiz h1 {
-                font-size: 1.2rem;
-                margin-bottom: 0.5rem;
-            }
+  #options-container {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+  }
 
-            .quiz h4 {
-                font-size: 1rem;
-                padding: 0.5rem;
-                margin-top: 1rem;
-            }
+  .option {
+    background: oklch(0.9 0.005 242.99);
+    color: oklch(0.2 0.02 242.99);
+    padding: 1rem 1.2rem;
+    margin: 0.8rem 0;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    user-select: none;
+    position: relative;
+    border: 2px solid transparent;
+    font-size: 1rem;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: left;
+    font-family: inherit;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
 
-            .option{
-                padding: 0.6rem;
-                font-size: 0.85rem;
-                margin: 4px 0;
-            }
+  .option:hover {
+    background: oklch(0.85 0.01 242.99);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border-color: oklch(0.7 0.02 242.99);
+  }
 
-            .quiz ul {
-                padding: 0;
-            }
+  .correct {
+    background: linear-gradient(135deg, #c8e6c9, #a5d6a7) !important;
+    color: var(--green) !important;
+    border-color: #4caf50 !important;
+    animation: correctPulse 0.6s ease;
+  }
 
-            button.follow {
-                font-size: 0.9rem;
-                padding: 0.5rem;
-            }
-        }
-  </style>
-  <!-- recorda que la ruta va ser http://localhost:4321/rooms/quiz -->
+  .incorrect {
+    background: linear-gradient(135deg, #ffcdd2, #ef9a9a) !important;
+    color: var(--red) !important;
+    border-color: #f44336 !important;
+    animation: incorrectShake 0.6s ease;
+  }
+
+  .option-icon {
+    font-size: 1.2rem;
+    margin-left: 0.5rem;
+  }
+
+  .action-controls {
+    margin-top: 2rem;
+  }
+
+  .action-button {
+    cursor: pointer;
+    width: 100%;
+    font-family: inherit;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+  }
+
+  .action-button--next {
+    background: var(--button-color);
+    color: white;
+  }
+
+  .action-button:hover:not(:disabled) {
+    background: var(--button-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  }
+
+  .action-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  @keyframes correctPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+
+  @keyframes incorrectShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.98); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  @media (max-width: 400px), (max-height: 480px) {
+    .quiz {
+      margin: 0.5rem;
+      padding: 1rem;
+      max-width: 100%;
+      max-height: 100%;
+      box-sizing: border-box;
+    }
+
+    .quiz-title h1 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .quiz-progress--counter {
+      font-size: 1.5rem;
+    }
+
+    .timer {
+      font-size: 1.5rem;
+    }
+
+    #question-text {
+      font-size: 1rem;
+      padding: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .option {
+      padding: 0.6rem;
+      font-size: 0.85rem;
+      margin: 4px 0;
+    }
+
+    .action-button {
+      font-size: 0.9rem;
+      padding: 0.5rem;
+    }
+  }
+</style>
