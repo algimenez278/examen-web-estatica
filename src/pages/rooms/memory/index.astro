@@ -1,9 +1,50 @@
 ---
 import MainLayout from "../../../layouts/MainLayout.astro";
+import GameBoard from "../../../pages/rooms/memory/components/GameBoard.astro";
+import Controls from "../../../pages/rooms/memory/components/Controls.astro";
+import StatsPanel from "../../../pages/rooms/memory/components/StatsPanel.astro";
+import EndMessage from "../../../pages/rooms/memory/components/EndMessage.astro";
+import Button from "../../../components/Button.astro";
+import "./style/styles.css";
 ---
 
 <MainLayout title="Memorama Dev">
-  <h1>memory</h1>
   <!-- Acá va todo tu contenido específico -->
   <!-- recorda quela ruta va ser http://localhost:4321/rooms/memory -->
+  <div class="memorama">
+    <div class="memorama__glass-card">
+      <header class="memorama__header">
+        <h1 class="memorama__title">🧠 Memorama</h1>
+        <p class="memorama__paragraph">Haz coincidir las imágenes</p>
+      </header>
+      <div class="memorama__layout">
+        <GameBoard />
+        <aside class="memorama__side-panel">
+          <Controls />
+
+          <div class="memorama__nav-buttons">
+            <Button
+              href="/rooms/padlock"
+              title="Volver a habitación anterior"
+              direction="left"
+              id="btn-prev"
+            />
+            <Button
+              href="/rooms/hangman"
+              title="Ir a habitación siguiente"
+              id="btn-next"
+            />
+          </div>
+          
+          <StatsPanel />
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <EndMessage />
+
+  <script type="module" src="/src/pages/rooms/memory/memory.js" is:inline></script>
+
 </MainLayout>
+
