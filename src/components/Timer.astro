@@ -33,7 +33,7 @@ const { initialTime = 50, timeOut, extraClass = "" } = Astro.props;
         remainingTimeEl.parentElement.style.color = '#e74c3c';
       }
 
-      // ⏰ Cuando se acaba el tiempo
+      // Cuando se acaba el tiempo
       if (remainingTime <= 0) {
         clearInterval(interval);
 
@@ -41,11 +41,12 @@ const { initialTime = 50, timeOut, extraClass = "" } = Astro.props;
         const event = new Event('timer-finished');
         document.dispatchEvent(event);
 
-        // Llamar a función externa si está definida
+        // Llamar a función externa
         if (typeof timeOut === 'function') {
           timeOut();
         }
       }
     }, 1000);
   });
+
 </script>
