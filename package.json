@@ -10,6 +10,6 @@
   },
   "dependencies": {
     "astro": "^5.7.13",
-    "sweetalert2": "^11.22.0"
+    "package-lock.json": "^1.0.0"
   }
 }
