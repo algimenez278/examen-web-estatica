@@ -1,0 +1,134 @@
+{
+  "rounds": [
+    {
+      "letter": "A",
+      "definition": "Contiene 'A'. Lenguaje de programación multiplataforma orientado a objetos",
+      "response": "java"
+    },
+    {
+      "letter": "B",
+      "definition": "Empieza con 'B'. Espacio de memoria reservado para guardar datos temporalmente",
+      "response": "buffer"
+    },
+    {
+      "letter": "C",
+      "definition": "Empieza con 'C'. Componente visual de secuencia que a Santiago le disgusta",
+      "response": "carrusel"
+    },
+    {
+      "letter": "D",
+      "definition": "Empieza con 'D'. Estructura de datos que almacenan datos como clave-valor",
+      "response": "diccionario"
+    },
+    {
+      "letter": "E",
+      "definition": "Contiene 'E'. Biblioteca de JavaScript para construir interfaces de usuario",
+      "response": "react"
+    },
+    {
+      "letter": "F",
+      "definition": "Contiene 'F'. Palabra clave reservada en Python para definir funciones",
+      "response": "def"
+    },
+    {
+      "letter": "G",
+      "definition": "Contiene 'G'. Conjunto de operaciones que permite hallar una solución",
+      "response": "algoritmo"
+    },
+    {
+      "letter": "H",
+      "definition": "Empieza con 'H'. Protocolo de Transferencia de Hipertexto en la web",
+      "response": "http"
+    },
+    {
+      "letter": "I",
+      "definition": "Empieza con 'I'. Repetición de un bloque de código o secuencia en un programa",
+      "response": "iteracion"
+    },
+    {
+      "letter": "J",
+      "definition": "Empieza con 'J'. Formato de texto ligero de intercambio y almacenamiento de datos",
+      "response": "json"
+    },
+    {
+      "letter": "K",
+      "definition": "Contiene 'K'. Parte del desarrollo que se encarga de la lógica del servidor",
+      "response": "backend"
+    },
+    {
+      "letter": "L",
+      "definition": "Empieza con 'L'. Lenguaje de programación multiparadigma, imperativo y bastante ligero",
+      "response": "lua"
+    },
+    {
+      "letter": "M",
+      "definition": "Empieza con 'M'. Patrón de diseño que organiza la lógica en capas diferenciadas",
+      "response": "mvc"
+    },
+    {
+      "letter": "N",
+      "definition": "Empieza con 'N'. Entorno de ejecución multiplataforma usado por Javascript",
+      "response": "node"
+    },
+    {
+      "letter": "O",
+      "definition": "Contiene 'O'. Programa que traduce código fuente de un lenguaje a otro",
+      "response": "compilador"
+    },
+    {
+      "letter": "P",
+      "definition": "Contiene 'P'. Lenguaje de programación de tipado estático que se basa en Javascript",
+      "response": "typescript"
+    },
+    {
+      "letter": "Q",
+      "definition": "Contiene 'Q'. Lenguaje de consulta estructurado que almacena y procesa información",
+      "response": "sql"
+    },
+    {
+      "letter": "R",
+      "definition": "Contiene 'R'. Atributo en HTML para definir dirección URL o el destino de hipervinculo",
+      "response": "href"
+    },
+    {
+      "letter": "S",
+      "definition": "Empieza con 'S'. Preprocesador de CSS que extiende sus capacidades y facilita el trabajo",
+      "response": "sass"
+    },
+    {
+      "letter": "T",
+      "definition": "Contiene 'T'. Framework de desarrollo frontend con componentes responsivos",
+      "response": "bootstrap"
+    },
+    {
+      "letter": "U",
+      "definition": "Empieza con 'U'. Lenguaje de programación funcional puro y estático",
+      "response": "unison"
+    },
+    {
+      "letter": "V",
+      "definition": "Empieza con 'V'. Framework JavaScript progresivo y de código abierto",
+      "response": "vue"
+    },
+    {
+      "letter": "W",
+      "definition": "Empieza con 'W'. Sistema operativo desarrollado por Microsoft en 1985",
+      "response": "windows"
+    },
+    {
+      "letter": "X",
+      "definition": "Comienza con 'X'. Lenguaje de marcado que define estructura y contenido",
+      "response": "xml"
+    },
+    {
+      "letter": "Y",
+      "definition": "Contiene 'Y'. Lenguaje de programación de alto nivel, interpretado y de tipado dinámico",
+      "response": "python"
+    },
+    {
+      "letter": "Z",
+      "definition": "Contiene 'Z'. Marco frontend responsivo que cuenta con gran variedad de componentes",
+      "response": "zurb"
+    }
+  ]
+}
