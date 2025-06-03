@@ -1,12 +1,13 @@
 ---
-import Timer from "./Timer.astro";
-import Button from "./Button.astro";
+import Timer from "../../../components/Timer.astro";
+import Button from "../../../components/Button.astro";
+const { title = "💻 Rosco"} = Astro.props;
 ---
 
 <main class="rosco__container">
-  <header class="rosco__header">
-    <h1 class="rosco__title">Rosco Dev</h1>
-    <Timer initialTime="300" />
+  <header>
+    <h1 class="rosco__title">{title}</h1>
+    <Timer initialTime="100" />
     <button id="end-game-btn" class="btn__finish">Terminar Juego</button>
   </header>
 
@@ -58,9 +59,13 @@ import Button from "./Button.astro";
     height: 100%;
   }
 
+  .rosco__title {
+    font-size: 2.3rem;
+    color: var(--sky);
+    text-shadow: 0 0 10px var(--blue);
+  }
+
   body {
-    background-color: var(--base);
-    height: 100vh;
     margin: 0;
     padding: 0;
     display: flex;
@@ -77,7 +82,7 @@ import Button from "./Button.astro";
     max-height: 95vh;
     width: 90%;
     margin: auto;
-    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 20px rgba(163, 213, 255, 0.5);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -142,7 +147,6 @@ import Button from "./Button.astro";
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     margin: 1rem auto;
     color: black;
-
     max-height: 180px;
     display: block;
   }
@@ -198,16 +202,22 @@ import Button from "./Button.astro";
     width: 100%;
     padding: 0 1rem;
   }
+  
+  .results {
+    color: white;
+  }
 
   .hidden {
     display: none;
   }
 
   @media (max-width: 425px) {
+
     .rosco {
       width: 58vw;
       max-width: 280px;
     }
+
     :global(.letter) {
       width: 1.6rem;
       height: 1.6rem;
@@ -216,10 +226,12 @@ import Button from "./Button.astro";
   }
 
   @media (min-width: 426px) and (max-width: 540px) {
+
     .rosco {
       width: 46vw;
       max-width: 320px;
     }
+
     :global(.letter) {
       width: 1.8rem;
       height: 1.8rem;
@@ -259,6 +271,7 @@ import Button from "./Button.astro";
       grid-area: header;
       text-align: center;
     }
+
     .rosco {
       grid-area: rosco;
       width: 100%;
@@ -285,9 +298,11 @@ import Button from "./Button.astro";
       padding: 0;
       width: 100%;
     }
+
     .nav__buttons__container :global(.arrow-btn) {
       margin: 0;
     }
+
     .button-nav-left,
     .button-nav-right {
       flex-basis: auto;
@@ -320,8 +335,6 @@ import Button from "./Button.astro";
     const finallyBtn = document.getElementById("end-game-btn");
     const resultsEl = document.getElementById("results");
     const scoreEl = document.getElementById("final-score");
-
-    // Referencias a los nuevos rosco__buttons de navegación
     const nextRoomButtons = document.querySelectorAll(".arrow-btn");
 
     const state = {
@@ -390,7 +403,7 @@ import Button from "./Button.astro";
       );
 
       if (!letterEl) {
-        console.error("No se encontró el elemento de la letter");
+        console.error("No se encontró el elemento de la letra");
         return;
       }
 
@@ -432,7 +445,6 @@ import Button from "./Button.astro";
         }
       }
 
-      // Si no encontró ninguna letter pending o pass, termina el juego
       finallyGame();
     }
 
@@ -449,7 +461,7 @@ import Button from "./Button.astro";
         Boolean
       ).length;
       const percentage = Math.round((successes / questions.length) * 100);
-      scoreEl.textContent = `Acertaste ${successes} de ${questions.length} letters (${percentage}%)`;
+      scoreEl.textContent = `Acertaste ${successes} de ${questions.length} letras (${percentage}%)`;
 
       responseInput.disabled = true;
       responseBtn.disabled = true;
