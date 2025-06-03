@@ -1,134 +1,134 @@
 {
-  "rondas": [
+  "rounds": [
     {
-      "letra": "A",
-      "definicion": "Contiene 'A'. Lenguaje de programación multiplataforma orientado a objetos",
-      "respuesta": "java"
+      "letter": "A",
+      "definition": "Contiene 'A'. Lenguaje de programación multiplataforma orientado a objetos",
+      "response": "java"
     },
     {
-      "letra": "B",
-      "definicion": "Empieza con 'B'. Espacio de memoria reservado para guardar datos temporalmente",
-      "respuesta": "buffer"
+      "letter": "B",
+      "definition": "Empieza con 'B'. Espacio de memoria reservado para guardar datos temporalmente",
+      "response": "buffer"
     },
     {
-      "letra": "C",
-      "definicion": "Empieza con 'C'. Componente visual de secuencia que a Santiago le disgusta",
-      "respuesta": "carrusel"
+      "letter": "C",
+      "definition": "Empieza con 'C'. Componente visual de secuencia que a Santiago le disgusta",
+      "response": "carrusel"
     },
     {
-      "letra": "D",
-      "definicion": "Empieza con 'D'. Estructura de datos que almacenan datos como clave-valor",
-      "respuesta": "diccionario"
+      "letter": "D",
+      "definition": "Empieza con 'D'. Estructura de datos que almacenan datos como clave-valor",
+      "response": "diccionario"
     },
     {
-      "letra": "E",
-      "definicion": "Contiene 'E'. Biblioteca de JavaScript para construir interfaces de usuario",
-      "respuesta": "react"
+      "letter": "E",
+      "definition": "Contiene 'E'. Biblioteca de JavaScript para construir interfaces de usuario",
+      "response": "react"
     },
     {
-      "letra": "F",
-      "definicion": "Contiene 'F'. Palabra clave reservada en Python para definir funciones",
-      "respuesta": "def"
+      "letter": "F",
+      "definition": "Contiene 'F'. Palabra clave reservada en Python para definir funciones",
+      "response": "def"
     },
     {
-      "letra": "G",
-      "definicion": "Contiene 'G'. Conjunto de operaciones que permite hallar una solución",
-      "respuesta": "algoritmo"
+      "letter": "G",
+      "definition": "Contiene 'G'. Conjunto de operaciones que permite hallar una solución",
+      "response": "algoritmo"
     },
     {
-      "letra": "H",
-      "definicion": "Empieza con 'H'. Protocolo de Transferencia de Hipertexto en la web",
-      "respuesta": "http"
+      "letter": "H",
+      "definition": "Empieza con 'H'. Protocolo de Transferencia de Hipertexto en la web",
+      "response": "http"
     },
     {
-      "letra": "I",
-      "definicion": "Empieza con 'I'. Repetición de un bloque de código o secuencia en un programa",
-      "respuesta": "iteracion"
+      "letter": "I",
+      "definition": "Empieza con 'I'. Repetición de un bloque de código o secuencia en un programa",
+      "response": "iteracion"
     },
     {
-      "letra": "J",
-      "definicion": "Empieza con 'J'. Formato de texto ligero de intercambio y almacenamiento de datos",
-      "respuesta": "json"
+      "letter": "J",
+      "definition": "Empieza con 'J'. Formato de texto ligero de intercambio y almacenamiento de datos",
+      "response": "json"
     },
     {
-      "letra": "K",
-      "definicion": "Contiene 'K'. Parte del desarrollo que se encarga de la lógica del servidor",
-      "respuesta": "backend"
+      "letter": "K",
+      "definition": "Contiene 'K'. Parte del desarrollo que se encarga de la lógica del servidor",
+      "response": "backend"
     },
     {
-      "letra": "L",
-      "definicion": "Empieza con 'L'. Lenguaje de programación multiparadigma, imperativo y bastante ligero",
-      "respuesta": "lua"
+      "letter": "L",
+      "definition": "Empieza con 'L'. Lenguaje de programación multiparadigma, imperativo y bastante ligero",
+      "response": "lua"
     },
     {
-      "letra": "M",
-      "definicion": "Empieza con 'M'. Patrón de diseño que organiza la lógica en capas diferenciadas",
-      "respuesta": "mvc"
+      "letter": "M",
+      "definition": "Empieza con 'M'. Patrón de diseño que organiza la lógica en capas diferenciadas",
+      "response": "mvc"
     },
     {
-      "letra": "N",
-      "definicion": "Empieza con 'N'. Entorno de ejecución multiplataforma usado por Javascript",
-      "respuesta": "node"
+      "letter": "N",
+      "definition": "Empieza con 'N'. Entorno de ejecución multiplataforma usado por Javascript",
+      "response": "node"
     },
     {
-      "letra": "O",
-      "definicion": "Contiene 'O'. Programa que traduce código fuente de un lenguaje a otro",
-      "respuesta": "compilador"
+      "letter": "O",
+      "definition": "Contiene 'O'. Programa que traduce código fuente de un lenguaje a otro",
+      "response": "compilador"
     },
     {
-      "letra": "P",
-      "definicion": "Contiene 'P'. Lenguaje de programación de tipado estático que se basa en Javascript",
-      "respuesta": "typescript"
+      "letter": "P",
+      "definition": "Contiene 'P'. Lenguaje de programación de tipado estático que se basa en Javascript",
+      "response": "typescript"
     },
     {
-      "letra": "Q",
-      "definicion": "Contiene 'Q'. Lenguaje de consulta estructurado que almacena y procesa información",
-      "respuesta": "sql"
+      "letter": "Q",
+      "definition": "Contiene 'Q'. Lenguaje de consulta estructurado que almacena y procesa información",
+      "response": "sql"
     },
     {
-      "letra": "R",
-      "definicion": "Contiene 'R'. Atributo en HTML para definir dirección URL o el destino de hipervinculo",
-      "respuesta": "href"
+      "letter": "R",
+      "definition": "Contiene 'R'. Atributo en HTML para definir dirección URL o el destino de hipervinculo",
+      "response": "href"
     },
     {
-      "letra": "S",
-      "definicion": "Empieza con 'S'. Preprocesador de CSS que extiende sus capacidades y facilita el trabajo",
-      "respuesta": "sass"
+      "letter": "S",
+      "definition": "Empieza con 'S'. Preprocesador de CSS que extiende sus capacidades y facilita el trabajo",
+      "response": "sass"
     },
     {
-      "letra": "T",
-      "definicion": "Contiene 'T'. Framework de desarrollo frontend con componentes responsivos",
-      "respuesta": "bootstrap"
+      "letter": "T",
+      "definition": "Contiene 'T'. Framework de desarrollo frontend con componentes responsivos",
+      "response": "bootstrap"
     },
     {
-      "letra": "U",
-      "definicion": "Empieza con 'U'. Lenguaje de programación funcional puro y estático",
-      "respuesta": "unison"
+      "letter": "U",
+      "definition": "Empieza con 'U'. Lenguaje de programación funcional puro y estático",
+      "response": "unison"
     },
     {
-      "letra": "V",
-      "definicion": "Empieza con 'V'. Framework JavaScript progresivo y de código abierto",
-      "respuesta": "vue"
+      "letter": "V",
+      "definition": "Empieza con 'V'. Framework JavaScript progresivo y de código abierto",
+      "response": "vue"
     },
     {
-      "letra": "W",
-      "definicion": "Empieza con 'W'. Sistema operativo desarrollado por Microsoft en 1985",
-      "respuesta": "windows"
+      "letter": "W",
+      "definition": "Empieza con 'W'. Sistema operativo desarrollado por Microsoft en 1985",
+      "response": "windows"
     },
     {
-      "letra": "X",
-      "definicion": "Comienza con 'X'. Lenguaje de marcado que define estructura y contenido",
-      "respuesta": "xml"
+      "letter": "X",
+      "definition": "Comienza con 'X'. Lenguaje de marcado que define estructura y contenido",
+      "response": "xml"
     },
     {
-      "letra": "Y",
-      "definicion": "Contiene 'Y'. Lenguaje de programación de alto nivel, interpretado y de tipado dinámico",
-      "respuesta": "python"
+      "letter": "Y",
+      "definition": "Contiene 'Y'. Lenguaje de programación de alto nivel, interpretado y de tipado dinámico",
+      "response": "python"
     },
     {
-      "letra": "Z",
-      "definicion": "Contiene 'Z'. Marco frontend responsivo que cuenta con gran variedad de componentes",
-      "respuesta": "zurb"
+      "letter": "Z",
+      "definition": "Contiene 'Z'. Marco frontend responsivo que cuenta con gran variedad de componentes",
+      "response": "zurb"
     }
   ]
 }

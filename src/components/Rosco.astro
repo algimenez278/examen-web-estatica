@@ -1,51 +1,59 @@
 ---
-import Timer from './Timer.astro';
-import Button from './Button.astro';
+import Timer from "./Timer.astro";
+import Button from "./Button.astro";
 ---
 
-<main class="rosco-container">
-  <header>
-    <h1>Rosco Dev</h1>
-    <Timer initialTime="300"/>
-    <button id="terminar-juego-btn" class="btn-terminar">Terminar Juego</button>
+<main class="rosco__container">
+  <header class="rosco__header">
+    <h1 class="rosco__title">Rosco Dev</h1>
+    <Timer initialTime="300" />
+    <button id="end-game-btn" class="btn__finish">Terminar Juego</button>
   </header>
 
-  <section id="rosco-letras" class="rosco" aria-label="Rosco de letras">
-    </section>
+  <section id="rosco-letters" class="rosco" aria-label="Rosco de letters">
+  </section>
 
-  <section class="juego-area" aria-label="Zona de juego">
-    <article id="definicion-container">
-      <h2 id="letra-actual"></h2>
-      <p id="definicion-actual"></p>
+  <section class="rosco__game-area" aria-label="Zona de juego">
+    <article id="rosco-definition">
+      <h2 id="rosco-letter-current"></h2>
+      <p id="rosco-definition-clue"></p>
     </article>
 
-    <input 
-      type="text" 
-      id="respuesta-input" 
-      autocomplete="off" 
-      placeholder="Escribe tu respuesta..."
-      class="input-response"
+    <input
+      type="text"
+      id="rosco-input"
+      autocomplete="off"
+      placeholder="Escribe tu response..."
+      class="rosco__input-response"
     />
 
-    <div class="botones">
-      <button id="responder-btn" class="btn-responder">Responder</button>
-      <button id="pasar-btn" class="btn-pasar">Pasapalabra</button>
+    <div class="rosco__buttons">
+      <button id="rosco-buttons-reply" class="rosco__buttons__reply"
+        >Responder</button
+      >
+      <button id="rosco-buttons-pass" class="rosco__pass__btn"
+        >Pasapalabra</button
+      >
     </div>
   </section>
 
-  <div class="nav-buttons-container">
-      <Button href="/rooms/quiz" title="Volver a la habitación anterior" direction="left" />
-      <Button href="/rooms/padlock" title="Ir a habitación siguiente"/>
+  <div class="nav__buttons__container">
+    <Button
+      href="/rooms/quiz"
+      title="Volver a la habitación anterior"
+      direction="left"
+    />
+    <Button href="/rooms/padlock" title="Ir a habitación siguiente" />
   </div>
 
-  <section id="resultados" class="hidden resultados">
+  <section id="results" class="hidden results">
     <h2>Juego Terminado!</h2>
-    <p id="puntuacion-final"></p>
+    <p id="final-score"></p>
   </section>
 </main>
 
 <style>
-  html, 
+  html,
   body {
     height: 100%;
   }
@@ -58,35 +66,35 @@ import Button from './Button.astro';
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow-x: hidden; 
+    overflow-x: hidden;
   }
 
-  .rosco-container {
+  .rosco__container {
     background: var(--over);
     border-radius: 12px;
     text-align: center;
-    max-width: 600px; 
+    max-width: 600px;
     max-height: 95vh;
-    width: 90%; 
+    width: 90%;
     margin: auto;
     box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 1rem; 
+    padding: 1rem;
   }
-  
+
   .rosco {
     position: relative;
-    width: 75vw; 
+    width: 75vw;
     max-width: 300px;
     height: auto;
     aspect-ratio: 1 / 1.1;
     margin: 1.3rem auto;
   }
-  
-  :global(.letra) {
+
+  :global(.letter) {
     position: absolute;
     width: 1.8rem;
     height: 1.8rem;
@@ -103,59 +111,59 @@ import Button from './Button.astro';
     transition: all 0.3s ease;
     transform: translate(-50%, -50%);
   }
-  
-  :global(.letra.activa) {
+
+  :global(.letter.active) {
     background-color: var(--letter);
     color: white;
     transform: scale(1.1);
     box-shadow: 0 0 10px rgba(243, 156, 18, 0.7);
     z-index: 10;
   }
-  
-  :global(.letra.acertada) {
+
+  :global(.letter.correct) {
     background-color: var(--green);
     color: var(--over);
   }
-  
-  :global(.letra.fallada) {
+
+  :global(.letter.failed) {
     background-color: var(--red);
     color: var(--over);
   }
-  
-  :global(.letra.pasada) {
+
+  :global(.letter.pass) {
     background-color: var(--blue);
     color: var(--over);
   }
-  
-  .juego-area {
+
+  .rosco__game-area {
     background-image: linear-gradient(45deg, var(--mauve), var(--sky));
     padding: 1rem;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     margin: 1rem auto;
-    color: black; 
-    
+    color: black;
+
     max-height: 180px;
-    display: block; 
+    display: block;
   }
 
-  .input-response {
-    width: 60%; 
-    max-width: 300px; 
+  .rosco__input-response {
+    width: 60%;
+    max-width: 300px;
     height: 1em;
     padding: 0.5em;
     font-size: 1rem;
     border-radius: 4px;
     margin: 1rem auto;
   }
-  
-  .botones {
+
+  .rosco__buttons {
     display: flex;
     gap: 1rem;
     justify-content: center;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
   }
-  
+
   button {
     padding: 8px 8px;
     border: none;
@@ -163,28 +171,28 @@ import Button from './Button.astro';
     font-size: 1rem;
     cursor: pointer;
   }
-  
+
   button:hover {
     box-shadow: 0px 0px 5px var(--sky);
   }
 
-  .btn-responder {
+  .rosco__buttons__reply {
     background-color: var(--mauve);
     color: var(--base);
   }
-  
-  .btn-pasar {
+
+  .rosco__pass__btn {
     background-color: var(--sky);
     color: var(--base);
   }
-  
-  .btn-terminar {
+
+  .btn__finish {
     background-color: var(--red);
     color: white;
     margin-top: 1rem;
   }
 
-  .nav-buttons-container {
+  .nav__buttons__container {
     display: flex;
     justify-content: space-around;
     width: 100%;
@@ -197,11 +205,11 @@ import Button from './Button.astro';
 
   @media (max-width: 425px) {
     .rosco {
-      width: 58vw; 
-      max-width: 280px; 
+      width: 58vw;
+      max-width: 280px;
     }
-    :global(.letra) {
-      width: 1.6rem; 
+    :global(.letter) {
+      width: 1.6rem;
       height: 1.6rem;
       font-size: 1.2rem;
     }
@@ -209,10 +217,10 @@ import Button from './Button.astro';
 
   @media (min-width: 426px) and (max-width: 540px) {
     .rosco {
-      width: 46vw; 
-      max-width: 320px; 
+      width: 46vw;
+      max-width: 320px;
     }
-    :global(.letra) {
+    :global(.letter) {
       width: 1.8rem;
       height: 1.8rem;
       font-size: 1.4rem;
@@ -221,10 +229,10 @@ import Button from './Button.astro';
 
   @media (min-width: 541px) and (max-width: 767px) {
     .rosco {
-      width: 48vw; 
+      width: 48vw;
       max-width: 350px;
     }
-    :global(.letra) {
+    :global(.letter) {
       width: 2rem;
       height: 2rem;
       font-size: 1.6rem;
@@ -232,7 +240,7 @@ import Button from './Button.astro';
   }
 
   @media (min-width: 768px) {
-    .rosco-container {
+    .rosco__container {
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: auto auto auto;
@@ -243,7 +251,7 @@ import Button from './Button.astro';
       align-items: start;
       justify-items: center;
       gap: 1rem;
-      padding: 2rem; 
+      padding: 2rem;
       height: auto;
     }
 
@@ -253,23 +261,23 @@ import Button from './Button.astro';
     }
     .rosco {
       grid-area: rosco;
-      width: 100%; 
+      width: 100%;
       max-width: 400px;
       margin: 0;
     }
 
-    :global(.letra) {
-      width: 2rem; 
+    :global(.letter) {
+      width: 2rem;
       height: 2rem;
       font-size: 1.2rem;
     }
 
-    .juego-area {
+    .rosco__game-area {
       grid-area: juego;
-      max-width: 350px; 
+      max-width: 350px;
     }
 
-    .nav-buttons-container {
+    .nav__buttons__container {
       grid-area: nav-buttons;
       display: flex;
       justify-content: space-evenly;
@@ -277,190 +285,197 @@ import Button from './Button.astro';
       padding: 0;
       width: 100%;
     }
-    .nav-buttons-container :global(.arrow-btn) {
+    .nav__buttons__container :global(.arrow-btn) {
       margin: 0;
     }
-    .button-nav-left, .button-nav-right {
+    .button-nav-left,
+    .button-nav-right {
       flex-basis: auto;
       width: auto;
       max-width: 150px;
     }
   }
-
 </style>
-
 <script type="module">
-  document.addEventListener('DOMContentLoaded', async () => {
+  document.addEventListener("DOMContentLoaded", async () => {
     let data;
     try {
-      const res = await fetch('/data-rosco/rosco.json');
-      if (!res.ok) throw new Error('No se pudo cargar rosco.json');
+      const res = await fetch("/data-rosco/rosco.json");
+      if (!res.ok) throw new Error("No se pudo cargar rosco.json");
       data = await res.json();
     } catch (error) {
-      console.error('Error cargando rosco.json:', error);
-      alert('Error al cargar los datos del rosco. Ver consola.');
+      console.error("Error cargando rosco.json:", error);
+      alert("Error al cargar los datos del rosco. Ver consola.");
       return;
     }
-  
-    const preguntas = data.rondas;
-  
-    const roscoEl = document.getElementById('rosco-letras');
-    const letraActualEl = document.getElementById('letra-actual');
-    const definicionEl = document.getElementById('definicion-actual');
-    const respuestaInput = document.getElementById('respuesta-input');
-    const responderBtn = document.getElementById('responder-btn');
-    const pasarBtn = document.getElementById('pasar-btn');
-    const terminarBtn = document.getElementById('terminar-juego-btn');
-    const resultadosEl = document.getElementById('resultados');
-    const puntuacionEl = document.getElementById('puntuacion-final');
 
-    // Referencias a los nuevos botones de navegación
-    const nextRoomButtons = document.querySelectorAll('.arrow-btn'); 
-  
-    const estado = {
-      letraActual: 0,
-      letrasAcertadas: {},
-      juegoTerminado: false,
+    const questions = data.rounds;
+
+    const roscoEl = document.getElementById("rosco-letters");
+    const letterCurrentEl = document.getElementById("rosco-letter-current");
+    const definitionEl = document.getElementById("rosco-definition-clue");
+    const responseInput = document.getElementById("rosco-input");
+    const responseBtn = document.getElementById("rosco-buttons-reply");
+    const passBtn = document.getElementById("rosco-buttons-pass");
+    const finallyBtn = document.getElementById("end-game-btn");
+    const resultsEl = document.getElementById("results");
+    const scoreEl = document.getElementById("final-score");
+
+    // Referencias a los nuevos rosco__buttons de navegación
+    const nextRoomButtons = document.querySelectorAll(".arrow-btn");
+
+    const state = {
+      letterCurrent: 0,
+      lettersCorrect: {},
+      endGame: false,
     };
-  
+
     const roscoSize = 250;
     const center = roscoSize / 2;
     const radius = 125;
-  
-    preguntas.forEach((pregunta, index) => {
-      pregunta.estado = 'pendiente';
-      const div = document.createElement('div');
-      div.className = 'letra';
-      div.dataset.letra = pregunta.letra;
+
+    questions.forEach((ask, index) => {
+      ask.state = "pending";
+      const div = document.createElement("div");
+      div.className = "letter";
+      div.dataset.letter = ask.letter;
       div.dataset.index = index;
-      div.textContent = pregunta.letra;
-  
-      const total = preguntas.length;
-      const ang = ((2 * Math.PI * index) / total) - Math.PI / 2;
+      div.textContent = ask.letter;
+
+      const total = questions.length;
+      const ang = (2 * Math.PI * index) / total - Math.PI / 2;
       const x = center + radius * Math.cos(ang);
       const y = center + radius * Math.sin(ang);
-  
-      div.style.position = 'absolute';
+
+      div.style.position = "absolute";
       div.style.left = `${x}px`;
       div.style.top = `${y}px`;
-  
+
       roscoEl.appendChild(div);
-      
+
       nextRoomButtons.forEach((btn) => {
         btn.disabled = true;
         btn.style.cursor = "not-allowed";
         btn.style.opacity = "0.5";
       });
     });
-  
-    function actualizarPregunta() {
-      const pregunta = preguntas[estado.letraActual];
-      letraActualEl.textContent = pregunta.letra;
-      definicionEl.textContent = pregunta.definicion;
-      respuestaInput.value = '';
-  
-      document.querySelectorAll('.letra').forEach((el, i) => {
-        el.classList.remove('activa');
-        if (i === estado.letraActual && !el.classList.contains('acertada') && !el.classList.contains('fallada')) {
-          el.classList.add('activa');
+
+    function updateAsk() {
+      const ask = questions[state.letterCurrent];
+      letterCurrentEl.textContent = ask.letter;
+      definitionEl.textContent = ask.definition;
+      responseInput.value = "";
+
+      document.querySelectorAll(".letter").forEach((el, i) => {
+        el.classList.remove("active");
+        if (
+          i === state.letterCurrent &&
+          !el.classList.contains("correct") &&
+          !el.classList.contains("failed")
+        ) {
+          el.classList.add("active");
         }
       });
     }
 
-    function manejarRespuesta() {
-  if (estado.juegoTerminado) return;
+    function handleResponse() {
+      if (state.endGame) return;
 
-  const pregunta = preguntas[estado.letraActual];
-  const respuesta = respuestaInput.value.trim().toLowerCase();
-  const esCorrecta = respuesta === pregunta.respuesta.toLowerCase();
+      const ask = questions[state.letterCurrent];
+      const response = responseInput.value.trim().toLowerCase();
+      const isCorrect = response === ask.response.toLowerCase();
 
-  const letraEl = document.querySelector(`.letra[data-index="${estado.letraActual}"]`);
-  
-  console.log('Elemento letra encontrado:', letraEl); // Para depuración
-  
-  if (!letraEl) {
-    console.error('No se encontró el elemento de la letra');
-    return;
-  }
+      const letterEl = document.querySelector(
+        `.letter[data-index="${state.letterCurrent}"]`
+      );
 
-  letraEl.classList.remove('activa', 'acertada', 'fallada', 'pasada');
-  
-  letraEl.classList.add(esCorrecta ? 'acertada' : 'fallada');
+      if (!letterEl) {
+        console.error("No se encontró el elemento de la letter");
+        return;
+      }
 
-  pregunta.estado = esCorrecta ? 'acertada' : 'fallada';
-  
-  estado.letrasAcertadas[pregunta.letra] = esCorrecta;
+      letterEl.classList.remove("active", "correct", "failed", "pass");
 
-  setTimeout(avanzar, 300);
-}
-  
-    function pasarPalabra() {
-      const pregunta = preguntas[estado.letraActual];
-      const letraEl = document.querySelector(`.letra[data-letra="${pregunta.letra}"]`);
-      letraEl.classList.remove('activa');
-      letraEl.classList.add('pasada');
-      pregunta.estado = 'pasada';
-      pregunta.estado = 'pasada';
+      letterEl.classList.add(isCorrect ? "correct" : "failed");
 
-      avanzar();
+      ask.state = isCorrect ? "correct" : "failed";
+
+      state.lettersCorrect[ask.letter] = isCorrect;
+
+      setTimeout(advance, 300);
     }
-  
-    function avanzar() {
-  let siguienteIndice = estado.letraActual;
 
-  for (let i = 1; i <= preguntas.length; i++) {
-    const index = (siguienteIndice + i) % preguntas.length;
-    const estadoPregunta = preguntas[index].estado;
+    function passTheWord() {
+      const ask = questions[state.letterCurrent];
+      const letterEl = document.querySelector(
+        `.letter[data-letter="${ask.letter}"]`
+      );
+      letterEl.classList.remove("active");
+      letterEl.classList.add("pass");
+      ask.state = "pass";
+      ask.state = "pass";
 
-    if (estadoPregunta === 'pendiente' || estadoPregunta === 'pasada') {
-      estado.letraActual = index;
-      actualizarPregunta();
-      return;
+      advance();
     }
-  }
 
-  // Si no encontró ninguna letra pendiente o pasada, termina el juego
-  terminarJuego();
-}
+    function advance() {
+      let nextIndex = state.letterCurrent;
 
-    function terminarJuego() {
-      if(estado.juegoTerminado) return;
-      estado.juegoTerminado = true;
+      for (let i = 1; i <= questions.length; i++) {
+        const index = (nextIndex + i) % questions.length;
+        const stateask = questions[index].state;
 
-      document.querySelector('.juego-area').classList.add('hidden');
-      document.getElementById('rosco-letras').classList.add('hidden');
-      document.getElementById('terminar-juego-btn').classList.add('hidden');
-      resultadosEl.classList.remove('hidden'); 
+        if (stateask === "pending" || stateask === "pass") {
+          state.letterCurrent = index;
+          updateAsk();
+          return;
+        }
+      }
 
-      const aciertos = Object.values(estado.letrasAcertadas).filter(Boolean).length;
-      const porcentaje = Math.round((aciertos / preguntas.length) * 100);
-      puntuacionEl.textContent = `Acertaste ${aciertos} de ${preguntas.length} letras (${porcentaje}%)`;
+      // Si no encontró ninguna letter pending o pass, termina el juego
+      finallyGame();
+    }
 
-      respuestaInput.disabled = true;
-      responderBtn.disabled = true;
-      pasarBtn.disabled = true;
-      terminarBtn.disabled = true;
-      
+    function finallyGame() {
+      if (state.endGame) return;
+      state.endGame = true;
+
+      document.querySelector(".rosco__game-area").classList.add("hidden");
+      document.getElementById("rosco-letters").classList.add("hidden");
+      document.getElementById("end-game-btn").classList.add("hidden");
+      resultsEl.classList.remove("hidden");
+
+      const successes = Object.values(state.lettersCorrect).filter(
+        Boolean
+      ).length;
+      const percentage = Math.round((successes / questions.length) * 100);
+      scoreEl.textContent = `Acertaste ${successes} de ${questions.length} letters (${percentage}%)`;
+
+      responseInput.disabled = true;
+      responseBtn.disabled = true;
+      passBtn.disabled = true;
+      finallyBtn.disabled = true;
+
       nextRoomButtons.forEach((btn) => {
         btn.disabled = false;
         btn.style.cursor = "pointer";
         btn.style.opacity = "1";
       });
-     }
+    }
 
-    document.addEventListener('timer-finished', () => {
-      terminarJuego();
+    document.addEventListener("timer-finished", () => {
+      finallyGame();
     });
-  
-    responderBtn.addEventListener('click', manejarRespuesta);
-    pasarBtn.addEventListener('click', pasarPalabra);
-    terminarBtn.addEventListener('click', terminarJuego);
-    respuestaInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        manejarRespuesta();
+
+    responseBtn.addEventListener("click", handleResponse);
+    passBtn.addEventListener("click", passTheWord);
+    finallyBtn.addEventListener("click", finallyGame);
+    responseInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        handleResponse();
       }
     });
 
-    actualizarPregunta();
+    updateAsk();
   });
-  </script>
+</script>
