@@ -178,7 +178,7 @@ function pista4(numero) {
       direction="left"
       id="btn-prev"
     />
-    <button id="btn-verificar" aria-describedby="message">Verificar</button>
+    <button id="btn-verificar" aria-describedby="message">Verificar </button>
     <Button
       href="/rooms/memory"
       title="Ir a habitación siguiente"
@@ -266,10 +266,14 @@ function pista4(numero) {
       wheel.addEventListener("transitionend", handler);
     }
     const digitElements = document.querySelectorAll<HTMLElement>(".digit");
-
+    const audio = new Audio(
+      "https://www.soundjay.com/misc/sounds/handbag-lock-5.mp3"
+    );
     digitElements.forEach((digitEl, idx) => {
       digitEl.addEventListener("click", () => {
         incrementDigit(idx);
+        audio.currentTime = 0;
+        audio.play();
       });
     });
 
@@ -283,6 +287,9 @@ function pista4(numero) {
 
     //Verify functionality
     function verifyKey() {
+      const audioWinner = new Audio(
+        "https://www.soundjay.com/misc/sounds/magic-chime-01.mp3"
+      );
       const input = digits.join("");
       const message = document.getElementById("message") as HTMLElement | null;
       const btnsPadlock = document.querySelectorAll<HTMLElement>(".digit");
@@ -302,6 +309,8 @@ function pista4(numero) {
         btnVerif.style.pointerEvents = "none";
         enableButton(btnPrev);
         enableButton(btnNext);
+        audioWinner.currentTime = 0;
+        audioWinner.play();
         btnsPadlock.forEach((btn) => {
           btn.style.pointerEvents = "none";
           btn.style.opacity = "0.6";
