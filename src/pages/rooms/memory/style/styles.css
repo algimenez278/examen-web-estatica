@@ -33,14 +33,14 @@ body {
 
 .memorama {
   width: 95%;
-  max-width: 1200px;
+  max-width: 850px;
   max-height: 100%;
   overflow: hidden;
   backdrop-filter: var(--glass-blur);
   background: var(--over);
   border-radius: 20px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-  padding: 30px;
+  padding: 10px 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -57,7 +57,7 @@ body {
   width: 100%;
   max-width: 1000px;
   min-height: 250px;
-  padding: 40px 20px;
+  padding: 10px 10px;
   text-align: center;
   animation: fadeIn 1s ease;
   margin: 0 auto; 
@@ -239,22 +239,22 @@ body {
   transform: scale(1.05);
 }
 
-#btn-prev,
+/* #btn-prev,
 #btn-next {
   display: inline-block;
   width: auto;
   min-width: 120px;
   margin: 0 8px;
 }
-
+ */
 /* Agrupación automática para los dos botones si están consecutivos */
-#btn-prev,
+/* #btn-prev,
 #btn-next {
   display: inline-block;
   min-width: 120px;
   width: auto;
   margin: 0 8px;
-}
+} */
 
 /* Agrupar solo los botones de navegación */
 #btn-prev,

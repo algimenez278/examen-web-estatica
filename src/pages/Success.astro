@@ -28,9 +28,9 @@ import MainLayout from "../layouts/MainLayout.astro"
             <label class="contact__label" for="message">Mensaje</label>
             <textarea class="contact__textarea" id="message" name="message" required></textarea>
           </div>
-          <button id="submitBtn"  class="contact__button" type="submit">Enviar</button>
         </form>
-        <a href="/" class="contact__button contact__button--top">🏠 Volver al inicio</a>
+        <button id="submitBtn"  class="contact__button" type="submit">Enviar</button>
+        <button href="/" class="contact__button contact__button--top">🏠 Volver al inicio</button>
       </section>
 
       <!-- Perfiles de LinkedIn -->
@@ -131,6 +131,9 @@ section.contact {
   width: 100%;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
   transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 section.contact:hover {
@@ -199,11 +202,12 @@ section.contact:hover {
   border-radius: 10px;
   cursor: pointer;
   font-size: 0.95rem;
-  width: 100%;
+  width: 70%;
   font-weight: 600;
   transition: all 0.3s ease;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
   font-family: "Sugar Fruit", sans-serif;
+  
 }
 
 .contact__button:hover {
@@ -211,18 +215,20 @@ section.contact:hover {
 }
 
 .contact__button--top {
-  display: inline-block;
-  text-align: center;
-  text-decoration: none;
-  margin-top: 1rem;
+  margin-top: 10px;
   background: linear-gradient(to right, var(--green), var(--blue));
-  font-size: 0.9rem;
-  padding: 10px 18px;
-  border-radius: 10px;
   color: white;
-  font-weight: bold;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  width: 70%;
+  font-weight: 600;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  font-family: "Sugar Fruit", sans-serif;
+  
 }
 
 .contact__button--top:hover {
