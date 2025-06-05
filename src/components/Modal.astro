@@ -15,7 +15,10 @@ const {
     <p id="modal-message">{message}</p>
     <div class="modal-buttons">
       <button id="modal-replay" class="modal-confirm">{confirmText}</button>
-      {showNext && <button id="modal-next" class="modal-confirm">Siguiente</button>}
+      <!-- Valid syntax en Astro para condicionales -->
+      {showNext ? (
+        <button id="modal-next" class="modal-confirm">Siguiente</button>
+      ) : null}
     </div>
   </div>
 </div>
@@ -28,7 +31,6 @@ const {
     display: none;
     align-items: center;
     justify-content: center;
-    
   }
 
   .modal.show {
@@ -72,6 +74,7 @@ const {
     color: var(--letter);
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
   }
 
   .modal-confirm:hover {
