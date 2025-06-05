@@ -1,3 +1,4 @@
+if (typeof window !== "undefined") {
 const questions = [
   {
     question: "¿Qué representa una variable en programación?",
@@ -100,7 +101,6 @@ const nextButton = document.getElementById("next-question");
 const currentSpan = document.getElementById("current-question");
 const totalSpan = document.getElementById("total-questions");
 const remainingTime = document.getElementById("remaining-time");
-const modal = document.getElementById("game-modal");
 const nextRoomButton = document.getElementById("btn-next");
 
 // iniciar juego
@@ -245,3 +245,4 @@ function enableNavigationButtons() {
 }
 // Inicializar juego al cargar
 startGame();
+}
