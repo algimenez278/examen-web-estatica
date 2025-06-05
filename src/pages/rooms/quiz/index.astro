@@ -705,7 +705,11 @@ const { title = "Quiz 🤓❔" } = Astro.props;
           addIcon(btn, "✅");
         }
       });
-      setTimeout(resetToFirstQuestion, 1500);
+      if (currentQuestionIndex < selectedQuestions.length - 1) {
+        setTimeout(resetToFirstQuestion, 1500);
+      } else {
+        setTimeout(showVictory, 1500);
+      }
     }
   }
 
