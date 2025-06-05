@@ -39,8 +39,8 @@ const { title = "💻 Ahorcado Dev 💀" } = Astro.props;
       <canvas class="hangman__canvas" id="canvas" width="160" height="200"
       ></canvas>
       <div class="component__button">
-        <Button href="/rooms/memory" direction="left"/>
-        <Button href="/rooms/quiz" direction="right"/>
+        <Button href="/rooms/memory" direction="left" title="Ir a habitación anterior"/>
+        <Button href="/rooms/quiz" direction="right" title="Ir a habitación siguiente"/>
       </div>
     </div>
 
@@ -70,14 +70,14 @@ const { title = "💻 Ahorcado Dev 💀" } = Astro.props;
     align-items: center;
     height: 100vh;
     padding: 1rem;
-    overflow: hidden;
+    /* overflow: hidden; */
   }
 
   .hangman {
     width: 90vw;
     max-width: 700px;
     height: 400px;
-    background-image: linear-gradient(to bottom, var(--mauve), var(--sky));
+    background-image: linear-gradient(to bottom, var(--sky), var(--mauve));
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
     border-radius: 15px;
     padding: 1.5rem;
@@ -106,6 +106,7 @@ const { title = "💻 Ahorcado Dev 💀" } = Astro.props;
     font-style: italic;
     color: var(--base);
     font-size: 0.9rem;
+    text-align: center;
   }
 
   .hangman__word {
@@ -147,7 +148,7 @@ const { title = "💻 Ahorcado Dev 💀" } = Astro.props;
 
   .hangman__button:hover,
   .hangman__reset:hover {
-    background: var(--mauve);
+    background: var(--green);
   }
 
   .hangman__used-letters {
