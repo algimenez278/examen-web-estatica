@@ -49,13 +49,13 @@ import MainLayout from "../layouts/MainLayout.astro";
               name="message"
               required></textarea>
           </div>
-          <button id="submitBtn" class="contact__button" type="submit"
-            >Enviar</button
-          >
-          <a href="/" class="contact__button contact__button--top"
-            >🏠 Volver al inicio</a
-          >
         </form>
+        <button id="submitBtn" class="contact__button" type="submit"
+          >Enviar</button
+        >
+        <button class="contact__button contact__button--top">
+          <a href="/">🏠 Volver al inicio</a>
+        </button>
       </section>
 
       <!-- Perfiles de LinkedIn -->
@@ -235,6 +235,7 @@ import MainLayout from "../layouts/MainLayout.astro";
     }
 
     .contact__button {
+      display: block;
       margin-top: 10px;
       background: linear-gradient(to right, var(--mauve), var(--blue));
       color: white;
@@ -255,13 +256,12 @@ import MainLayout from "../layouts/MainLayout.astro";
     }
 
     .contact__button--top {
-      display: inline-block;
+      display: block;
       text-align: center;
       text-decoration: none;
       margin-top: 1rem;
       background: linear-gradient(to right, var(--green), var(--blue));
       font-size: 0.9rem;
-      padding: 10px 18px;
       border-radius: 10px;
       color: white;
       font-weight: bold;
