@@ -1,4 +1,5 @@
-document.addEventListener("DOMContentLoaded", () => {
+// hangman.js
+export function initHangman() {
   const wordEl = document.getElementById("word");
   const hintEl = document.getElementById("hint");
   const usedLettersEl = document.getElementById("used-letters");
@@ -9,13 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const ctx = canvas.getContext("2d");
   const resetBtn = document.getElementById("reset");
 
-  const modal = document.getElementById("game-modal");
-  const modalTitle = document.getElementById("modal-title");
-  const modalMessage = document.getElementById("modal-message");
-  const modalReplay = document.getElementById("modal-replay");
-  const modalNext = document.getElementById("modal-next");
-  const nextRoomButtons = document.querySelectorAll(".arrow-btn");
-
   let word = "";
   let hint = "";
   let usedLetters = [];
@@ -24,8 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function pickRandomWord() {
     try {
-      const response = await fetch("/rooms/hangman/word.json");
-      const data = await response.json();
+      const res = await fetch("/rooms/hangman/word.json");
+      const data = await res.json();
       const words = data.record;
       const random = words[Math.floor(Math.random() * words.length)];
 
@@ -40,14 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateWordDisplay();
       updateUsedLetters();
       input.disabled = false;
-
-      // Bloquear botones flecha al iniciar o reiniciar
-      nextRoomButtons.forEach((btn) => {
-        btn.disabled = true;
-        btn.style.cursor = "not-allowed";
-        btn.style.opacity = "0.5";
-      });
-    } catch (error) {
+    } catch {
       messageEl.textContent = "No se pudo cargar la palabra 😢";
     }
   }
@@ -55,17 +42,25 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateWordDisplay() {
     const display = word
       .split("")
-      .map((letter) => (usedLetters.includes(letter) ? letter : "_"))
+      .map((l) => (usedLetters.includes(l) ? l : "_"))
       .join(" ");
-
     wordEl.textContent = display;
 
     if (!display.includes("_")) {
       input.disabled = true;
-      input.blur();
-      setTimeout(() => {
-        showModal("🎉 ¡Ganaste!", "¡Buen trabajo dev 😎!", false); // <== solo un botón
-      }, 500);
+      messageEl.textContent = "🎉 ¡Ganaste!";
+      const btnPrev = document.getElementById("btn-prev");
+      const btnNext = document.getElementById("btn-next");
+      if (btnPrev) {
+        btnPrev.disabled = false;
+        btnPrev.style.cursor = "pointer";
+        btnPrev.style.opacity = "1";
+      }
+      if (btnNext) {
+        btnNext.disabled = false;
+        btnNext.style.cursor = "pointer";
+        btnNext.style.opacity = "1";
+      }
     }
   }
 
@@ -77,37 +72,35 @@ document.addEventListener("DOMContentLoaded", () => {
     ctx.beginPath();
     switch (errors) {
       case 1:
-        ctx.moveTo(10, 180);
-        ctx.lineTo(150, 180);
+        ctx.moveTo(10, 240);
+        ctx.lineTo(190, 240);
         break;
       case 2:
-        ctx.moveTo(40, 180);
-        ctx.lineTo(40, 20);
-        ctx.lineTo(120, 20);
-        ctx.lineTo(120, 40);
+        ctx.moveTo(50, 240);
+        ctx.lineTo(50, 20);
+        ctx.lineTo(140, 20);
+        ctx.lineTo(140, 40);
         break;
       case 3:
-        ctx.arc(120, 60, 15, 0, Math.PI * 2);
+        ctx.arc(140, 60, 20, 0, Math.PI * 2);
         break;
       case 4:
-        ctx.moveTo(120, 75);
-        ctx.lineTo(120, 130);
+        ctx.moveTo(140, 80);
+        ctx.lineTo(140, 150);
         break;
       case 5:
-        ctx.moveTo(120, 90);
-        ctx.lineTo(100, 110);
-        ctx.moveTo(120, 90);
-        ctx.lineTo(140, 110);
+        ctx.moveTo(140, 100);
+        ctx.lineTo(120, 130);
+        ctx.moveTo(140, 100);
+        ctx.lineTo(160, 130);
         break;
       case 6:
-        ctx.moveTo(120, 130);
-        ctx.lineTo(100, 160);
-        ctx.moveTo(120, 130);
-        ctx.lineTo(140, 160);
+        ctx.moveTo(140, 150);
+        ctx.lineTo(120, 190);
+        ctx.moveTo(140, 150);
+        ctx.lineTo(160, 190);
         input.disabled = true;
-        setTimeout(() => {
-          showModal("💀 ¡Perdiste!", `La palabra era: ${word}`, false);
-        }, 500);
+        messageEl.textContent = `💀 Perdiste. La palabra era: ${word}`;
         break;
     }
     ctx.stroke();
@@ -127,6 +120,9 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    document.getElementById("btn-prev")?.setAttribute("disabled", true);
+    document.getElementById("btn-next")?.setAttribute("disabled", true);
+
     usedLetters.push(letter);
 
     if (word.includes(letter)) {
@@ -141,42 +137,11 @@ document.addEventListener("DOMContentLoaded", () => {
     input.focus();
   });
 
-  function showModal(title, message, showNextBtn) {
-    modalTitle.textContent = title;
-    modalMessage.textContent = message;
-    modal.classList.add("show");
-
-    if (modalNext) {
-      modalNext.style.display = showNextBtn ? "inline-block" : "none";
-    }
-  }
-
-  modalReplay.addEventListener("click", () => {
-    modal.classList.remove("show");
-
-    if (modalTitle.textContent.includes("¡Ganaste")) {
-      enableNextButtons(); // desbloquea flechitas solo después de ganar
-    } else {
-      resetBtn.click(); // reinicia si perdiste
-    }
-  });
-
-  modalNext?.addEventListener("click", () => {
-    window.location.href = "/rooms/quiz";
-  });
-
-  function enableNextButtons() {
-    nextRoomButtons.forEach((btn) => {
-      btn.disabled = false;
-      btn.style.cursor = "pointer";
-      btn.style.opacity = "1";
-    });
-  }
-
   resetBtn.addEventListener("click", () => {
     pickRandomWord();
     input.focus();
   });
 
   pickRandomWord();
-});
+}
+initHangman();
