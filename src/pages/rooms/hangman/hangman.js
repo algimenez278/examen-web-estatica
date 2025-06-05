@@ -144,4 +144,8 @@ export function initHangman() {
 
   pickRandomWord();
 }
-initHangman();
+
+// ✅ Solo ejecutar en el navegador (evita error en el build de Astro)
+if (typeof window !== "undefined" && typeof document !== "undefined") {
+  initHangman();
+}
