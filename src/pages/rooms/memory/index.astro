@@ -4,6 +4,7 @@ import GameBoard from "../../../pages/rooms/memory/components/GameBoard.astro";
 import Controls from "../../../pages/rooms/memory/components/Controls.astro";
 import StatsPanel from "../../../pages/rooms/memory/components/StatsPanel.astro";
 import EndMessage from "../../../pages/rooms/memory/components/EndMessage.astro";
+import GameHeader from "../../../pages/rooms/memory/components/GameHeader.astro";
 import Button from "../../../components/Button.astro";
 import "./style/styles.css";
 ---
@@ -13,12 +14,13 @@ import "./style/styles.css";
   <!-- recorda quela ruta va ser http://localhost:4321/rooms/memory -->
   <div class="memorama">
     <div class="memorama__glass-card">
-      <header class="memorama__header">
-        <h1 class="memorama__title">🧠 Memorama</h1>
-        <p class="memorama__paragraph">Haz coincidir las imágenes</p>
-      </header>
+      <GameHeader>
+      <h1 class="memorama__title">🧠 Memorama</h1>
+      <p class="memorama__paragraph">Haz coincidir las imágenes</p>
+    </GameHeader>
       <div class="memorama__layout">
-        <GameBoard />
+        <GameBoard message="¡Buena suerte!" />
+
         <aside class="memorama__side-panel">
           <Controls />
 
