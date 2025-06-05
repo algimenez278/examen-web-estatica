@@ -461,6 +461,7 @@ const { title = "Quiz 🤓❔" } = Astro.props;
 </style>
 
 <script type="module">
+  // Preguntas
   const questions = [
     {
       question: "¿Qué representa una variable en programación?",
@@ -634,7 +635,7 @@ const { title = "Quiz 🤓❔" } = Astro.props;
   const remainingTime = document.getElementById("remaining-time");
   const nextRoomButton = document.getElementById("btn-next");
 
-  // iniciar juego
+  // Iniciar juego
   function startGame() {
     selectedQuestions = [...questions]
       .sort(() => Math.random() - 0.5)
@@ -674,7 +675,6 @@ const { title = "Quiz 🤓❔" } = Astro.props;
       btn.classList.remove("correct", "incorrect");
       btn.disabled = false;
 
-      // Remover íconos previos
       const icon = btn.querySelector(".option-icon");
       if (icon) icon.remove();
 
@@ -718,8 +718,8 @@ const { title = "Quiz 🤓❔" } = Astro.props;
 
   function resetToFirstQuestion() {
     clearInterval(timerInterval);
-    currentQuestionIndex = 0; // Volver a la primera pregunta
-    time = initialTime; // Resetear tiempo completo
+    currentQuestionIndex = 0;
+    time = initialTime;
     displayQuestion();
     startTimer();
   }
@@ -735,24 +735,10 @@ const { title = "Quiz 🤓❔" } = Astro.props;
 
   function showVictory() {
     clearInterval(timerInterval);
-
-    // Verificar si el modal existe y tiene el método showModal
-    if (modal) {
-      modal.classList.remove("hidden");
-      modal.classList.add("show");
-      const confirmButton = document.getElementById("modal-replay");
-
-      if (confirmButton) {
-        confirmButton.onclick = () => {
-          modal.classList.add("hidden");
-          modal.classList.remove("show");
-          enableNavigationButtons();
-        };
-      }
-    }
+    enableNavigationButtons();
   }
+
   function enableNavigationButtons() {
-    // Habilitar botón siguiente (derecha)
     if (nextRoomButton) {
       nextRoomButton.removeAttribute("disabled");
       nextRoomButton.style.opacity = "1";
@@ -760,7 +746,6 @@ const { title = "Quiz 🤓❔" } = Astro.props;
       nextRoomButton.classList.add("enabled");
     }
 
-    // Habilitar botón anterior (izquierda) si existe
     const prevButton = document.getElementById("btn-prev");
     if (prevButton) {
       prevButton.removeAttribute("disabled");
@@ -769,12 +754,12 @@ const { title = "Quiz 🤓❔" } = Astro.props;
       prevButton.classList.add("enabled");
     }
 
-    // Hacer que los enlaces funcionen
     const navLinks = document.querySelectorAll(".navigation-button a");
     navLinks.forEach((link) => {
       link.style.pointerEvents = "auto";
     });
   }
-  // Inicializar juego al cargar
+
+  // Iniciar
   startGame();
 </script>
