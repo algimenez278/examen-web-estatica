@@ -245,7 +245,3 @@ function enableNavigationButtons() {
 }
 // Inicializar juego al cargar
 startGame();
-
-if (modal) {
-  handleModalClose();
-}
