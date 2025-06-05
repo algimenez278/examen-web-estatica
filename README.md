@@ -1,47 +1,79 @@
-# Astro Starter Kit: Minimal
+# 🕹️ Dev Escape Room
 
-```sh
-pnpm create astro@latest -- --template minimal
+¡Bienvenidos al **Dev Escape Room**! 🔐  
+Un sitio web interactivo donde tendrás que superar distintos desafíos para avanzar de sala en sala.  
+¿La temática? **Programación**, por supuesto 💻
+
+Este proyecto fue desarrollado como parte del **Examen de Web Estática 2025** utilizando tecnologías modernas como **Astro**, **HTML**, **CSS** y **JavaScript DOM-oriented**.
+
+---
+
+## 🌐 Tecnologías utilizadas
+
+- Astro
+- HTML semántico
+- CSS (metodología BEM)
+- JavaScript (orientado al DOM)
+- Fetch API (JSON local)
+- SweetAlert2 (modales personalizados)
+- Deploy en Netlify
+
+---
+
+## 🧠 ¿Qué desafíos vas a encontrar?
+
+Cada integrante del equipo desarrolló una sala distinta del escape room. Todas están unificadas por la temática “Dev” 👨‍💻👩‍💻
+
+| Sala              | Juego                           | 
+|-------------------|---------------------------------|
+| 🧠 Memorama Dev   | Match de tecnologías y memes    |  
+| 💀 Ahorcado Dev   | Adiviná palabras tech           |                              
+| 🤓 Quiz Dev       | Preguntas de programación       |                              
+| 🔤 Rosco Dev      | Definiciones dev                |                               
+| 🔐 Candado Dev    | Combinación de digitos secretos |
+-------------------------------------------------------
+
+---
+
+## 🚀 Cómo correr el proyecto
+
+```bash
+git clone http://github.com/algimenez278/examen-web-estatica/
+cd examen-web-estatica
+pnpm install
+pnpm run dev
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+---
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 👩‍💻 Integrantes
 
-## 🚀 Project Structure
+**Antonella Simonetti** – *Memorama Dev 🧠*
 
-Inside of your Astro project, you'll see the following folders and files:
+**Katherine Gomez** – *Ahorcado Dev 💀*
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+**Valeria Medina** – *Quiz Dev 🤓*
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+**Miriam Chalañuk** - *Rosco Dev  🔤*
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+**Abril Gimenez** – *Candado 🔐*
 
-Any static assets, like images, can be placed in the `public/` directory.
+---
 
-## 🧞 Commands
+## 🛠️ Funcionalidades técnicas implementadas
 
-All commands are run from the root of the project, from a terminal:
+✅ Sitio 100% responsive
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+✅ Código fuente en inglés (clases, variables, etc.)
 
-## 👀 Want to learn more?
+✅ Uso de props y layouts en Astro
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+✅ Consumo de archivo JSON local con fetch()
+
+✅ Validaciones de formulario en JS
+
+✅ Manejo de estado y eventos con JavaScript nativo
+
+✅ SweetAlert2 para modales personalizados
+
+✅ Deploy en Netlify

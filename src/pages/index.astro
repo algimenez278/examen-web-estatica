@@ -1,16 +1,95 @@
 ---
-
+import MainLayout from '../layouts/MainLayout.astro';
+import Particles from '../components/Particles.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<MainLayout title="Scape Rooms">
+  <Particles amount={100} direction="down" />
+
+  <main>
+    <section class="intro__container">
+      <h1 class="intro__title">Scape Rooms </h1>
+      <p class="intro__name__squad">By Suicide Squad</p>
+      <button onclick="getInto()" class="intro__button__enter">Ingresar</button>
+      <button onclick="contact()" class="intro__button__contact">Contacto</button>
+    </section>
+  </main>
+
+  <style>
+    body {
+      background-color: var(--base);
+      color: var(--letter);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    main {
+      z-index: 2;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .intro__container {
+      text-align: center;
+      max-width: 600px;
+    }
+
+    .intro__title {
+      font-size: 3rem;
+      color: var(--sky);
+      margin-bottom: 1rem;
+      text-shadow: 0 0 10px var(--blue);
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .intro__name__squad {
+      font-size: 1.2rem;
+      color: var(--mauve);
+      margin-bottom: 2rem;
+      animation: fadeIn 2.5s ease-in-out;
+    }
+
+    .intro__button__enter,
+    .intro__button__contact {
+      background: linear-gradient(45deg, var(--green), var(--sky));
+      border: none;
+      color: var(--over);
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      font-family: "Sugar Fruit";
+      margin: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 0 10px var(--green);
+    }
+
+    .intro__button__enter:hover,
+    .intro__button__contact:hover {
+      transform: scale(1.1);
+      color: var(--base);
+      box-shadow: 0 0 20px var(--sky);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+
+  <script is:inline>
+    function getInto() {
+      window.location.href = "./rooms/memory";
+    }
+
+    function contact() {
+      window.location.href = "./Success";
+    }
+  </script>
+</MainLayout>

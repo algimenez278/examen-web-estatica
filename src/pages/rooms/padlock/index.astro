@@ -1,0 +1,372 @@
+---
+import MainLayout from "../../../layouts/MainLayout.astro";
+import Button from "../../../components/Button.astro";
+import Modal from "./padlock-layouts/Modal.astro";
+import PadlockDigit from "./padlock-layouts/PadlockDigit.astro";
+import CardModal from "./padlock-layouts/CardModal.astro";
+
+const pistas = [1, 2, 3, 4];
+
+const modales = [
+  {
+    num: 1,
+    title: "¿Qué retorna pista1(AÑONACIMENTOADALOVELACE)?",
+    code: `
+function pista1(numero) {
+  const strNum = numero.toString();
+  if (strNum.length === 0) return 0;
+  const suma = parseInt(strNum[0], 10) + pista1(strNum.slice(1));
+  if (suma > 9) {
+    return pista1(suma);
+  }
+  return suma;
+}`,
+  },
+  {
+    num: 2,
+    title: `¿Qué retorna si gatos = [
+  { nombre: 'Michi', color: 'gris', edad: 3 },
+  { nombre: 'Luna', color: 'negro', edad: 2 },
+  { nombre: 'Simba', color: 'naranja', edad: 4 }, ] ?`,
+    code: `
+function pista2(gatos) {
+  const suma = gatos.reduce((total, gato) => {
+    return total + (gato.edad * gato.nombre.length);
+  }, 0);
+  return suma % 10;
+}`,
+  },
+  {
+    num: 3,
+    title: "¿Qué retornará pista3(10110101)?",
+    code: `
+function pista3(numero) {
+  const binario = numero.toString(2);
+  const otro = [...binario].filter(bit => bit === '1').length;
+  return otro;
+}`,
+  },
+  {
+    num: 4,
+    title: "¿Qué retorará pista4(gatos[1].edad)?",
+    code: `
+function pista4(numero) {
+  if (numero <= 0) return 0;
+  if (numero === 1) return 15;
+  if (numero === 2) return 24;
+
+  return (24 + (numero - 2) * 3) % 10;
+}`,
+  },
+];
+---
+
+<style>
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background: var(--base);
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .container {
+    background: rgba(255, 255, 255, 0.459);
+    border-radius: 12px;
+    box-shadow: 0 8px 25px var(--red);
+    text-align: center;
+    max-width: 350px;
+    width: 90%;
+  }
+  /* Cards container block */
+  .cards {
+    display: flex;
+    padding: 10px 5px;
+    margin-bottom: 25px;
+  }
+
+  .heading {
+    margin-bottom: 20px;
+    color: var(--over);
+    font-weight: 700;
+  }
+
+  #padlock {
+    display: flex;
+    justify-content: center;
+    gap: 2px;
+    margin-bottom: 30px;
+  }
+
+  button {
+    padding: 12px 24px;
+    background-color: var(--sky);
+    color: #fdfdfd;
+    font-weight: 700;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    user-select: none;
+    font-size: 16px;
+  }
+
+  button:hover {
+    background-color: var(--blue);
+  }
+
+  .message {
+    margin: 20px;
+    font-weight: 700;
+    min-height: 24px;
+    font-size: 18px;
+  }
+
+  /* @media (max-width: 320px) {
+    .cards {
+      justify-content: space-around;
+      gap: 2px;
+    }
+    .cards__card {
+      width: 90%;
+      height: 38px;
+      font-size: 14px;
+    }
+    .digit {
+      width: 50px;
+      height: 70px;
+      line-height: 70px;
+    }
+    .wheel {
+      font-size: 40px;
+      line-height: 70px;
+    }
+  } */
+</style>
+
+<!-- Acá va todo tu contenido específico -->
+<!-- recorda quela ruta va ser http://localhost:4321/rooms/lock -->
+
+<MainLayout title="Padlock">
+  <main class="container" role="main">
+    <!-- Cards block -->
+    <section class="cards">
+      {pistas.map((num) => <CardModal num={num} />)}
+    </section>
+
+    <header>
+      <h1 class="heading">🐱Código Oculto💻</h1>
+    </header>
+
+    <section id="padlock" aria-label="Candado de 4 dígitos">
+      {[0, 1, 2, 3].map((i) => <PadlockDigit index={i} />)}
+    </section>
+
+    <Button
+      href="/rooms/rosco"
+      title="Volver a habitación anterior"
+      direction="left"
+      id="btn-prev"
+    />
+    <button id="btn-verificar" aria-describedby="message">Verificar </button>
+    <Button
+      href="/rooms/memory"
+      title="Ir a habitación siguiente"
+      id="btn-next"
+    />
+
+    <p class="message" id="message" role="alert" aria-live="polite"></p>
+  </main>
+
+  <!-- Modal blocks -->
+  {
+    modales.map(({ num, title, code }) => (
+      <Modal num={num} title={title} code={code} />
+    ))
+  }
+
+  <!-- script functions -->
+  <script>
+    const correctKey = "6396";
+    const wheelCount = 10;
+    const digits: number[] = [0, 0, 0, 0];
+    const wheels: HTMLElement[] = [];
+    const digitHeight = 80;
+
+    function createWheelNumbers(): number[] {
+      const nums = [];
+      for (let i = 0; i < wheelCount; i++) nums.push(i);
+      return nums.concat(nums);
+    }
+
+    function setupWheels() {
+      const digitElements =
+        document.querySelectorAll<HTMLElement>(".digit .wheel");
+
+      digitElements.forEach((wheel, i) => {
+        wheels[i] = wheel;
+
+        const nums = createWheelNumbers();
+        wheel.innerHTML = "";
+
+        nums.forEach((n) => {
+          const div = document.createElement("div");
+          div.textContent = n.toString();
+          wheel.appendChild(div);
+        });
+
+        wheel.style.transform = `translateY(${-digits[i] * digitHeight}px)`;
+        wheel.style.transition = "none";
+      });
+    }
+
+    const animating = [false, false, false, false];
+
+    function incrementDigit(idx: number) {
+      const message = document.getElementById("message") as HTMLElement | null;
+      if (message) {
+        message.textContent = "";
+      }
+
+      if (animating[idx]) return;
+      animating[idx] = true;
+
+      const wheel = wheels[idx] as HTMLElement;
+      digits[idx] = (digits[idx] + 1) % wheelCount;
+
+      const newTranslate = -digits[idx] * digitHeight;
+
+      wheel.style.transition = "transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)";
+      wheel.style.transform = `translateY(${newTranslate}px)`;
+
+      const parent = wheel.parentElement as HTMLElement | null;
+      if (parent) {
+        parent.setAttribute("aria-valuenow", digits[idx].toString());
+      }
+
+      const handler = () => {
+        if (digits[idx] === 0) {
+          wheel.style.transition = "none";
+          wheel.style.transform = "translateY(0px)";
+        }
+        animating[idx] = false;
+        wheel.removeEventListener("transitionend", handler);
+      };
+
+      wheel.addEventListener("transitionend", handler);
+    }
+    const digitElements = document.querySelectorAll<HTMLElement>(".digit");
+    const audio = new Audio(
+      "https://www.soundjay.com/misc/sounds/handbag-lock-5.mp3"
+    );
+    digitElements.forEach((digitEl, idx) => {
+      digitEl.addEventListener("click", () => {
+        incrementDigit(idx);
+        audio.currentTime = 0;
+        audio.play();
+      });
+    });
+
+    function enableButton(button: HTMLButtonElement | null) {
+      if (button) {
+        button.removeAttribute("disabled");
+        button.style.opacity = "1";
+        button.style.cursor = "pointer";
+      }
+    }
+
+    //Verify functionality
+    function verifyKey() {
+      const audioWinner = new Audio(
+        "https://www.soundjay.com/misc/sounds/magic-chime-01.mp3"
+      );
+      const input = digits.join("");
+      const message = document.getElementById("message") as HTMLElement | null;
+      const btnsPadlock = document.querySelectorAll<HTMLElement>(".digit");
+      const btnPrev = document.getElementById("btn-prev") as HTMLButtonElement;
+      const btnNext = document.getElementById("btn-next") as HTMLButtonElement;
+      const btnVerif = document.getElementById(
+        "btn-verificar"
+      ) as HTMLButtonElement;
+
+      if (!message || !btnVerif) return;
+
+      if (input === correctKey) {
+        message.textContent = "Clave correcta!";
+        message.style.color = "#2a7f62";
+        btnVerif.style.opacity = "0.5";
+        btnVerif.setAttribute("disabled", "true");
+        btnVerif.style.pointerEvents = "none";
+        enableButton(btnPrev);
+        enableButton(btnNext);
+        audioWinner.currentTime = 0;
+        audioWinner.play();
+        btnsPadlock.forEach((btn) => {
+          btn.style.pointerEvents = "none";
+          btn.style.opacity = "0.6";
+          btn.setAttribute("aria-disabled", "true");
+          btn.tabIndex = -1;
+        });
+      } else {
+        message.textContent = "Clave incorrecta.";
+        message.style.color = "#aa2a2a";
+      }
+    }
+    document
+      .getElementById("btn-verificar")
+      ?.addEventListener("click", verifyKey);
+
+    // Modal functionality
+    document.querySelectorAll<HTMLElement>(".cards__card").forEach((card) => {
+      card.addEventListener("click", () => {
+        const modalId = card.getAttribute("data-modal");
+        if (modalId) {
+          const modal = document.getElementById(modalId);
+          if (modal) {
+            modal.style.display = "flex";
+            modal.focus();
+          }
+        }
+      });
+
+      card.addEventListener("keydown", (e: KeyboardEvent) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          card.click();
+        }
+      });
+    });
+
+    document.querySelectorAll(".modal__close").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const modalId = btn.getAttribute("data-close");
+        if (modalId) {
+          const modal = document.getElementById(modalId);
+          if (modal) {
+            modal.style.display = "none";
+          }
+        }
+      });
+    });
+
+    document.querySelectorAll(".modal").forEach((modal) => {
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+          (modal as HTMLElement).style.display = "none";
+        }
+      });
+    });
+
+    setupWheels();
+  </script>
+</MainLayout>

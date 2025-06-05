@@ -1,0 +1,53 @@
+---
+const {
+  title = "Dev Escape Room",
+  description = "¡Desafíos de programación y diversión asegurada!",
+} = Astro.props;
+---
+
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+
+    <meta name="description" content={description} />
+    <meta name="author" content="Dev Escape Room Team" />
+    <link rel="icon" type="image/svg+xml" href="/public/assets/logo.svg" />
+
+  </head>
+
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style>
+  @font-face {
+    font-family: "Sugar Fruit";
+    src: url("/public/font/sugarFruit.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  :root {
+    --base: #1e1e2e;
+    --over: #181825;
+    --mauve: #ca9ee6;
+    --red: #e78284;
+    --green: #a6d189;
+    --sky: #99d1db;
+    --blue: #8caaee;
+    --letter: #cdd6f4;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: "Sugar Fruit", sans-serif;
+  }
+</style>
