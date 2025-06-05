@@ -1,0 +1,52 @@
+---
+const { initialTime = 50, timeOut, extraClass = "" } = Astro.props;
+---
+
+<div class="timer">
+ Tiempo: <span id="remaining-time">{initialTime}</span> 
+</div>
+
+<style>
+  .timer {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--mauve);
+    margin: 1rem auto;
+    padding: 0.5rem;
+    border-radius: 8px;
+    display: inline-block;
+    box-shadow: 0 2px 4px var(--sky);
+  }
+</style>
+
+<script type="module">
+  document.addEventListener('DOMContentLoaded', () => {
+    const remainingTimeEl = document.getElementById('remaining-time');
+    let remainingTime = parseInt(remainingTimeEl.textContent);
+
+    const interval = setInterval(() => {
+      remainingTime--;
+      remainingTimeEl.textContent = remainingTime;
+      
+      // Cambiar color cuando queda poco tiempo
+      if (remainingTime <= 30) {
+        remainingTimeEl.parentElement.style.color = '#e74c3c';
+      }
+
+      // Cuando se acaba el tiempo
+      if (remainingTime <= 0) {
+        clearInterval(interval);
+
+        // Disparar evento global
+        const event = new Event('timer-finished');
+        document.dispatchEvent(event);
+
+        // Llamar a función externa
+        if (typeof timeOut === 'function') {
+          timeOut();
+        }
+      }
+    }, 1000);
+  });
+
+</script>
