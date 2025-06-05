@@ -269,3 +269,16 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("restart-button").style.display = "none";
   document.getElementById("stats").style.display = "none";
 })
+
+// This function hides the game message after a few seconds
+function hideMessageAfterDelay(selector, delay = 3000) {
+  const messageElement = document.querySelector(selector);
+  if (!messageElement) return;
+
+  setTimeout(() => {
+    messageElement.style.display = "none";
+  }, delay);
+}
+
+// Call the function when the game loads
+hideMessageAfterDelay(".memorama__message", 4000);

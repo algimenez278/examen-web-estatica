@@ -272,6 +272,32 @@ body {
   flex-wrap: wrap;
 }
 
+.memorama__message {
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(145deg, #bb88ff, #a175ff);
+  padding: 0.6rem 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  border-radius: 1.8rem;
+  box-shadow: 0 4px 12px rgba(160, 120, 255, 0.3);
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+  animation: fade-in 0.5s ease-out;
+}
+
+.start-box {
+  background-color: rgba(255, 255, 255, 0.03);
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 12px rgba(160, 120, 255, 0.1);
+  text-align: center;
+  margin-top: 2rem;
+}
+
 
 /* Tablets */
 @media screen and (min-width: 768px) {
