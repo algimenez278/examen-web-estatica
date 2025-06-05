@@ -1,0 +1,493 @@
+---
+import Timer from "../../../components/Timer.astro";
+import Button from "../../../components/Button.astro";
+const { title = "💻 Rosco"} = Astro.props;
+---
+
+<main class="rosco__container">
+  <header>
+    <h1 class="rosco__title">{title}</h1>
+    <Timer initialTime="130" />
+    <button id="end-game-btn" class="btn__finish">Terminar Juego</button>
+  </header>
+
+  <section id="rosco-letters" class="rosco" aria-label="Rosco de letters">
+  </section>
+
+  <section class="rosco__game-area" aria-label="Zona de juego">
+    <article id="rosco-definition">
+      <h2 id="rosco-letter-current"></h2>
+      <p id="rosco-definition-clue"></p>
+    </article>
+
+    <input
+      type="text"
+      id="rosco-input"
+      autocomplete="off"
+      placeholder="Escribe tu response..."
+      class="rosco__input-response"
+    />
+
+    <div class="rosco__buttons">
+      <button id="rosco-buttons-reply" class="rosco__buttons__reply"
+        >Responder</button
+      >
+      <button id="rosco-buttons-pass" class="rosco__pass__btn"
+        >Pasapalabra</button
+      >
+    </div>
+  </section>
+
+  <div class="nav__buttons__container">
+    <Button
+      href="/rooms/quiz"
+      title="Volver a la habitación anterior"
+      direction="left"
+    />
+    <Button href="/rooms/padlock" title="Ir a habitación siguiente" />
+  </div>
+
+  <section id="results" class="hidden results">
+    <h2>Juego Terminado!</h2>
+    <p id="final-score"></p>
+  </section>
+</main>
+
+<style>
+  html,
+  body {
+    height: 100%;
+  }
+
+  .rosco__title {
+    font-size: 2.3rem;
+    color: var(--sky);
+    text-shadow: 0 0 10px var(--blue);
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+  }
+
+  .rosco__container {
+    background: var(--over);
+    border-radius: 12px;
+    text-align: center;
+    max-width: 600px;
+    max-height: 95vh;
+    width: 90%;
+    margin: auto;
+    box-shadow: 0 4px 20px rgba(163, 213, 255, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  .rosco {
+    position: relative;
+    width: 75vw;
+    max-width: 300px;
+    height: auto;
+    aspect-ratio: 1 / 1.1;
+    margin: 1.3rem auto;
+  }
+
+  :global(.letter) {
+    position: absolute;
+    width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.4rem;
+    user-select: none;
+    background-color: var(--sky);
+    color: var(--base);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+    transform: translate(-50%, -50%);
+  }
+
+  :global(.letter.active) {
+    background-color: var(--letter);
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(243, 156, 18, 0.7);
+    z-index: 10;
+  }
+
+  :global(.letter.correct) {
+    background-color: var(--green);
+    color: var(--over);
+  }
+
+  :global(.letter.failed) {
+    background-color: var(--red);
+    color: var(--over);
+  }
+
+  :global(.letter.pass) {
+    background-color: var(--blue);
+    color: var(--over);
+  }
+
+  .rosco__game-area {
+    background-image: linear-gradient(45deg, var(--mauve), var(--sky));
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin: 1rem auto;
+    color: black;
+    max-height: 180px;
+    display: block;
+  }
+
+  .rosco__input-response {
+    width: 60%;
+    max-width: 300px;
+    height: 1em;
+    padding: 0.5em;
+    font-size: 1rem;
+    border-radius: 4px;
+    margin: 1rem auto;
+  }
+
+  .rosco__buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  button {
+    padding: 8px 8px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  button:hover {
+    box-shadow: 0px 0px 5px var(--sky);
+  }
+
+  .rosco__buttons__reply {
+    background-color: var(--mauve);
+    color: var(--base);
+  }
+
+  .rosco__pass__btn {
+    background-color: var(--sky);
+    color: var(--base);
+  }
+
+  .btn__finish {
+    background-color: var(--red);
+    color: white;
+    margin-top: 1rem;
+  }
+
+  .nav__buttons__container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding: 0 1rem;
+  }
+  
+  .results {
+    color: white;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  @media (max-width: 425px) {
+
+    .rosco {
+      width: 58vw;
+      max-width: 280px;
+    }
+
+    :global(.letter) {
+      width: 1.6rem;
+      height: 1.6rem;
+      font-size: 1.2rem;
+    }
+  }
+
+  @media (min-width: 426px) and (max-width: 540px) {
+
+    .rosco {
+      width: 46vw;
+      max-width: 320px;
+    }
+
+    :global(.letter) {
+      width: 1.8rem;
+      height: 1.8rem;
+      font-size: 1.4rem;
+    }
+  }
+
+  @media (min-width: 541px) and (max-width: 767px) {
+    .rosco {
+      width: 48vw;
+      max-width: 350px;
+    }
+    :global(.letter) {
+      width: 2rem;
+      height: 2rem;
+      font-size: 1.6rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .rosco__container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto auto;
+      grid-template-areas:
+        "header header"
+        "rosco juego"
+        "nav-buttons nav-buttons";
+      align-items: start;
+      justify-items: center;
+      gap: 1rem;
+      padding: 2rem;
+      height: auto;
+    }
+
+    header {
+      grid-area: header;
+      text-align: center;
+    }
+
+    .rosco {
+      grid-area: rosco;
+      width: 100%;
+      max-width: 400px;
+      margin: 0;
+    }
+
+    :global(.letter) {
+      width: 2rem;
+      height: 2rem;
+      font-size: 1.2rem;
+    }
+
+    .rosco__game-area {
+      grid-area: juego;
+      max-width: 350px;
+    }
+
+    .nav__buttons__container {
+      grid-area: nav-buttons;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      padding: 0;
+      width: 100%;
+    }
+
+    .nav__buttons__container :global(.arrow-btn) {
+      margin: 0;
+    }
+
+    .button-nav-left,
+    .button-nav-right {
+      flex-basis: auto;
+      width: auto;
+      max-width: 150px;
+    }
+  }
+</style>
+<script type="module">
+  document.addEventListener("DOMContentLoaded", async () => {
+    let data;
+    try {
+      const res = await fetch("/data-rosco/rosco.json");
+      if (!res.ok) throw new Error("No se pudo cargar rosco.json");
+      data = await res.json();
+    } catch (error) {
+      console.error("Error cargando rosco.json:", error);
+      alert("Error al cargar los datos del rosco. Ver consola.");
+      return;
+    }
+
+    const questions = data.rounds;
+
+    const roscoEl = document.getElementById("rosco-letters");
+    const letterCurrentEl = document.getElementById("rosco-letter-current");
+    const definitionEl = document.getElementById("rosco-definition-clue");
+    const responseInput = document.getElementById("rosco-input");
+    const responseBtn = document.getElementById("rosco-buttons-reply");
+    const passBtn = document.getElementById("rosco-buttons-pass");
+    const finallyBtn = document.getElementById("end-game-btn");
+    const resultsEl = document.getElementById("results");
+    const scoreEl = document.getElementById("final-score");
+    const nextRoomButtons = document.querySelectorAll(".arrow-btn");
+
+    const state = {
+      letterCurrent: 0,
+      lettersCorrect: {},
+      endGame: false,
+    };
+
+    const roscoSize = 250;
+    const center = roscoSize / 2;
+    const radius = 125;
+
+    questions.forEach((ask, index) => {
+      ask.state = "pending";
+      const div = document.createElement("div");
+      div.className = "letter";
+      div.dataset.letter = ask.letter;
+      div.dataset.index = index;
+      div.textContent = ask.letter;
+
+      const total = questions.length;
+      const ang = (2 * Math.PI * index) / total - Math.PI / 2;
+      const x = center + radius * Math.cos(ang);
+      const y = center + radius * Math.sin(ang);
+
+      div.style.position = "absolute";
+      div.style.left = `${x}px`;
+      div.style.top = `${y}px`;
+
+      roscoEl.appendChild(div);
+
+      nextRoomButtons.forEach((btn) => {
+        btn.disabled = true;
+        btn.style.cursor = "not-allowed";
+        btn.style.opacity = "0.5";
+      });
+    });
+
+    function updateAsk() {
+      const ask = questions[state.letterCurrent];
+      letterCurrentEl.textContent = ask.letter;
+      definitionEl.textContent = ask.definition;
+      responseInput.value = "";
+
+      document.querySelectorAll(".letter").forEach((el, i) => {
+        el.classList.remove("active");
+        if (
+          i === state.letterCurrent &&
+          !el.classList.contains("correct") &&
+          !el.classList.contains("failed")
+        ) {
+          el.classList.add("active");
+        }
+      });
+    }
+
+    function handleResponse() {
+      if (state.endGame) return;
+
+      const ask = questions[state.letterCurrent];
+      const response = responseInput.value.trim().toLowerCase();
+      const isCorrect = response === ask.response.toLowerCase();
+
+      const letterEl = document.querySelector(
+        `.letter[data-index="${state.letterCurrent}"]`
+      );
+
+      if (!letterEl) {
+        console.error("No se encontró el elemento de la letra");
+        return;
+      }
+
+      letterEl.classList.remove("active", "correct", "failed", "pass");
+
+      letterEl.classList.add(isCorrect ? "correct" : "failed");
+
+      ask.state = isCorrect ? "correct" : "failed";
+
+      state.lettersCorrect[ask.letter] = isCorrect;
+
+      setTimeout(advance, 300);
+    }
+
+    function passTheWord() {
+      const ask = questions[state.letterCurrent];
+      const letterEl = document.querySelector(
+        `.letter[data-letter="${ask.letter}"]`
+      );
+      letterEl.classList.remove("active");
+      letterEl.classList.add("pass");
+      ask.state = "pass";
+      ask.state = "pass";
+
+      advance();
+    }
+
+    function advance() {
+      let nextIndex = state.letterCurrent;
+
+      for (let i = 1; i <= questions.length; i++) {
+        const index = (nextIndex + i) % questions.length;
+        const stateask = questions[index].state;
+
+        if (stateask === "pending" || stateask === "pass") {
+          state.letterCurrent = index;
+          updateAsk();
+          return;
+        }
+      }
+
+      finallyGame();
+    }
+
+    function finallyGame() {
+      if (state.endGame) return;
+      state.endGame = true;
+
+      document.querySelector(".rosco__game-area").classList.add("hidden");
+      document.getElementById("rosco-letters").classList.add("hidden");
+      document.getElementById("end-game-btn").classList.add("hidden");
+      resultsEl.classList.remove("hidden");
+
+      const successes = Object.values(state.lettersCorrect).filter(
+        Boolean
+      ).length;
+      const percentage = Math.round((successes / questions.length) * 100);
+      scoreEl.textContent = `Acertaste ${successes} de ${questions.length} letras (${percentage}%)`;
+
+      responseInput.disabled = true;
+      responseBtn.disabled = true;
+      passBtn.disabled = true;
+      finallyBtn.disabled = true;
+
+      nextRoomButtons.forEach((btn) => {
+        btn.disabled = false;
+        btn.style.cursor = "pointer";
+        btn.style.opacity = "1";
+      });
+    }
+
+    document.addEventListener("timer-finished", () => {
+      finallyGame();
+    });
+
+    responseBtn.addEventListener("click", handleResponse);
+    passBtn.addEventListener("click", passTheWord);
+    finallyBtn.addEventListener("click", finallyGame);
+    responseInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        handleResponse();
+      }
+    });
+
+    updateAsk();
+  });
+</script>
