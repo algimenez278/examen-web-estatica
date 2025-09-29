@@ -1,8 +1,10 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
+import Particles from "../components/Particles.astro";
 ---
 
 <MainLayout title="Gracias por jugar!">
+  <Particles amount={100} direction="down" />
   <!-- Es un espacio donde posiblemente puede estar el form, portfolio, linkedin, etc. -->
   <main class="main-layout">
     <section class="layout-columns">
@@ -152,8 +154,9 @@ import MainLayout from "../layouts/MainLayout.astro";
     main.main-layout {
       width: 100%;
       max-width: 1200px;
-      padding: 2rem 1rem;
+      padding: 1.5rem 1rem;
       box-sizing: border-box;
+      z-index: 10000;
     }
 
     /* Contenedor columnas */
@@ -210,7 +213,7 @@ import MainLayout from "../layouts/MainLayout.astro";
 
     .contact__input,
     .contact__textarea {
-      width: 100%;
+      width: 97%;
       padding: 8px;
       border: none;
       border-radius: 6px;
